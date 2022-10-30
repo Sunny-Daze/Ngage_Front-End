@@ -1,0 +1,20 @@
+.Register {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+}
+
+.BannerPicture {
+    height: 100vh;
+    width: 40vw;
+    background-image: url(../assets/bgimg.JPG);
+    /* background-repeat: no-repeat; */
+    background-size: cover;
+    background-position: right;
+}
+
+.Form {
+    height: 100vh;
+    width: 60vw;
+    border-left: 2px solid black;
+}
