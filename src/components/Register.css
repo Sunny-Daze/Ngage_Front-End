@@ -8,7 +8,9 @@
     height: 100vh;
     width: 33vw;
     box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset; 
-    /* background-image: url(../assets/banner_register_login.jpg);    */
+    background-image: url(../assets/banner_login_register.JPG);   
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .Form {
