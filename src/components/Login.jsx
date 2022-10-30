@@ -1,4 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+import './Login.css';
+import { loginUser } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const defaulValue = {
     email:'',
@@ -6,18 +9,24 @@ const defaulValue = {
 }
 
 function Login() {
+
+    const navigate = useNavigate();
+
     const [userData, setUserData] = useState(defaulValue);
 
     const handleChange = (e) => {
         setUserData({...userData, [e.target.name]:e.target.value});
     }
 
-    const userLogin = () => {
-        console.log(userData);
+    const userLogin = async () => {
+        await loginUser(userData);
     }
 
   return (
     <div>
+        <div className="Login">
+        <div className='BannerPicture'></div>
+        <div className="form">
         <h1>Login</h1>
         <input type="text" placeholder='Email' name='email' onChange={(e)=>{handleChange(e)}} />
         <br />
@@ -25,7 +34,9 @@ function Login() {
         <br />
         <button onClick={userLogin}>Login</button>
         <br />
-        <button>Register</button>
+        <button onClick={() => navigate('/register')}>Register</button>
+        </div>
+        </div>
     </div>
   )
 }

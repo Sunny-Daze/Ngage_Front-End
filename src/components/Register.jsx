@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Register.css';
 import { userRegister } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const defaulValue = {
     name:'',
@@ -10,6 +11,8 @@ const defaulValue = {
 }
 
 function Register() {
+    const navigate = useNavigate();
+
     const [userData, setUserData] = useState(defaulValue);
 
     const handleChange = (e) => {
@@ -41,6 +44,8 @@ function Register() {
         <input type="password" placeholder='Re-enter Password' onChange={(e)=>{handleChange(e)}} name='reEnterPassword'/>
         <br />
         <button onClick={userRegisteration}>Register</button>
+        <br />
+        <button onClick={() => navigate('/')}>Login</button>
         </div>
     </div>
   )

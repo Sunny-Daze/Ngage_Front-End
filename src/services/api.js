@@ -1,11 +1,19 @@
-import axios from 'axios';
+import axios from "axios";
 
-const URL = 'http://localhost:9000';
+const URL = "http://localhost:9000";
 
 export const userRegister = async (userData) => {
-    try {
-        return await axios.post(`${URL}/register`, userData);
-    } catch(e) {
-        console.log("Error in registering the user ", e);
-    }
-} 
+  try {
+    return await axios.post(`${URL}/register`, userData);
+  } catch (e) {
+    console.log("Error in registering the user ", e);
+  }
+};
+
+export const loginUser = async (userData) => {
+  try {
+    return await axios.post(`${URL}/login`, userData);
+  } catch (e) {
+    console.log("Error in logging in the user ", e);
+  }
+};
