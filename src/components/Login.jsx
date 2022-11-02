@@ -29,7 +29,7 @@ const defaulValue = {
   password: "",
 };
 
-function Login() {
+const Login = ( {setLoginUser} ) => {
   const navigate = useNavigate();
 
   const [userData, setUserData] = useState(defaulValue);
@@ -39,7 +39,15 @@ function Login() {
   };
 
   const userLogin = async () => {
-    await loginUser(userData);
+    await loginUser(userData)
+    .then(m => {
+      console.log(m.message);
+      console.log(m.user);
+      alert(m.message);
+      setLoginUser(m.user);
+      if(m.message === 'Login Succesfull')
+        navigate('/community');
+    })
   };
 
   return (

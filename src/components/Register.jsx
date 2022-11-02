@@ -44,7 +44,12 @@ function Register() {
     const { name, email, password, reEnterPassword } = userData;
     console.log(name, email, password, reEnterPassword);
     if (name && email && password && password === reEnterPassword) {
-      await userRegister(userData);
+      await userRegister(userData)
+      .then(res => {
+        alert(res.message)
+        if(res.message === 'User successfully registered!')
+          navigate('/');
+      })
     } else {
       alert("Invalid input");
     }

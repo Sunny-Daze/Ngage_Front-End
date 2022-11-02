@@ -14,8 +14,7 @@
 }
 
 .Form {
-    /* box-shadow: -5px 0 5px -5px #333; */
-    box-shadow: -5px 0 20px -5px #333;
+    box-shadow: -5px 0 8px -5px #333;
     height: 100vh;
     width: 67vw;
     display: flex;
