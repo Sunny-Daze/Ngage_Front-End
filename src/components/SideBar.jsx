@@ -1,10 +1,12 @@
 import { NavLink } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
+import Divider from '@mui/material/Divider';
+import Logout from '@mui/icons-material/Logout';
+import ListItemIcon from '@mui/material/ListItemIcon';
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SideBarMenu";
 import Avatar from "@mui/material/Avatar";
-import Chip from "@mui/material/Chip";
 import Badge from "@mui/material/Badge";
 import MailIcon from "@mui/icons-material/Mail";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -16,6 +18,8 @@ import { HiShoppingCart } from "react-icons/hi";
 import { AiOutlineStar } from "react-icons/ai";
 import AdbIcon from "@mui/icons-material/Adb";
 import Typography from "@mui/material/Typography";
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 const routes = [
   {
@@ -87,24 +91,18 @@ const routes = [
 ];
 
 const HomePage = ({ children }) => {
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const [isOpen, setIsOpen] = useState(true);
   const toggle = () => setIsOpen(!isOpen);
-  // const inputAnimation = {
-  //   hidden: {
-  //     width: 0,
-  //     padding: 0,
-  //     transition: {
-  //       duration: 0.2,
-  //     },
-  //   },
-  //   show: {
-  //     width: "140px",
-  //     padding: "5px 15px",
-  //     transition: {
-  //       duration: 0.2,
-  //     },
-  //   },
-  // };
 
   const showAnimation = {
     hidden: {
@@ -122,6 +120,7 @@ const HomePage = ({ children }) => {
       },
     },
   };
+
 
   return (
     <>
@@ -234,7 +233,33 @@ const HomePage = ({ children }) => {
               </Badge>
             </div>
             <div className="settings">
-              <SettingsIcon />
+              <SettingsIcon id="basic-menu" aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}/>
+              <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem onClick={handleClose} >
+        <ListItemIcon>
+          <Avatar sx={{ width: 32, height: 32, marginRight:1 }}/> 
+        </ListItemIcon>
+          My Account
+          </MenuItem>
+          <Divider />
+        <MenuItem onClick={handleClose}>
+        <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          Logout
+        </MenuItem>
+      </Menu>
             </div>
           </div>
         </motion.div>

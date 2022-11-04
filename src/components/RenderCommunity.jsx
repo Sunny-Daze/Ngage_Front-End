@@ -1,6 +1,6 @@
 import React from 'react'
 import SideBar from './SideBar'
-import DashBoard from '../pages/Dashboard'
+import Community from '../pages/Community'
 import './RenderCommunity.css'
 
 function RenderCommunity() {
@@ -8,7 +8,7 @@ function RenderCommunity() {
     <div className='RenderCommunity'>
         <SideBar />
         <div>
-        <DashBoard />
+        <Community />
         </div>
     </div>
   )
