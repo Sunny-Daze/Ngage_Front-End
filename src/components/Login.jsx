@@ -59,6 +59,7 @@ const Login = ( {setLoginUser} ) => {
             <Grid item xs={1}>
               <LockOutlinedIcon
                 style={{
+                  fontSize: "2.3rem",
                   color: "white",
                   background: "#8B008B",
                   borderRadius: "50%",

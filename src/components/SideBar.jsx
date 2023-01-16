@@ -20,6 +20,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import Typography from "@mui/material/Typography";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { useNavigate } from "react-router-dom";
 
 const routes = [
   {
@@ -120,7 +121,7 @@ const HomePage = ({ children }) => {
       },
     },
   };
-
+  const navigate = useNavigate();
 
   return (
     <>
@@ -254,7 +255,7 @@ const HomePage = ({ children }) => {
           </MenuItem>
           <Divider />
         <MenuItem onClick={handleClose}>
-        <ListItemIcon>
+        <ListItemIcon onClick={()=>navigate('/')}>
             <Logout fontSize="small" />
           </ListItemIcon>
           Logout

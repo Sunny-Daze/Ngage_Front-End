@@ -47,6 +47,7 @@
     overflow-x: visible; 
     overflow-y: scroll;
     padding: 2rem;
+    overflow-x: hidden;
 }
 
 .UserPostCard {

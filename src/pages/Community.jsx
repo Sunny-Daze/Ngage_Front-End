@@ -31,6 +31,21 @@ const currencies = [
     },
   ];  
 
+const currenciess = [
+    {
+      value: 'USD',
+      label: 'Likes',
+    },
+    {
+      value: 'EUR',
+      label: 'Oldest',
+    },
+    {
+      value: 'BTC',
+      label: 'Newest',
+    },
+  ];  
+
 function Community() {
     const [currency, setCurrency] = React.useState('EUR');
 
@@ -95,7 +110,7 @@ function Community() {
           value={currency}
           onChange={handleChange}
         >
-          {currencies.map((option) => (
+          {currenciess.map((option) => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
             </MenuItem>
