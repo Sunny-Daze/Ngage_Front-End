@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Register.css";
-import { userRegister } from "../services/api";
+import { userRegister } from "../services/auth.services";
 import { useNavigate } from "react-router-dom";
 import {
   FormGroup,
@@ -44,12 +44,10 @@ function Register() {
     const { name, email, password, reEnterPassword } = userData;
     console.log(name, email, password, reEnterPassword);
     if (name && email && password && password === reEnterPassword) {
-      await userRegister(userData)
-      .then(res => {
-        alert(res.message)
-        if(res.message === 'User successfully registered!')
-          navigate('/');
-      })
+      await userRegister(userData).then((res) => {
+        alert(res.message);
+        if (res.message === "User successfully registered!") navigate("/");
+      });
     } else {
       alert("Invalid input");
     }
@@ -57,8 +55,7 @@ function Register() {
 
   return (
     <div className="Register">
-      <div className="BannerPicture">
-      </div>
+      <div className="BannerPicture"></div>
       <div className="Form">
         <Container>
           <Grid item xs={1}>
@@ -153,7 +150,7 @@ function Register() {
             </Button>
           </FormControl>
           <div onClick={() => navigate("/")}>
-            <Link className='link' onclick underline="always">
+            <Link className="link" onclick underline="always">
               {"Already have a account? Sign In"}
             </Link>
           </div>
