@@ -1,17 +1,14 @@
-
 import axios from "axios";
-import { endPoints } from "./endPoints";
+import { endPoints,domain } from "./endPoints";
 
 export const createPost = async (body) => {
+  console.log(
+    domain + endPoints.createPost ==
+      "http://localhost:6000/api/post/createPost"
+  );
 
-    console.log(endPoints.domain + endPoints.createPost)
-  try {
-    return await axios
-      .post(endPoints.domain + endPoints.createPost, body)
-      .then((res) => {
-        return res.data;
-      });
-  } catch (e) {
-    console.log("Error in logging in the user ", e);
-  }
+  axios
+    .post("https://localhost:6000/api/post/createPost", body)
+    .then((res) => console.log(res))
+    .catch((error) => console.log(error));
 };
