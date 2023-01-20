@@ -1,10 +1,10 @@
 import axios from "axios";
+import { domain } from "./endPoints";
 
-const URL = "http://localhost:9000";
 
 export const userRegister = async (userData) => {
   try {
-    return await axios.post(`${URL}/register`, userData).then((res) => {
+    return await axios.post(`${domain}/register`, userData).then((res) => {
       return res.data;
     });
   } catch (e) {
@@ -14,7 +14,7 @@ export const userRegister = async (userData) => {
 
 export const loginUser = async (userData) => {
   try {
-    return await axios.post(`${URL}/login`, userData).then((res) => {
+    return await axios.post(`${domain}/login`, userData).then((res) => {
       return res.data;
     });
   } catch (e) {
