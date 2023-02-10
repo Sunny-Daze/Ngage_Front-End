@@ -1,10 +1,14 @@
 import axios from "axios";
+import { domain } from "./endPoints";
 
+<<<<<<< HEAD
 const URL = "http://localhost:6000";
+=======
+>>>>>>> 52a235fce42fc79c914389153a2ab8a983852dfc
 
 export const userRegister = async (userData) => {
   try {
-    return await axios.post(`${URL}/register`, userData).then((res) => {
+    return await axios.post(`${domain}/register`, userData).then((res) => {
       return res.data;
     });
   } catch (e) {
@@ -14,7 +18,7 @@ export const userRegister = async (userData) => {
 
 export const loginUser = async (userData) => {
   try {
-    return await axios.post(`${URL}/login`, userData).then((res) => {
+    return await axios.post(`${domain}/login`, userData).then((res) => {
       return res.data;
     });
   } catch (e) {
