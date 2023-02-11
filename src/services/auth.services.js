@@ -1,10 +1,6 @@
 import axios from "axios";
 import { domain } from "./endPoints";
 
-<<<<<<< HEAD
-const URL = "http://localhost:6000";
-=======
->>>>>>> 52a235fce42fc79c914389153a2ab8a983852dfc
 
 export const userRegister = async (userData) => {
   try {

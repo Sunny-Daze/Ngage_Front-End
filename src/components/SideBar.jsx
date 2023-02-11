@@ -73,12 +73,12 @@ const routes = [
     icon: <FiUsers />,
     subRoutes: [
       {
-        path: "/settings/profile",
+        path: "/user-control",
         name: "User ",
         icon: <AiOutlineStar />,
       },
       {
-        path: "/settings/2fa",
+        path: "/admin-control",
         name: "Admin Control",
         icon: <AiOutlineStar />,
       },

@@ -5,7 +5,7 @@ import Register from "./components/Register";
 // import HomePage from "./components/HomePage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import RenderCommunity from './components/RenderCommunity'
-import RenderUsers from './components/RenderUsers'
+import RenderUserControl from './components/RenderUserControl'
 function App() {
   const [user, setLoginUser] = useState({});
 
@@ -21,7 +21,7 @@ function App() {
             <Route path="/" element={<Login setLoginUser={setLoginUser} />} />
           )}
           <Route path="/community" element={<RenderCommunity />} />
-          <Route path="/users" element={<RenderUsers />} />
+          <Route path="/user-control" element={<RenderUserControl />} />
         </Routes>
       </Router>
     </div>
