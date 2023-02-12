@@ -1,7 +1,15 @@
-class HttpService {
-  async post(url, body) {
-    fetch(url, body)
-    .then((response) => response.json())
-    .then((json) => console.log(json));;
-  }
+async function postMethod(url, body) {
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      'Authorization:':'Bearer '
+      
+    },
+    body: JSON.stringify(body),
+  }).then((value) => console.log(value));
 }
+
+module.exports = {
+  postMethod,
+};
