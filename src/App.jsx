@@ -2,10 +2,11 @@ import { useState } from "react";
 import "./App.css";
 import Login from "./components/Login";
 import Register from "./components/Register";
-// import HomePage from "./components/HomePage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import RenderCommunity from './components/RenderCommunity'
 import RenderUserControl from './components/RenderUserControl'
+import RenderStore from './components/RenderStore'
+
 function App() {
   const [user, setLoginUser] = useState({});
 
@@ -22,6 +23,7 @@ function App() {
           )}
           <Route path="/community" element={<RenderCommunity />} />
           <Route path="/user-control" element={<RenderUserControl />} />
+          <Route path="/store" element={<RenderStore />} />
         </Routes>
       </Router>
     </div>
