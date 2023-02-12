@@ -58,7 +58,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-// Add New User model
+// Add New User modal
 const style = {
   position: "absolute",
   top: "50%",
@@ -206,7 +206,6 @@ function UserControl() {
             </Box>
           </Modal>
         </div>
-
         <UserTable />
       </div>
     </div>

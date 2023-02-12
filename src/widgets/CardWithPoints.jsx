@@ -3,7 +3,14 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import './CardWithPoints';
+import './CardWithPoints.css';
+import TollIcon from '@mui/icons-material/Toll';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { IconButton, Tooltip } from '@mui/material';
+
+const handleCartClick = () => {
+  window.location.href = '/store';
+}
 
 function CardWithPoints(props) {
   return (
@@ -11,7 +18,7 @@ function CardWithPoints(props) {
       <Box sx={{ minWidth: 800 }}>
         <Card variant="outlined">
           <CardContent>
-            <div className="cardBody">
+            <div className="CardBody">
             <div className="left">
             <Typography variant="h5" component="div">
               {props.heading}
@@ -19,7 +26,17 @@ function CardWithPoints(props) {
             <Typography variant="body2">{props.subheading}</Typography>
             </div>
             <div className="right">
-                hello
+               <div className="right-container">
+                <div className="coin">
+                <TollIcon style={{color:'goldenrod', fontSize:'1.3rem'}} />
+                <Typography variant="body2" style={{marginLeft:'4px'}}>100</Typography>
+                </div>
+                <Tooltip title="Points Shop">
+                <IconButton onClick={handleCartClick}>
+                <ShoppingCartIcon style={{color:'gray', fontSize:'1.3rem'}}/>
+                </IconButton>
+                </Tooltip>
+               </div>
             </div>
             </div>
           </CardContent>
