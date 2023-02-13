@@ -29,11 +29,11 @@ function CardWithPoints(props) {
                <div className="right-container">
                 <div className="coin">
                 <TollIcon style={{color:'goldenrod', fontSize:'1.3rem'}} />
-                <Typography variant="body2" style={{marginLeft:'4px'}}>100</Typography>
+                <Typography variant="body2" style={{marginLeft:'4px'}}>{props.coins}</Typography>
                 </div>
                 <Tooltip title="Points Shop">
                 <IconButton onClick={handleCartClick}>
-                <ShoppingCartIcon style={{color:'gray', fontSize:'1.3rem'}}/>
+                <ShoppingCartIcon style={{color:'darkslategray', fontSize:'1.3rem'}}/>
                 </IconButton>
                 </Tooltip>
                </div>

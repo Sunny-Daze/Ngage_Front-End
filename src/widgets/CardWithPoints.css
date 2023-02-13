@@ -1,12 +1,13 @@
 .CardBody {
     display: flex;
     justify-content: space-between;
+    height: 4.2rem;
 }
 
 .right-container {
     width: 6.5rem;
     height: 2.5rem;
-    border: solid 1px lightgray;
+    border: solid 1px darkslategray;
     border-radius: 3px;
     display: flex;
     align-items: center;
