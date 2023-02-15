@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
-import Divider from '@mui/material/Divider';
-import Logout from '@mui/icons-material/Logout';
-import ListItemIcon from '@mui/material/ListItemIcon';
+import Divider from "@mui/material/Divider";
+import Logout from "@mui/icons-material/Logout";
+import ListItemIcon from "@mui/material/ListItemIcon";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SideBarMenu";
@@ -18,8 +18,8 @@ import { HiShoppingCart } from "react-icons/hi";
 import { AiOutlineStar } from "react-icons/ai";
 import AdbIcon from "@mui/icons-material/Adb";
 import Typography from "@mui/material/Typography";
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 
 const routes = [
@@ -92,7 +92,6 @@ const routes = [
 ];
 
 const HomePage = ({ children }) => {
-
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -198,18 +197,22 @@ const HomePage = ({ children }) => {
                   className="link"
                   activeClassName="active"
                 >
-                  <div className="icon" className="routeIcon">{route.icon}</div>
+                  <div className="icon" className="routeIcon">
+                    {route.icon}
+                  </div>
                   <AnimatePresence>
                     {isOpen && (
                       <motion.div
-                        variants={showAnimation}
-                        initial="hidden"
-                        animate="show"
-                        exit="hidden"
-                        className="link_text"
-                      >
-                        {route.name}
-                      </motion.div>
+                      variants={showAnimation}
+                      initial="hidden"
+                      animate="show"
+                      exit="hidden"
+                      className="link_text"
+                        >
+                      <Typography variant='body1'>
+                          {route.name}
+                      </Typography>
+                        </motion.div>
                     )}
                   </AnimatePresence>
                 </NavLink>
@@ -229,38 +232,45 @@ const HomePage = ({ children }) => {
               </div>
             </div>
             <div className="notification">
-              <Badge style={{"color":'white'}} badgeContent={4} color="primary">
+              <Badge
+                style={{ color: "white" }}
+                badgeContent={4}
+                color="primary"
+              >
                 <MailIcon />
               </Badge>
             </div>
             <div className="settings">
-              <SettingsIcon id="basic-menu" aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}/>
+              <SettingsIcon
+                id="basic-menu"
+                aria-controls={open ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+              />
               <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >
-        <MenuItem onClick={handleClose} >
-        <ListItemIcon>
-          <Avatar sx={{ width: 32, height: 32, marginRight:1 }}/> 
-        </ListItemIcon>
-          My Account
-          </MenuItem>
-          <Divider />
-        <MenuItem onClick={handleClose}>
-        <ListItemIcon onClick={()=>navigate('/')}>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
-      </Menu>
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                <MenuItem onClick={handleClose}>
+                  <ListItemIcon>
+                    <Avatar sx={{ width: 32, height: 32, marginRight: 1 }} />
+                  </ListItemIcon>
+                  My Account
+                </MenuItem>
+                <Divider />
+                <MenuItem onClick={handleClose}>
+                  <ListItemIcon onClick={() => navigate("/")}>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
+                  Logout
+                </MenuItem>
+              </Menu>
             </div>
           </div>
         </motion.div>

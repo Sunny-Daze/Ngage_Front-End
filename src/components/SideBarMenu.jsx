@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import Typography from "@mui/material/Typography";
 
 const menuAnimation = {
   hidden: {
@@ -61,7 +62,9 @@ const SidebarMenu = ({ route, showAnimation, isOpen, setIsOpen }) => {
                 exit="hidden"
                 className="link_text"
               >
+                <Typography variant='body1'>
                 {route.name}
+                </Typography>
               </motion.div>
             )}
           </AnimatePresence>
@@ -93,7 +96,7 @@ const SidebarMenu = ({ route, showAnimation, isOpen, setIsOpen }) => {
               <motion.div variants={menuItemAnimation} key={i} custom={i}>
                 <NavLink to={subRoute.path} className="link">
                   <div className="icon" style={{"fontSize":"20px"}}>{subRoute.icon}</div>
-                  <motion.div className="link_text">{subRoute.name}</motion.div>
+                  <motion.div className="link_text"><Typography variant='body1'>{subRoute.name}</Typography></motion.div>
                 </NavLink>
               </motion.div>
             ))}

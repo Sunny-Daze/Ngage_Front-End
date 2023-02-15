@@ -28,8 +28,8 @@ const columns = [
           .forEach(
             (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
           );
-          window.location.href = '/store';
-        // return alert(JSON.stringify(thisRow, null, 4));
+
+        return alert(JSON.stringify(thisRow, null, 4));
       };
 
       return (
@@ -135,7 +135,6 @@ const rows = [
 ];
 
 function UserTable() {
-  const [openModal, setOpenModal] = React.useState(false);
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
@@ -145,6 +144,11 @@ function UserTable() {
         columns={columns}
         pageSize={6}
         rowsPerPageOptions={[6]}
+        onRowClick={(params, event) => {
+          if (!event.ignore) {
+            console.log("hello");
+          }
+        }}
       />
     </div>
   );
