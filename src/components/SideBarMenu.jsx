@@ -62,7 +62,7 @@ const SidebarMenu = ({ route, showAnimation, isOpen, setIsOpen }) => {
                 exit="hidden"
                 className="link_text"
               >
-                <Typography variant='body1'>
+                <Typography variant='body1' style={{fontWeight:'bold', color:'darkslategray'}}>
                 {route.name}
                 </Typography>
               </motion.div>
@@ -96,7 +96,7 @@ const SidebarMenu = ({ route, showAnimation, isOpen, setIsOpen }) => {
               <motion.div variants={menuItemAnimation} key={i} custom={i}>
                 <NavLink to={subRoute.path} className="link">
                   <div className="icon" style={{"fontSize":"20px"}}>{subRoute.icon}</div>
-                  <motion.div className="link_text"><Typography variant='body1'>{subRoute.name}</Typography></motion.div>
+                  <motion.div className="link_text"><Typography variant='body1' style={{fontWeight:'bold', color:'darkslategray'}}>{subRoute.name}</Typography></motion.div>
                 </NavLink>
               </motion.div>
             ))}

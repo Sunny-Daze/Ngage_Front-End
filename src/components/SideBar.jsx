@@ -209,7 +209,7 @@ const HomePage = ({ children }) => {
                       exit="hidden"
                       className="link_text"
                         >
-                      <Typography variant='body1'>
+                      <Typography variant='body1' style={{fontWeight:'bold', color:'darkslategray'}}>
                           {route.name}
                       </Typography>
                         </motion.div>
