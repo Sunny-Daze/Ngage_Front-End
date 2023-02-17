@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { loginUser } from "../services/auth.services";
 import { useNavigate } from "react-router-dom";
 import {
   FormGroup,
@@ -13,6 +12,8 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Grid from "@mui/material/Grid";
+import { domain, endPoints } from "../services/endPoints";
+import axios from "axios";
 
 const Container = styled(FormGroup)`
   margin-left: 35px;
@@ -29,7 +30,7 @@ const defaulValue = {
   password: "",
 };
 
-const Login = ( {setLoginUser} ) => {
+const Login = ({ setLoginUser }) => {
   const navigate = useNavigate();
 
   const [userData, setUserData] = useState(defaulValue);
@@ -39,15 +40,17 @@ const Login = ( {setLoginUser} ) => {
   };
 
   const userLogin = async () => {
-    await loginUser(userData)
-    .then(m => {
-      console.log(m.message);
-      console.log(m.user);
-      alert(m.message);
-      setLoginUser(m.user);
-      if(m.message === 'Login Succesfull')
-        navigate('/community');
-    })
+    let response = await axios.post(domain + endPoints.login, {
+      email: userData.email,
+      password: userData.password,
+    });
+
+    if (response.data.success) {
+      localStorage.setItem("token", response.data.token);
+      navigate("/community");
+    } else {
+      alert(response.data.message);
+    }
   };
 
   return (
@@ -125,7 +128,7 @@ const Login = ( {setLoginUser} ) => {
               </Button>
             </FormControl>
             <div onClick={() => navigate("/register")}>
-              <Link className='link' underline="always">
+              <Link className="link" underline="always">
                 {"Don't have an account? Sign Up"}
               </Link>
             </div>
@@ -134,6 +137,6 @@ const Login = ( {setLoginUser} ) => {
       </div>
     </div>
   );
-}
+};
 
 export default Login;

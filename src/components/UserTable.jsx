@@ -19,8 +19,8 @@ const columns = [
       const onClick = (e) => {
         e.stopPropagation(); // don't select this row after clicking
 
-        const api: GridApi = params.api;
-        const thisRow: Record<string, GridCellValue> = {};
+        const api = params.api;
+        const thisRow = {};
 
         api
           .getAllColumns()
@@ -55,8 +55,8 @@ const columns = [
       const onClick = (e) => {
         e.stopPropagation(); // don't select this row after clicking
 
-        const api: GridApi = params.api;
-        const thisRow: Record<string, GridCellValue> = {};
+        const api = params.api;
+        const thisRow = {};
 
         api
           .getAllColumns()

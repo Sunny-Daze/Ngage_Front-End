@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./Register.css";
-import { userRegister } from "../services/auth.services";
 import { useNavigate } from "react-router-dom";
 import {
   FormGroup,
@@ -13,6 +12,8 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Grid from "@mui/material/Grid";
+import axios from "axios";
+import { domain, endPoints } from "../services/endPoints";
 
 const Container = styled(FormGroup)`
   margin-left: 35px;
@@ -44,10 +45,19 @@ function Register() {
     const { name, email, password, reEnterPassword } = userData;
     console.log(name, email, password, reEnterPassword);
     if (name && email && password && password === reEnterPassword) {
-      await userRegister(userData).then((res) => {
-        alert(res.message);
-        if (res.message === "User successfully registered!") navigate("/");
+      // API CALLS
+
+      let response = await axios.post(domain + endPoints.signup, {
+        userName: name,
+        email: email,
+        password: password,
       });
+
+      if (response.data.success) {
+        navigate("/");
+      } else {
+        alert(response.data.message);
+      }
     } else {
       alert("Invalid input");
     }

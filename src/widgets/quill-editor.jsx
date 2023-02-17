@@ -3,7 +3,6 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
 import Button from "@mui/material/Button";
-import { createPost } from "../services/posts.services";
 
 class RichTextEditor extends Component {
   constructor(props) {
@@ -67,7 +66,6 @@ class RichTextEditor extends Component {
           <Button
             onClick={async () => {
               // console.log(this.value);
-              await createPost(this.value);
             }}
           >
             Post
