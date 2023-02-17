@@ -1,9 +1,12 @@
 import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Button, IconButton } from "@mui/material";
+import { Button, IconButton, Modal, Box } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./UserTable.css";
+import EditUserDetails from "./EditUserDetails";
+
+let selectedUser;
 
 const columns = [
   { field: "email", headerName: "Email", width: 200 },
@@ -16,28 +19,15 @@ const columns = [
     headerClassName: "lastcolumnSeparator",
     width: 100,
     renderCell: (params) => {
-      const onClick = (e) => {
-        e.stopPropagation(); // don't select this row after clicking
-
-        const api = params.api;
-        const thisRow = {};
-
-        api
-          .getAllColumns()
-          .filter((c) => c.field !== "__check__" && !!c)
-          .forEach(
-            (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
-          );
-
-        return alert(JSON.stringify(thisRow, null, 4));
-      };
-
       return (
         <Button
           variant="outlined"
           size="small"
           style={{ marginLeft: 25, borderColor: "#001f54", color: "#001f54" }}
-          onClick={onClick}
+          onClick={() => {
+            selectedUser = params.row;
+            params.row.dialog();
+          }}
         >
           <EditIcon />
         </Button>
@@ -52,22 +42,6 @@ const columns = [
     headerClassName: "lastcolumnSeparator",
     width: 100,
     renderCell: (params) => {
-      const onClick = (e) => {
-        e.stopPropagation(); // don't select this row after clicking
-
-        const api = params.api;
-        const thisRow = {};
-
-        api
-          .getAllColumns()
-          .filter((c) => c.field !== "__check__" && !!c)
-          .forEach(
-            (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
-          );
-
-        return alert(JSON.stringify(thisRow, null, 4));
-      };
-
       return (
         <IconButton style={{ color: "red" }}>
           <DeleteIcon />
@@ -77,64 +51,32 @@ const columns = [
   },
 ];
 
-const rows = [
-  {
-    id: 1,
-    email: "employee@gmail.com",
-    username: "employee",
-    role: "employee",
-  },
-  {
-    id: 2,
-    email: "employee@gmail.com",
-    username: "employee",
-    role: "employee",
-  },
-  {
-    id: 3,
-    email: "employee@gmail.com",
-    username: "employee",
-    role: "employee",
-  },
-  {
-    id: 4,
-    email: "employee@gmail.com",
-    username: "employee",
-    role: "employee",
-  },
-  {
-    id: 5,
-    email: "employee@gmail.com",
-    username: "employee",
-    role: "employee",
-  },
-  {
-    id: 6,
-    email: "employee@gmail.com",
-    username: "employee",
-    role: "employee",
-  },
-  {
-    id: 7,
-    email: "employee@gmail.com",
-    username: "employee",
-    role: "employee",
-  },
-  {
-    id: 8,
-    email: "employee@gmail.com",
-    username: "employee",
-    role: "employee",
-  },
-  {
-    id: 9,
-    email: "employee@gmail.com",
-    username: "employee",
-    role: "employee",
-  },
-];
+const modelStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 800,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  height: 500,
+  p: 4,
+};
 
 function UserTable() {
+  const rows = [
+    {
+      id: 8,
+      email: "employee@gmail.com",
+      username: "employee",
+      role: "employee",
+      dialog: () => handleOpen(),
+    },
+  ];
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
@@ -144,12 +86,17 @@ function UserTable() {
         columns={columns}
         pageSize={6}
         rowsPerPageOptions={[6]}
-        onRowClick={(params, event) => {
-          if (!event.ignore) {
-            console.log("hello");
-          }
-        }}
       />
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={modelStyle}>
+          <EditUserDetails props={selectedUser} />
+        </Box>
+      </Modal>
     </div>
   );
 }
