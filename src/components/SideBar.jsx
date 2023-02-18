@@ -51,12 +51,12 @@ const routes = [
     icon: <BsLightningChargeFill />,
     subRoutes: [
       {
-        path: "/settings/profile",
+        path: "/training/learning-management",
         name: "Learning Management ",
         icon: <AiOutlineStar />,
       },
       {
-        path: "/settings/2fa",
+        path: "/training/professional-growth",
         name: "Professional Growth",
         icon: <AiOutlineStar />,
       },
@@ -209,7 +209,7 @@ const HomePage = ({ children }) => {
                       exit="hidden"
                       className="link_text"
                         >
-                      <Typography variant='body1'>
+                      <Typography variant='body1' style={{fontWeight:'bold', color:'darkslategray'}}>
                           {route.name}
                       </Typography>
                         </motion.div>

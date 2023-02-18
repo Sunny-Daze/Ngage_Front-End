@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import RenderCommunity from './components/RenderCommunity'
 import RenderUserControl from './components/RenderUserControl'
 import RenderStore from './components/RenderStore'
+import RenderRecreation from './components/RenderRecreation'
+import RenderLearningManagement from './components/RenderLearningManagement'
 
 function App() {
   const [user, setLoginUser] = useState({});
@@ -24,6 +26,8 @@ function App() {
           <Route path="/community" element={<RenderCommunity />} />
           <Route path="/user-control" element={<RenderUserControl />} />
           <Route path="/store" element={<RenderStore />} />
+          <Route path="/recreation" element={<RenderRecreation />} />
+          <Route path="/training/learning-management" element={<RenderLearningManagement />} />
         </Routes>
       </Router>
     </div>
