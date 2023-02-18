@@ -5,8 +5,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./UserTable.css";
 import EditUserDetails from "./EditUserDetails";
+import axios from "axios";
+import { domain, endPoints } from "../services/endPoints";
 
 let selectedUser;
+let users = [];
 
 const columns = [
   { field: "email", headerName: "Email", width: 200 },
@@ -63,17 +66,51 @@ const modelStyle = {
   height: 500,
   p: 4,
 };
+// componentDidUpdate = async () => {
+// let token =  localStorage.getItem('token')
+// const config = {
+//   headers: { Authorization: `Bearer ${token}` },
+// };
+// let response = await axios.post(domain + endPoints.fetchUsers,config);
+// console.log(response);
+// };
 
 function UserTable() {
-  const rows = [
-    {
-      id: 8,
-      email: "employee@gmail.com",
-      username: "employee",
-      role: "employee",
-      dialog: () => handleOpen(),
-    },
-  ];
+  const [state, setState] = React.useState([]);
+  React.useEffect(() => {
+    async function fetchData() {
+      let token = localStorage.getItem("token");
+
+      console.warn(token);
+
+      let response = await axios.post(
+        domain + endPoints.fetchUsers,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (response.data.success) {
+        let listOfusers = response.data.result;
+
+        let arr = [];
+
+        listOfusers.forEach((e) => {
+          arr.push({
+            id: e._id,
+            email: e.email,
+            username: e.userName,
+            role: e.role,
+            dialog: () => handleOpen(),
+          });
+        });
+
+        setState(arr);
+      }
+    }
+
+    fetchData();
+  });
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -82,7 +119,7 @@ function UserTable() {
       <DataGrid
         rowHeight={40}
         style={{ fontSize: "0.8rem" }}
-        rows={rows}
+        rows={state}
         columns={columns}
         pageSize={6}
         rowsPerPageOptions={[6]}
