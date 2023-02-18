@@ -1,0 +1,46 @@
+.RecreationCard {
+    background: white;
+    height:10rem;
+    width:800px;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    display: flex;
+}
+
+.CardImage {
+    height: 100%;
+    width: 28%;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+img {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    height: 100%;
+    width: 100%;
+}
+
+.RecreationCardBody {
+    height: 100%;
+    width: 72%;
+}
+
+.heading {
+    display: flex;
+    justify-content: flex-end;
+    height: 1rem;
+    padding: 0.5rem;
+    margin-right: 2rem;
+}
+
+.vertical-divider{
+    height: 20px;
+    width: 0rem;
+    margin-top: 3px;
+    border-left: solid 1px lightgray;
+}
+
+.RecreationContent {
+    margin-left: 1rem;
+}
