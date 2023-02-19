@@ -46,7 +46,7 @@ function EditUserDetails({ props }) {
 
   const editUser = async () => {
     let user = {
-      id: props.id,
+      userId: props.id,
       email: email,
       username: username,
       role: role
@@ -64,6 +64,9 @@ function EditUserDetails({ props }) {
 
       if(response.data.success){
         console.log('done')
+      }
+      else{
+        console.log('fucked')
       }
 
     console.log(user);
