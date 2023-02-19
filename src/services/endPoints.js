@@ -4,14 +4,12 @@ export const endPoints = {
   signup: "/api/auth/signup",
   login: "/api/auth/login",
   fetchUsers: "/api/auth/fetchUsers",
+  updateUser: '/api/auth/updateUser',
   
   
   // Shops
   createNewShopProduct  : '/api/shop/createNewShopProduct',
   fetchShopProducts  : '/api/shop/fetchShopProducts',
-
-
-
 
 
 };

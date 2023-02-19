@@ -1,4 +1,4 @@
-import { React } from "react";
+import React from "react";
 import "./EditUserDetails.css";
 import {
   Typography,
@@ -7,38 +7,66 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Box,
   FormControl,
 } from "@mui/material";
+import axios from "axios";
+import { domain, endPoints } from "../services/endPoints";
 
 const headingStyle = {
   fontSize: "1.5rem",
   color: "darkslategray",
 };
 
-const defaultValue = {
-  email: "",
-  username: "",
-  userRole: ""
-}
+// const defaultValue = {
+//   email: "",
+//   username: "",
+//   userRole: ""
+// }
 
 function EditUserDetails({ props }) {
 
-  const [userData, setUserData] = React.useState(defaultValue);
+  const [role, setRole] = React.useState(props.role);
+  const [email, setEmail] = React.useState(props.email);
+  const [username, setUsername] = React.useState(props.username);
 
-  const [role, setRole] = React.useState('employee');
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+    console.log(email)
+  }
+
+  const handleUsername = (e) => {
+    setUsername(e.target.value);
+    console.log(username)
+  }
 
   const handleChange = (event) => {
     setRole(event.target.value);
+    console.log(role);
   };
 
-  const handleUserInput = (e) => {
-    setUserData({...userData, [e.target.name] : e.target.value});
-    console.log(userData);
-  }
+  const editUser = async () => {
+    let user = {
+      id: props.id,
+      email: email,
+      username: username,
+      role: role
+    }
 
-  const handleClick = () => {
-    console.log(defaultValue);
+      let token = localStorage.getItem("token");
+
+      // console.warn(token);
+
+      let response = await axios.post(
+        domain + endPoints.updateUser,
+        user,
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+
+      if(response.data.success){
+        console.log('done')
+      }
+
+    console.log(user);
   }
 
   return (
@@ -50,20 +78,21 @@ function EditUserDetails({ props }) {
         id="outlined-basic"
         label="Email"
         variant="outlined"
-        name="email"
         onChange={(e) => {
-          handleUserInput(e);
+          handleEmail(e);
         }}
-        value={props.email}
+        defaultValue={email}
       />
       <TextField
         id="outlined-basic"
         label="Username"
         variant="outlined"
-        value={props.username}
+        onChange={(e) => {
+          handleUsername(e);
+        }}
+        defaultValue={username}
       />
 
-      <Box sx={{ minWidth: 120 }}>
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Role</InputLabel>
           <Select
@@ -71,17 +100,15 @@ function EditUserDetails({ props }) {
             id="demo-simple-select"
             value={role}
             label="Role"
-            name="UserRole"
             onChange={handleChange}
           >
-            <MenuItem value={"admin"}>Admin</MenuItem>
-            <MenuItem value={"employee"}>Employee</MenuItem>
-            <MenuItem value={"customer"}>Customer</MenuItem>
+            <MenuItem value={"Admin"}>Admin</MenuItem>
+            <MenuItem value={"Employee"}>Employee</MenuItem>
+            <MenuItem value={"Customer"}>Customer</MenuItem>
           </Select>
         </FormControl>
-      </Box>
 
-      <Button variant="contained" onClick={handleClick}>UPDATE USER</Button>
+      <Button variant="contained" onClick={editUser}>UPDATE USER</Button>
     </div>
   );
 }
