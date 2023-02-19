@@ -6,6 +6,7 @@ import { domain, endPoints } from "../services/endPoints";
 import axios from "axios";
 
 function UserControl() {
+
   const [state, setState] = React.useState([]);
   React.useEffect(() => {
     async function fetchData() {

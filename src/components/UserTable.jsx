@@ -59,12 +59,15 @@ const modelStyle = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 800,
+  width: 600,
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  borderRadius: "5px",
   boxShadow: 24,
-  height: 500,
-  p: 4,
+  height: 400,
+  p: 3,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center'
 };
 // componentDidUpdate = async () => {
 // let token =  localStorage.getItem('token')
@@ -81,7 +84,7 @@ function UserTable() {
     async function fetchData() {
       let token = localStorage.getItem("token");
 
-      console.warn(token);
+      // console.warn(token);
 
       let response = await axios.post(
         domain + endPoints.fetchUsers,

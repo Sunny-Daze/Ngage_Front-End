@@ -7,12 +7,16 @@ import './CardWithPoints.css';
 import TollIcon from '@mui/icons-material/Toll';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { IconButton, Tooltip } from '@mui/material';
-
-const handleCartClick = () => {
-  window.location.href = '/store';
-}
+import { useNavigate } from 'react-router-dom';
 
 function CardWithPoints(props) {
+  const navigate = useNavigate();
+
+  const handleCartClick = () => {
+    navigate('/store');
+  }
+  
+
   return (
     <>
       <Box sx={{ minWidth: 800 }}>
