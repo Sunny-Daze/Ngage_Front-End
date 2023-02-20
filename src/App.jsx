@@ -8,6 +8,7 @@ import RenderUserControl from './components/RenderUserControl'
 import RenderStore from './components/RenderStore'
 import RenderRecreation from './components/RenderRecreation'
 import RenderLearningManagement from './components/RenderLearningManagement'
+import RenderProfessionalGrowth from './components/RenderProfessionalGrowth'
 
 function App() {
   const [user, setLoginUser] = useState({});
@@ -18,16 +19,17 @@ function App() {
         <Routes>
           <Route path="/" element={<Login setLoginUser={setLoginUser} />} />
           <Route path="/register" element={<Register />} />
-          {user && user._id ? (
+          {/* {user && user._id ? (
             <Route path="/community" element={<RenderCommunity />} />
           ) : (
             <Route path="/" element={<Login setLoginUser={setLoginUser} />} />
-          )}
+          )} */}
           <Route path="/community" element={<RenderCommunity />} />
           <Route path="/user-control" element={<RenderUserControl />} />
           <Route path="/store" element={<RenderStore />} />
           <Route path="/recreation" element={<RenderRecreation />} />
           <Route path="/training/learning-management" element={<RenderLearningManagement />} />
+          <Route path="/training/professional-growth" element={<RenderProfessionalGrowth />} />
         </Routes>
       </Router>
     </div>

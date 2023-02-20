@@ -1,0 +1,11 @@
+.ProfessionalGrowth {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.AllCourses {
+    width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+}

@@ -17,6 +17,7 @@ function ActiveCourseCard(props) {
             color: "darkslategray",
             fontSize: "1.3rem",
             marginBottom: "0.5rem",
+            marginTop:"1rem",
           }}
         >
           {props.courseName}
