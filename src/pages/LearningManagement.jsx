@@ -21,11 +21,11 @@ function LearningManagement() {
         coins="100"
       />
       <Root>
-      <Divider style={{marginTop:'0.8rem', marginBottom:'1rem'}}>Your Traingings</Divider>
+      <Divider style={{marginTop:'0.8rem', marginBottom:'0.4rem'}}>Your Traingings</Divider>
       </Root>
 
         <div className="TrainingCourses">
-      <CourseCard />
+      <CourseCard courseName='ReactJS Course' courseExpiryDate='2nd August 2022' courseStatus='pending'/>
         </div>
 
     </div>

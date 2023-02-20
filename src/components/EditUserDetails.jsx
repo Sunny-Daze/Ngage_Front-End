@@ -17,12 +17,6 @@ const headingStyle = {
   color: "darkslategray",
 };
 
-// const defaultValue = {
-//   email: "",
-//   username: "",
-//   userRole: ""
-// }
-
 function EditUserDetails({ props }) {
 
   const [role, setRole] = React.useState(props.role);
@@ -69,7 +63,7 @@ function EditUserDetails({ props }) {
         console.log('fucked')
       }
 
-    console.log(user);
+    // console.log(user);
   }
 
   return (
