@@ -3,9 +3,15 @@ import "./ProductCard.css";
 import { Button, Typography } from "@mui/material";
 import TollIcon from "@mui/icons-material/Toll";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import couponImage from "../assets/couponImage.png";
+// import couponImage from "../assets/couponImage.png";
+import CustomizedSnackbar from '../widgets/CustomizedSnackbar'
 
 function ProductCard(props) {
+
+  const handleClick = () => {
+    <CustomizedSnackbar/>
+  }
+
   return (
     <div className="Product-Card">
       <div className="product-photo">
@@ -40,6 +46,7 @@ function ProductCard(props) {
         </div>
         <Button
           variant="outlined"
+          onClick={handleClick}
           style={{
             color: "#001f54",
             marginTop: "1rem",

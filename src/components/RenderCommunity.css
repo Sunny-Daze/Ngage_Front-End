@@ -1,4 +1,18 @@
 .RenderCommunity {
+    height: 100vh;
+    width: 100vw;
     display: flex;
     background: lightgray;
+    overflow-x: hidden;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+}
+
+.CommunityBody{
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }

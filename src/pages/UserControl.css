@@ -1,22 +1,22 @@
 .User-Control {
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .User-Table {
-    margin-top: 1rem;
-    border-radius: 5px;
-    background: white;
-    width: 800px;
-    height: 450px;
+  margin-top: 1rem;
+  border-radius: 5px;
+  background: white;
+  width: 800px;
+  height: 450px;
 }
 
 .User-Search-Bar {
-    background: #001f54;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    width: 100%;
-    height: 3.1rem;
-    padding-top: 7.5px;
+  background: #001f54;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  width: 100%;
+  height: 3.1rem;
+  padding-top: 7.5px;
 }

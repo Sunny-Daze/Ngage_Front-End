@@ -62,7 +62,6 @@ const ModalStyle = {
 };
 
 function UserControl() {
- 
   return (
     <div className="User-Control">
       <Card
@@ -82,7 +81,6 @@ function UserControl() {
           </Search>
         </div>
         <UserTable />
-
       </div>
     </div>
   );
