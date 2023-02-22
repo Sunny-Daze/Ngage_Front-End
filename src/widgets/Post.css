@@ -1,0 +1,25 @@
+.PostCard {
+    background: white;
+    width: 50rem;
+    border-radius: 5px;
+    height: 20rem;
+    margin-top: 0.6rem;
+    margin-bottom: 1rem;
+    display: flex;
+}
+
+.postUtils {
+    width: 5rem;
+    height: 100%;
+    background: transparent;
+}
+
+.postUtilsIcons {
+    margin-left: 1rem;
+}
+
+.postCardBody {
+    width: 100%;
+    background: maroon;
+}
+

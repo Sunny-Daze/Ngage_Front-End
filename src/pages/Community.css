@@ -6,6 +6,7 @@
 
 .CommunitySearchBar {
   height: 4.5rem;
+  min-height: 4.5rem;
   width: 50rem;
   background: white;
   border-radius: 5px;
