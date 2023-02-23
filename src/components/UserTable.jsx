@@ -29,7 +29,7 @@ const columns = [
           style={{ marginLeft: 25, borderColor: "#001f54", color: "#001f54" }}
           onClick={() => {
             selectedUser = params.row;
-            params.row.dialog();
+            params.row.dialogOpen();
           }}
         >
           <EditIcon />
@@ -103,7 +103,10 @@ function UserTable() {
             email: e.email,
             username: e.userName,
             role: e.role,
-            dialog: () => handleOpen(),
+            dialogOpen: () => handleOpen(),
+            dialogClose: () => handleClose(),
+
+
           });
         });
 
@@ -134,6 +137,7 @@ function UserTable() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={modelStyle}>
+
           <EditUserDetails props={selectedUser} />
         </Box>
       </Modal>

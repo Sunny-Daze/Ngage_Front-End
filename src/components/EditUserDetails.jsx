@@ -18,20 +18,19 @@ const headingStyle = {
 };
 
 function EditUserDetails({ props }) {
-
   const [role, setRole] = React.useState(props.role);
   const [email, setEmail] = React.useState(props.email);
   const [username, setUsername] = React.useState(props.username);
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
-    console.log(email)
-  }
+    console.log(email);
+  };
 
   const handleUsername = (e) => {
     setUsername(e.target.value);
-    console.log(username)
-  }
+    console.log(username);
+  };
 
   const handleChange = (event) => {
     setRole(event.target.value);
@@ -43,28 +42,26 @@ function EditUserDetails({ props }) {
       userId: props.id,
       email: email,
       username: username,
-      role: role
+      role: role,
+    };
+
+    let token = localStorage.getItem("token");
+
+    // console.warn(token);
+
+    let response = await axios.post(domain + endPoints.updateUser, user, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (response.data.success) {
+      console.log("done");
+      props.dialogClose();
+    } else {
+      console.log("fucked");
     }
 
-      let token = localStorage.getItem("token");
-
-      // console.warn(token);
-
-      let response = await axios.post(
-        domain + endPoints.updateUser,
-        user,
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
-
-      if(response.data.success){
-        console.log('done')
-      }
-      else{
-        console.log('fucked')
-      }
-
     // console.log(user);
-  }
+  };
 
   return (
     <div className="EditUserDetails">
@@ -90,22 +87,24 @@ function EditUserDetails({ props }) {
         defaultValue={username}
       />
 
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Role</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={role}
-            label="Role"
-            onChange={handleChange}
-          >
-            <MenuItem value={"Admin"}>Admin</MenuItem>
-            <MenuItem value={"Employee"}>Employee</MenuItem>
-            <MenuItem value={"Customer"}>Customer</MenuItem>
-          </Select>
-        </FormControl>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Role</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={role}
+          label="Role"
+          onChange={handleChange}
+        >
+          <MenuItem value={"Admin"}>Admin</MenuItem>
+          <MenuItem value={"Employee"}>Employee</MenuItem>
+          <MenuItem value={"Customer"}>Customer</MenuItem>
+        </Select>
+      </FormControl>
 
-      <Button variant="contained" onClick={editUser}>UPDATE USER</Button>
+      <Button variant="contained" onClick={editUser}>
+        UPDATE USER
+      </Button>
     </div>
   );
 }
