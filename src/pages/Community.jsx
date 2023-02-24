@@ -71,7 +71,7 @@ function Community() {
       </div>
 
       <Divider
-        style={{ marginTop: "1.4rem", marginBottom: "0.6rem", width: "50rem" }}
+        style={{ marginTop: "1.3rem", marginBottom: "0.75rem", width: "50rem" }}
       />
       <div className="createPostButton">
         <Button
