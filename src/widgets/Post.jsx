@@ -6,6 +6,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import CommentIcon from '@mui/icons-material/Comment';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { grey } from '@mui/material/colors';
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 function Post(props) {
   return (
@@ -39,15 +40,15 @@ function Post(props) {
           </div>
 
         <div className="postCaption">
-          <Typography variant='body2' style={{fontWeight:'bold', fontSize:'1rem', marginTop: '1rem'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit.</Typography>
-          <Chip />
+          <Typography variant='body2' style={{fontWeight:'bold', fontSize:'1rem', marginTop: '1rem', marginBottom: '0.5rem'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit.</Typography>
+          <Chip title="Question" />
         </div>
 
         <div className="postContent"></div>
 
 
         <div className="postfooter">
-          <Button variant='outlined' size="small" >see more</Button>
+          <Button variant='outlined' size="small" >see more <ChevronRightIcon /></Button>
           <Button variant='outlined' size="small" >delete post</Button>
         </div>
 

@@ -2,10 +2,19 @@ import * as React from 'react';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 
-export default function BasicChips() {
+const chipStyle = {
+  background: 'red',
+  fontSize: '0.6rem', 
+  width: '3.5rem',
+  height: '1rem',
+  paddingLeft: '0px',
+  paddingRight: '0px'
+}
+
+export default function BasicChips(props) {
   return (
     <Stack direction="row" spacing={1}>
-      <Chip label="Chip Filled" color="error" size="small" />
+      <Chip style={chipStyle} label={props.title} color="error" size="small" />
     </Stack>
   );
 }
