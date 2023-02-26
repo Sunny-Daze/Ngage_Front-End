@@ -11,11 +11,13 @@ import {
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import Post from '../widgets/Post'
+import CreatePostModal from "../components/CreatePostModal";
 // import PostComponent from "../widgets/post-components";
 
 function Community() {
   const [filter, setFilter] = React.useState("none");
   const [sort, setSort] = React.useState("newest");
+  const [postModal, setpostModal] = React.useState(true);
 
   const handleFilter = (event) => {
     setFilter(event.target.value);
@@ -24,6 +26,10 @@ function Community() {
   const handleSort = (event) => {
     setSort(event.target.value);
   };
+
+  const handlePostClick = () => {
+    setpostModal(true);
+  }
 
   return (
     <div className="Community">
@@ -75,6 +81,7 @@ function Community() {
       />
       <div className="createPostButton">
         <Button
+          onClick={handlePostClick}
           variant="contained"
           style={{ width: "9rem", fontSize: "0.75rem", background: "#001f54" }}
         >
@@ -87,15 +94,8 @@ function Community() {
         <Post />
         <Post />
         <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
       </div>
+      <CreatePostModal postModalswitch={postModal} setPostModalSwitch={setpostModal} />
     </div>
   );
 }
