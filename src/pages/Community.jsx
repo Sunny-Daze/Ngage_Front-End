@@ -85,7 +85,7 @@ function Community() {
           variant="contained"
           style={{ width: "9rem", fontSize: "0.75rem", background: "#001f54" }}
         >
-          create post{" "}
+          create post
           <AddIcon style={{ marginLeft: "0.2rem", fontSize: "1.2rem" }} />
         </Button>
       </div>

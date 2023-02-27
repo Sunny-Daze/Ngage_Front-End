@@ -32,6 +32,7 @@
 
 ::-webkit-scrollbar {
     width: 6px;
+    height:6px;
   }
 
 /* custom sroll bar */
@@ -52,4 +53,5 @@
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #001f54; 
+    width:6px;
   }
