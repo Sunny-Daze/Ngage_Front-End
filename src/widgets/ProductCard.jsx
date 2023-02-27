@@ -7,9 +7,9 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import CustomizedSnackbar from '../widgets/CustomizedSnackbar'
 
 function ProductCard(props) {
-
+  const [open, setOpen] = React.useState(false);
   const handleClick = () => {
-    <CustomizedSnackbar/>
+    setOpen(true);
   }
 
   return (
@@ -59,6 +59,7 @@ function ProductCard(props) {
           <ChevronRightIcon />
         </Button>
       </div>
+      <CustomizedSnackbar snackbarSwitch={open} handleSnackbar={setOpen}/>
     </div>
   );
 }

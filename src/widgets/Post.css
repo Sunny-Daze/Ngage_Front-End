@@ -2,8 +2,8 @@
     background: white;
     width: 50rem;
     border-radius: 5px;
-    height: 20rem;
-    margin-top: 0.6rem;
+    /* height: 20rem; */
+    margin-top: 0.75rem;
     margin-bottom: 1rem;
     display: flex;
 }
@@ -11,15 +11,48 @@
 .postUtils {
     width: 5rem;
     height: 100%;
-    background: transparent;
+    display:flex;
+    flex-direction: column;
+    padding-top: 1rem;
 }
 
 .postUtilsIcons {
-    margin-left: 1rem;
+    margin-left: 1.5rem;
 }
 
 .postCardBody {
     width: 100%;
-    background: maroon;
+    padding: 1rem;
 }
 
+.postHeader {
+    display: flex;
+    gap: 1rem;
+}
+
+.postHeader .postHeaderName {
+    height: 100%;
+}
+
+.postfooter {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.postContentBody {
+    margin-top: 1rem;
+    margin-bottom: 0.6rem;
+}
+
+.postContentImage {
+    width: 100%;
+    height: '20rem';
+    margin-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.postContentImage img {
+    width: 30rem;
+    /* height: 100%; */
+    border-radius: 5px;
+}
