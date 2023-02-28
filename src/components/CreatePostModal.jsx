@@ -14,7 +14,6 @@ import AddIcon from "@mui/icons-material/Add";
 import { domain, endPoints } from "../services/endPoints";
 import axios from "axios";
 
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -79,15 +78,29 @@ export default function CreatePostModal(props) {
   }
 
   async function createPost() {
-    let response = await axios.post(domain + endPoints.createPost, {
+    if (selectedtype == "") return;
+    let token = localStorage.getItem("token");
+    console.log({
       content: code,
       category: selectedtype,
       title: title,
     });
+    let response = await axios.post(
+      domain + endPoints.createPost,
+      {
+        content: code,
+        category: selectedtype,
+        title: title,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
 
     if (response.data.success) {
       console.warn(response.data);
     }
+
+
+    handleClose();
   }
 
   return (
@@ -127,7 +140,6 @@ export default function CreatePostModal(props) {
               // onClick={props.setModalSwitch}
               onClick={() => {
                 selectedtype = "Question";
-                console.log(selectedtype);
               }}
             />
             <Chip
@@ -135,7 +147,6 @@ export default function CreatePostModal(props) {
               variant="outlined"
               onClick={() => {
                 selectedtype = "Discussion";
-                console.log(selectedtype);
               }}
             />
           </Box>

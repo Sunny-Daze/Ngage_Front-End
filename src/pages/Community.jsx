@@ -10,14 +10,17 @@ import {
   Divider,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import Post from '../widgets/Post'
+import Post from "../widgets/Post";
 import CreatePostModal from "../components/CreatePostModal";
-// import PostComponent from "../widgets/post-components";
+
+import { domain, endPoints } from "../services/endPoints";
+import axios from "axios";
 
 function Community() {
   const [filter, setFilter] = React.useState("none");
   const [sort, setSort] = React.useState("newest");
   const [postModal, setpostModal] = React.useState(false);
+  const [posts, setPosts] = React.useState([]);
 
   const handleFilter = (event) => {
     setFilter(event.target.value);
@@ -29,7 +32,40 @@ function Community() {
 
   const handlePostClick = () => {
     setpostModal(true);
-  }
+  };
+
+  React.useEffect(() => {
+    async function fetchData() {
+      let token = localStorage.getItem("token");
+
+      // console.warn(token);
+
+      let response = await axios.post(
+        domain + endPoints.fetchPosts,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (response.data.success) {
+        response.data.result.forEach((e) => {
+          posts.push({
+            category: e.category,
+            title: e.title,
+            user: e.user,
+            content: e.content,
+            likes: e.likes,
+            comments: e.comments,
+            createdAt: e.createdAt,
+          });
+        });
+        setPosts([...posts]);
+      }
+    }
+
+    if (posts.length == 0) {
+      fetchData();
+    }
+  });
 
   return (
     <div className="Community">
@@ -91,11 +127,14 @@ function Community() {
       </div>
 
       <div className="postBody">
-        <Post />
-        <Post />
-        <Post />
+        {posts.map((item, key) => {
+          return <Post {...item} />;
+        })}
       </div>
-      <CreatePostModal postModalswitch={postModal} setPostModalSwitch={setpostModal} />
+      <CreatePostModal
+        postModalswitch={postModal}
+        setPostModalSwitch={setpostModal}
+      />
     </div>
   );
 }
