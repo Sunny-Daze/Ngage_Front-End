@@ -17,7 +17,7 @@ import CreatePostModal from "../components/CreatePostModal";
 function Community() {
   const [filter, setFilter] = React.useState("none");
   const [sort, setSort] = React.useState("newest");
-  const [postModal, setpostModal] = React.useState(true);
+  const [postModal, setpostModal] = React.useState(false);
 
   const handleFilter = (event) => {
     setFilter(event.target.value);
