@@ -23,7 +23,15 @@ function Community() {
   const [posts, setPosts] = React.useState([]);
 
   const handleFilter = (event) => {
-    setFilter(event.target.value);
+    console.log(event.target.value);
+
+    if (event.target.value === "none") {
+      setPosts([...posts]);
+      return;
+    }
+
+    let filteredPosts = posts.filter((e) => e.category == event.target.value);
+    setPosts([...filteredPosts]);
   };
 
   const handleSort = (event) => {
@@ -74,7 +82,15 @@ function Community() {
           style={{ width: "23rem" }}
           size="small"
           label="Search for Posts"
-          id="outlined-size-small"
+          id="outlined-size-sm  all"
+          onChange={(e) => {
+            if (e.target.value === "") setPosts([...posts]);
+            console.warn(e.target.value);
+            let searchedPosts = posts.filter((pt) =>
+              pt.title.includes(e.target.value)
+            );
+            setPosts([...searchedPosts]);
+          }}
         />
         <FormControl style={{ width: "9rem" }}>
           <InputLabel id="demo-simple-select-label">Filter</InputLabel>
@@ -88,8 +104,8 @@ function Community() {
             onChange={handleFilter}
           >
             <MenuItem value={"none"}>none</MenuItem>
-            <MenuItem value={"question"}>Question</MenuItem>
-            <MenuItem value={"discussion"}>Discussion</MenuItem>
+            <MenuItem value={"Question"}>Question</MenuItem>
+            <MenuItem value={"Discussion"}>Discussion</MenuItem>
           </Select>
         </FormControl>
         <FormControl style={{ width: "9rem" }}>
