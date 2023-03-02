@@ -29,6 +29,15 @@ const style = {
   overflowX: "scroll",
 };
 
+const activeButtonStyle = {
+  background: '#001f54',
+  color: 'white',
+  borderColor: '#001f54'
+}
+
+const inactiveButtonStyle = {
+}
+
 export default function CreatePostModal(props) {
   // quill editor
   const modules = {
@@ -65,11 +74,18 @@ export default function CreatePostModal(props) {
 
   const [code, setCode] = React.useState("");
   const [title, setTitle] = React.useState("");
+  const [badge1ButtonStyle, setBadge1ButtonStyle] = React.useState(inactiveButtonStyle);
+  const [badge2ButtonStyle, setBadge2ButtonStyle] = React.useState(inactiveButtonStyle);
+
   const handleProcedureContentChange = (content, delta, source, editor) => {
     setCode(content);
   };
 
-  const handleClose = () => props.setPostModalSwitch(false);
+  const handleClose = () => {
+    props.setPostModalSwitch(false)
+    setBadge1ButtonStyle(inactiveButtonStyle);
+    setBadge2ButtonStyle(inactiveButtonStyle);
+  };
 
   let selectedtype = "";
 
@@ -102,6 +118,7 @@ export default function CreatePostModal(props) {
     handleClose();
   }
 
+
   return (
     <div>
       <Modal
@@ -130,22 +147,33 @@ export default function CreatePostModal(props) {
             }}
           >
             <Chip
-              style={{
-                backgroundColor:
-                  selectedtype === "Question" ? "#001f54" : "#ffffff",
-              }}
+              style = {badge1ButtonStyle}
+              // style={{
+              //   backgroundColor:
+              //     selectedtype === "Question" ? "#001f54" : "#ffffff",
+              // }}
               label="Question"
               variant="outlined"
               // onClick={props.setModalSwitch}
               onClick={() => {
                 selectedtype = "Question";
+                setBadge2ButtonStyle(inactiveButtonStyle);
+                badge1ButtonStyle === inactiveButtonStyle?
+                setBadge1ButtonStyle(activeButtonStyle):
+                setBadge1ButtonStyle(inactiveButtonStyle)
+                console.log(selectedtype)
               }}
             />
             <Chip
+              style = {badge2ButtonStyle}
               label="Discussion"
               variant="outlined"
               onClick={() => {
                 selectedtype = "Discussion";
+                setBadge1ButtonStyle(inactiveButtonStyle);
+                badge2ButtonStyle === inactiveButtonStyle?
+                setBadge2ButtonStyle(activeButtonStyle):
+                setBadge2ButtonStyle(inactiveButtonStyle)
               }}
             />
           </Box>
