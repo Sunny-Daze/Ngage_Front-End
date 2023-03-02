@@ -133,7 +133,7 @@ export default function CreatePostModal(props) {
             <Chip
               style={{
                 backgroundColor:
-                  selectedtype == "Question" ? "#001f54" : "#ffffff",
+                  {selectedtype === "Question" ? "#001f54" : "#ffffff"},
               }}
               label="Question"
               variant="outlined"
