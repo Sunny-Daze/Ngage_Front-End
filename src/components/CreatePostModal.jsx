@@ -11,6 +11,7 @@ import {
 import ReactQuill from "react-quill";
 import "quill/dist/quill.snow.css";
 import AddIcon from "@mui/icons-material/Add";
+import { EventEmitter } from "fbemitter";
 import { domain, endPoints } from "../services/endPoints";
 import axios from "axios";
 
@@ -30,15 +31,15 @@ const style = {
 };
 
 const activeButtonStyle = {
-  background: '#001f54',
-  color: 'white',
-  borderColor: '#001f54'
-}
+  background: "#001f54",
+  color: "white",
+  borderColor: "#001f54",
+};
 
-const inactiveButtonStyle = {
-}
+const inactiveButtonStyle = {};
 
 export default function CreatePostModal(props) {
+  console.log(props)
   // quill editor
   const modules = {
     toolbar: [
@@ -74,15 +75,17 @@ export default function CreatePostModal(props) {
 
   const [code, setCode] = React.useState("");
   const [title, setTitle] = React.useState("");
-  const [badge1ButtonStyle, setBadge1ButtonStyle] = React.useState(inactiveButtonStyle);
-  const [badge2ButtonStyle, setBadge2ButtonStyle] = React.useState(inactiveButtonStyle);
+  const [badge1ButtonStyle, setBadge1ButtonStyle] =
+    React.useState(inactiveButtonStyle);
+  const [badge2ButtonStyle, setBadge2ButtonStyle] =
+    React.useState(inactiveButtonStyle);
 
   const handleProcedureContentChange = (content, delta, source, editor) => {
     setCode(content);
   };
 
   const handleClose = () => {
-    props.setPostModalSwitch(false)
+    props.setPostModalSwitch(false);
     setBadge1ButtonStyle(inactiveButtonStyle);
     setBadge2ButtonStyle(inactiveButtonStyle);
   };
@@ -94,7 +97,7 @@ export default function CreatePostModal(props) {
   }
 
   async function createPost() {
-    if (selectedtype == "") return;
+    // if (selectedtype == "") return;
     let token = localStorage.getItem("token");
     console.log({
       content: code,
@@ -112,12 +115,12 @@ export default function CreatePostModal(props) {
     );
 
     if (response.data.success) {
-      console.warn(response.data);
+      props.eventEmitter.emit('newPost',response.data);
+    
     }
 
     handleClose();
   }
-
 
   return (
     <div>
@@ -147,7 +150,7 @@ export default function CreatePostModal(props) {
             }}
           >
             <Chip
-              style = {badge1ButtonStyle}
+              style={badge1ButtonStyle}
               // style={{
               //   backgroundColor:
               //     selectedtype === "Question" ? "#001f54" : "#ffffff",
@@ -158,22 +161,22 @@ export default function CreatePostModal(props) {
               onClick={() => {
                 selectedtype = "Question";
                 setBadge2ButtonStyle(inactiveButtonStyle);
-                badge1ButtonStyle === inactiveButtonStyle?
-                setBadge1ButtonStyle(activeButtonStyle):
-                setBadge1ButtonStyle(inactiveButtonStyle)
-                console.log(selectedtype)
+                badge1ButtonStyle === inactiveButtonStyle
+                  ? setBadge1ButtonStyle(activeButtonStyle)
+                  : setBadge1ButtonStyle(inactiveButtonStyle);
+                console.log(selectedtype);
               }}
             />
             <Chip
-              style = {badge2ButtonStyle}
+              style={badge2ButtonStyle}
               label="Discussion"
               variant="outlined"
               onClick={() => {
                 selectedtype = "Discussion";
                 setBadge1ButtonStyle(inactiveButtonStyle);
-                badge2ButtonStyle === inactiveButtonStyle?
-                setBadge2ButtonStyle(activeButtonStyle):
-                setBadge2ButtonStyle(inactiveButtonStyle)
+                badge2ButtonStyle === inactiveButtonStyle
+                  ? setBadge2ButtonStyle(activeButtonStyle)
+                  : setBadge2ButtonStyle(inactiveButtonStyle);
               }}
             />
           </Box>
