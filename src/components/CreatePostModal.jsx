@@ -11,7 +11,6 @@ import {
 import ReactQuill from "react-quill";
 import "quill/dist/quill.snow.css";
 import AddIcon from "@mui/icons-material/Add";
-import { EventEmitter } from "fbemitter";
 import { domain, endPoints } from "../services/endPoints";
 import axios from "axios";
 
@@ -115,8 +114,8 @@ export default function CreatePostModal(props) {
     );
 
     if (response.data.success) {
-      props.eventEmitter.emit('newPost',response.data);
-    
+      console.log(props);
+      props.addNewPost(response.data.result);
     }
 
     handleClose();

@@ -16,27 +16,23 @@ import CreatePostModal from "../components/CreatePostModal";
 import { domain, endPoints } from "../services/endPoints";
 import axios from "axios";
 
-import { EventEmitter } from "fbemitter";
 
 function Community() {
   //Emitter
 
-  let eventEmitter = new EventEmitter();
-
-  eventEmitter.addListener("newPost", (val) => {
-    let temp = val.result;
+  function appendNewPost(post) {
     posts.splice(0, 0, {
-      category: temp.category,
-      title: temp.title,
-      user: temp.user,
-      content: temp.content,
-      likes: temp.likes,
-      comments: temp.comments,
-      createdAt: temp.createdAt,
+      category: post.category,
+      title: post.title,
+      user: post.user,
+      content: post.content,
+      likes: post.likes,
+      comments: post.comments,
+      createdAt: post.createdAt,
     });
 
     setPosts([...posts]);
-  });
+  }
 
   //Emitter End
 
@@ -173,7 +169,7 @@ function Community() {
       <CreatePostModal
         postModalswitch={postModal}
         setPostModalSwitch={setpostModal}
-        eventEmitter={eventEmitter}
+        addNewPost={appendNewPost}
       />
     </div>
   );
