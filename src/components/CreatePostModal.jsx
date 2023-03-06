@@ -14,6 +14,10 @@ import AddIcon from "@mui/icons-material/Add";
 import { domain, endPoints } from "../services/endPoints";
 import axios from "axios";
 
+
+let selectedtype = "";
+
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -89,14 +93,13 @@ export default function CreatePostModal(props) {
     setBadge2ButtonStyle(inactiveButtonStyle);
   };
 
-  let selectedtype = "";
 
   function handleEmail(e) {
     setTitle(e.target.value);
   }
 
   async function createPost() {
-    // if (selectedtype == "") return;
+    if (selectedtype == "") return;
     let token = localStorage.getItem("token");
     console.log({
       content: code,
@@ -119,6 +122,7 @@ export default function CreatePostModal(props) {
     }
 
     handleClose();
+    setCode('');
   }
 
   return (
@@ -158,11 +162,11 @@ export default function CreatePostModal(props) {
               variant="outlined"
               // onClick={props.setModalSwitch}
               onClick={() => {
-                selectedtype = "Question";
                 setBadge2ButtonStyle(inactiveButtonStyle);
                 badge1ButtonStyle === inactiveButtonStyle
-                  ? setBadge1ButtonStyle(activeButtonStyle)
-                  : setBadge1ButtonStyle(inactiveButtonStyle);
+                ? setBadge1ButtonStyle(activeButtonStyle)
+                : setBadge1ButtonStyle(inactiveButtonStyle);
+                selectedtype = "Question";
                 console.log(selectedtype);
               }}
             />
@@ -171,11 +175,13 @@ export default function CreatePostModal(props) {
               label="Discussion"
               variant="outlined"
               onClick={() => {
-                selectedtype = "Discussion";
                 setBadge1ButtonStyle(inactiveButtonStyle);
                 badge2ButtonStyle === inactiveButtonStyle
-                  ? setBadge2ButtonStyle(activeButtonStyle)
-                  : setBadge2ButtonStyle(inactiveButtonStyle);
+                ? setBadge2ButtonStyle(activeButtonStyle)
+                : setBadge2ButtonStyle(inactiveButtonStyle);
+                selectedtype = "Discussion";
+                console.log(selectedtype);
+
               }}
             />
           </Box>
