@@ -1,33 +1,65 @@
 import React from "react";
 import Chip from "../widgets/Chip";
 import "./Post.css";
+import "../index.css";
 import { IconButton, Typography, Avatar, Button } from "@mui/material";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import CommentIcon from "@mui/icons-material/Comment";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { grey } from "@mui/material/colors";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import DeleteIcon from "@mui/icons-material/Delete";
 import formatDate from "../utils/dateFormater";
+import { FavoriteRounded } from "@mui/icons-material";
+import { domain, endPoints } from "../services/endPoints";
+import axios from "axios";
+import { FavoriteBorderRounded } from "@mui/icons-material";
+
+async function likeAndUnLikePost(liked, postId) {
+  let url = liked
+    ? `${domain}${endPoints.unlikePost}`
+    : `${domain}${endPoints.likePost}`;
+  let token = localStorage.getItem("token");
+  let response = await axios.post(
+    url,
+    { post: postId },
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+  console.log(response);
+}
 
 function Post(props) {
+  let [likedButton, setLikeButton] = React.useState(props.liked);
+  let [likeCounts, setLikeCount] = React.useState(props.likeCounts);
+
+  console.warn(likeCounts);
+
   return (
     <div className="PostCard">
       <div className="postUtils">
         <div className="postUtilsIcons">
-          <IconButton style={{ paddingBottom: "0px" }}>
-            <FavoriteBorderIcon style={{ fontSize: "1.9rem" }} />
+          <IconButton
+            onClick={() => {
+              likeAndUnLikePost(likedButton, props.id);
+              setLikeButton(!likedButton)
+              setLikeCount(likedButton?likeCounts-=1:likeCounts+=1)
+            }}
+            style={{ paddingBottom: "0px" }}
+          >
+            {likedButton && (
+              <FavoriteRounded style={{ fontSize: "1.9rem", color: "red" }} />
+            )}
+            {!likedButton && (
+              <FavoriteBorderRounded
+                style={{ fontSize: "1.9rem", color: "grey" }}
+              />
+            )}
           </IconButton>
+
           <Typography
             variant="body2"
-            style={{
-              color: "gray",
-              marginLeft: "1.15rem",
-              marginTop: "0px",
-              paddintTop: "0",
-            }}
+            style={{ color: "gray", textAlign: "center" }}
           >
-            3
+            {likeCounts}
           </Typography>
           <IconButton style={{ paddingBottom: "0px" }}>
             <CommentIcon style={{ fontSize: "1.9rem" }} />
@@ -74,7 +106,7 @@ function Post(props) {
           >
             {props.title}
           </Typography>
-          <Chip title= {props.category} />
+          <Chip title={props.category} />
         </div>
 
         <div className="postContent">

@@ -16,7 +16,6 @@ import CreatePostModal from "../components/CreatePostModal";
 import { domain, endPoints } from "../services/endPoints";
 import axios from "axios";
 
-
 function Community() {
   //Emitter
 
@@ -26,7 +25,8 @@ function Community() {
       title: post.title,
       user: post.user,
       content: post.content,
-      likes: post.likes,
+      likeCounts: post.likeCounts,
+      liked: post.liked,
       comments: post.comments,
       createdAt: post.createdAt,
     });
@@ -76,11 +76,13 @@ function Community() {
       if (response.data.success) {
         response.data.result.forEach((e) => {
           posts.push({
+            id:e._id,
             category: e.category,
             title: e.title,
             user: e.user,
             content: e.content,
-            likes: e.likes,
+            likeCounts: e.likeCounts,
+            liked: e.liked,
             comments: e.comments,
             createdAt: e.createdAt,
           });
