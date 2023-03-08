@@ -1,6 +1,6 @@
-export const domain = "http://localhost:3001";
+// export const domain = "http://localhost:3001";
 
-// export const domain = "https://ngage-backend.onrender.com";
+export const domain = "https://ngage-backend.onrender.com";
 
 export const endPoints = {
   signup: "/api/auth/signup",

@@ -124,16 +124,19 @@
 /* PRofile card */
 .profileCard {
   background: #001f54;
-  border-radius: 10px;
-  width: 100%;
-  height: 80px;
-  /* margin-top: 185px; */
+  border-radius: 2px;
+  /* width: 100%; */
+  /* height: 80px; */
   top: 86vh;
   display: flex;
   flex-direction: row;
   position: sticky;
-  /* top: 80vh; */
   bottom: 0.7rem;
+  padding: 1rem .1rem;
+  margin: 0rem .1rem;
+
+  font-size: smaller;
+
 }
 
 .avatar {
@@ -147,16 +150,17 @@
 .info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: start;
+  align-items: start;
   width: 95px;
 }
 .role {
-  border-radius: 40%;
+  border-radius: 10%;
   padding:3px;
   margin-top: 6px;
   background: white;
-  color: black;
+  color: #001f54;
+  font-weight: 600;
 }
 .notification {
   display: flex;
@@ -177,4 +181,13 @@
 
 .MuiInput-root {
   border-bottom: 1px solid #53af5b !important;
+}
+
+
+.logged-in-username{
+  color:wheat;
+  letter-spacing: .56px;
+  font-weight: 600;
+  font-size: medium;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }

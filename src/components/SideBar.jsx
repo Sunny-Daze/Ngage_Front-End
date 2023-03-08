@@ -91,6 +91,25 @@ const routes = [
   },
 ];
 
+function getuserDetails(type) {
+  let userDetails = JSON.parse(localStorage.getItem("user") ?? '');
+  console.warn(userDetails);
+
+  switch (type) {
+    case "role":
+      return userDetails.role;
+      break;
+
+    case "name":
+      return userDetails.userName;
+
+      break;
+
+    default:
+      break;
+  }
+}
+
 const HomePage = ({ children }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -121,6 +140,9 @@ const HomePage = ({ children }) => {
     },
   };
   const navigate = useNavigate();
+
+
+  getuserDetails();
 
   return (
     <>
@@ -197,22 +219,25 @@ const HomePage = ({ children }) => {
                   className="link"
                   activeClassName="active"
                 >
-                  <div className="icon" className="routeIcon">
+                  <div className="icon">
                     {route.icon}
                   </div>
                   <AnimatePresence>
                     {isOpen && (
                       <motion.div
-                      variants={showAnimation}
-                      initial="hidden"
-                      animate="show"
-                      exit="hidden"
-                      className="link_text"
+                        variants={showAnimation}
+                        initial="hidden"
+                        animate="show"
+                        exit="hidden"
+                        className="link_text"
+                      >
+                        <Typography
+                          variant="body1"
+                          style={{ fontWeight: "bold", color: "darkslategray" }}
                         >
-                      <Typography variant='body1' style={{fontWeight:'bold', color:'darkslategray'}}>
                           {route.name}
-                      </Typography>
-                        </motion.div>
+                        </Typography>
+                      </motion.div>
                     )}
                   </AnimatePresence>
                 </NavLink>
@@ -222,12 +247,12 @@ const HomePage = ({ children }) => {
 
           <div className="profileCard">
             <div className="avatar">
-              <Avatar>N</Avatar>
+              <Avatar>S</Avatar>
             </div>
             <div className="info">
-              <div className="name">Sunny</div>
+              <div className="logged-in-username"></div>
               <div className="roleParent">
-                <div className="role">admin</div>
+                <div className="role">Admin</div>
                 {/* <Chip label="primary" color="primary" /> */}
               </div>
             </div>

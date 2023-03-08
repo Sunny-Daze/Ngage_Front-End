@@ -47,6 +47,7 @@ const Login = ({ setLoginUser }) => {
 
     if (response.data.success) {
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem('user',JSON.stringify(response.data.result));
       navigate("/community");
     } else {
       alert(response.data.message);
