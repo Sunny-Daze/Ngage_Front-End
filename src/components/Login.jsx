@@ -87,11 +87,11 @@ const Login = ({ setLoginUser }) => {
               }}
             >
               By continuing, you agree to our{" "}
-              <Link href="#" onclick underline="always">
+              <Link href="#"  underline="always">
                 {"User Agreement"}
               </Link>{" "}
               and{" "}
-              <Link href="#" onclick underline="always">
+              <Link href="#"  underline="always">
                 {"Privacy Policy"}
               </Link>
               .

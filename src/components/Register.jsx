@@ -95,11 +95,11 @@ function Register() {
             }}
           >
             By continuing, you are setting up a Ngage account and agree to our{" "}
-            <Link href="#" onclick underline="always">
+            <Link href="#"  underline="always">
               {"User Agreement"}
             </Link>{" "}
             and{" "}
-            <Link href="#" onclick underline="always">
+            <Link href="#"  underline="always">
               {"Privacy Policy"}
             </Link>
             .
@@ -160,7 +160,7 @@ function Register() {
             </Button>
           </FormControl>
           <div onClick={() => navigate("/")}>
-            <Link className="link" onclick underline="always">
+            <Link className="link"  underline="always">
               {"Already have a account? Sign In"}
             </Link>
           </div>
