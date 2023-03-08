@@ -2,7 +2,6 @@ import React from "react";
 import SideBar from "./SideBar";
 import Community from "../pages/Community";
 import "./RenderCommunity.css";
-import { authCheck } from "../services/auth.service";
 
 function RenderCommunity() {
 
