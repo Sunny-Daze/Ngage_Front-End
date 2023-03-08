@@ -92,18 +92,16 @@ const routes = [
 ];
 
 function getuserDetails(type) {
-  let userDetails = JSON.parse(localStorage.getItem("user") ?? '');
-  console.warn(userDetails);
-
+  let userDetails = JSON.parse(localStorage.getItem("user") ?? "");
   switch (type) {
     case "role":
       return userDetails.role;
-      break;
 
     case "name":
-      return userDetails.userName;
+      return userDetails.userName.toUpperCase();
 
-      break;
+    case "avatar":
+      return userDetails.userName[0].toUpperCase();
 
     default:
       break;
@@ -140,9 +138,6 @@ const HomePage = ({ children }) => {
     },
   };
   const navigate = useNavigate();
-
-
-  getuserDetails();
 
   return (
     <>
@@ -219,9 +214,7 @@ const HomePage = ({ children }) => {
                   className="link"
                   activeClassName="active"
                 >
-                  <div className="icon">
-                    {route.icon}
-                  </div>
+                  <div className="icon">{route.icon}</div>
                   <AnimatePresence>
                     {isOpen && (
                       <motion.div
@@ -247,12 +240,12 @@ const HomePage = ({ children }) => {
 
           <div className="profileCard">
             <div className="avatar">
-              <Avatar>S</Avatar>
+              <Avatar>{getuserDetails("avatar")}</Avatar>
             </div>
             <div className="info">
-              <div className="logged-in-username"></div>
+              <div className="logged-in-username">{getuserDetails("name")}</div>
               <div className="roleParent">
-                <div className="role">Admin</div>
+                <div className="role">{getuserDetails("role")}</div>
                 {/* <Chip label="primary" color="primary" /> */}
               </div>
             </div>
@@ -289,8 +282,13 @@ const HomePage = ({ children }) => {
                   My Account
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={handleClose}>
-                  <ListItemIcon onClick={() => navigate("/")}>
+                <MenuItem
+                  onClick={() => {
+                    localStorage.clear();
+                    navigate("/");
+                  }}
+                >
+                  <ListItemIcon>
                     <Logout fontSize="small" />
                   </ListItemIcon>
                   Logout
