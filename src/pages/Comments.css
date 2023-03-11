@@ -7,5 +7,17 @@
 .Post-Comments {
     background: white;
     border-radius: 5px;
-    width: 50rem;
+    width: 51rem;
+}
+
+.Comments-Form {
+    width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 1rem;
+}
+
+.Comments-list {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
