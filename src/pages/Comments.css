@@ -1,0 +1,11 @@
+.Comments {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.Post-Comments {
+    background: white;
+    border-radius: 5px;
+    width: 50rem;
+}

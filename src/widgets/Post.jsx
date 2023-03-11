@@ -147,7 +147,7 @@ function Post(props) {
           >
             delete post{" "}
             <DeleteIcon
-              style={{ fontSize: "1.2rem", marginLeft: "0.5rem", color:'red' }}
+              style={{ fontSize: "1.1rem", marginLeft: "0.5rem", color:'red' }}
             />
           </Button>
         </div>
