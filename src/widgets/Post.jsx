@@ -4,7 +4,7 @@ import "./Post.css";
 import "../index.css";
 import { IconButton, Typography, Avatar, Button } from "@mui/material";
 import CommentIcon from "@mui/icons-material/Comment";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import { grey } from "@mui/material/colors";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -71,7 +71,7 @@ function Post(props) {
             0
           </Typography>
           <IconButton>
-            <LocationOnIcon style={{ fontSize: "1.7rem" }} />
+            <BookmarkBorderIcon style={{ fontSize: "1.8rem" }} />
           </IconButton>
         </div>
       </div>
@@ -106,7 +106,7 @@ function Post(props) {
           >
             {props.title}
           </Typography>
-          <Chip title={props.category} />
+          {props.category !== "" && <Chip title={props.category} />}
         </div>
 
         <div className="postContent">
@@ -141,13 +141,13 @@ function Post(props) {
               borderColor: "red",
               height: "1.8rem",
               fontSize: "0.75rem",
+              color:'red'
             }}
             size="small"
           >
             delete post{" "}
             <DeleteIcon
-              color="error"
-              style={{ fontSize: "1.1rem", marginLeft: "0.5rem" }}
+              style={{ fontSize: "1.2rem", marginLeft: "0.5rem", color:'red' }}
             />
           </Button>
         </div>

@@ -98,7 +98,7 @@ function getuserDetails(type) {
       return userDetails.role;
 
     case "name":
-      return userDetails.userName.toUpperCase();
+      return userDetails.userName;
 
     case "avatar":
       return userDetails.userName[0].toUpperCase();
