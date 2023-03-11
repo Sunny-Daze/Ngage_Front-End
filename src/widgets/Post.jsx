@@ -46,32 +46,32 @@ function Post(props) {
             style={{ paddingBottom: "0px" }}
           >
             {likedButton && (
-              <FavoriteRounded style={{ fontSize: "1.9rem", color: "red" }} />
+              <FavoriteRounded style={{ fontSize: "1.85rem", color: "red" }} />
             )}
             {!likedButton && (
               <FavoriteBorderRounded
-                style={{ fontSize: "1.9rem", color: "grey" }}
+                style={{ fontSize: "1.85rem", color: "grey" }}
               />
             )}
           </IconButton>
 
           <Typography
             variant="body2"
-            style={{ color: "gray", textAlign: "center" }}
+            style={{ color: "darkslategray", textAlign: "center", marginRight: '2px' }}
           >
             {likeCounts}
           </Typography>
           <IconButton style={{ paddingBottom: "0px" }}>
-            <CommentIcon style={{ fontSize: "1.9rem" }} />
+            <CommentIcon style={{ fontSize: "1.7rem"}} />
           </IconButton>
           <Typography
             variant="body2"
-            style={{ color: "gray", marginLeft: "1.15rem" }}
+            style={{ color: "darkslategray", textAlign: "center", marginRight: '2px' }}
           >
             0
           </Typography>
           <IconButton>
-            <LocationOnIcon style={{ fontSize: "1.9rem" }} />
+            <LocationOnIcon style={{ fontSize: "1.7rem" }} />
           </IconButton>
         </div>
       </div>

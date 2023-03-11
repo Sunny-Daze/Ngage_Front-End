@@ -110,6 +110,7 @@ function getuserDetails(type) {
 
 const HomePage = ({ children }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [showProfileCard, setShowProfileCard] = useState(true);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -119,7 +120,10 @@ const HomePage = ({ children }) => {
   };
 
   const [isOpen, setIsOpen] = useState(true);
-  const toggle = () => setIsOpen(!isOpen);
+  const toggle = () => {
+    setIsOpen(!isOpen);
+    setShowProfileCard(!showProfileCard);
+  }
 
   const showAnimation = {
     hidden: {
@@ -238,28 +242,38 @@ const HomePage = ({ children }) => {
             })}
           </section>
 
-          <div className="profileCard">
+          {showProfileCard && <div className="profileCard">
             <div className="avatar">
-              <Avatar>{getuserDetails("avatar")}</Avatar>
+              <Avatar style={{width:'2.3rem', height:'2.3rem'}}>{getuserDetails("avatar")}</Avatar>
             </div>
             <div className="info">
-              <div className="logged-in-username">{getuserDetails("name")}</div>
+              <div className="logged-in-username">
+              <Typography style={{color:'white', fontWeight: '540', fontSize:'0.9rem'}} variant='body2'>
+                {getuserDetails("name")}
+              </Typography>
+                </div>
               <div className="roleParent">
-                <div className="role">{getuserDetails("role")}</div>
+                <div className="role">
+                <Typography style={{color:'#001f54', fontWeight:'700', fontSize:'0.7rem'}} variant='body2'>
+                  {getuserDetails("role")}
+                  </Typography>
+                  </div>
                 {/* <Chip label="primary" color="primary" /> */}
               </div>
             </div>
             <div className="notification">
               <Badge
-                style={{ color: "white" }}
-                badgeContent={4}
-                color="primary"
+                // style={{ color: "white", fontSize:'1px' }}
+                badgeContent={1}
+                // color="error"
+                sx={{ "& .MuiBadge-badge": {background: 'red', color: 'white', fontSize: 12, height: 18, minWidth: 10 } }}
               >
-                <MailIcon />
+                <MailIcon style={{fontSize:'1.4rem', color:'white'}} />
               </Badge>
             </div>
             <div className="settings">
               <SettingsIcon
+              style={{fontSize:'1.4rem'}}
                 id="basic-menu"
                 aria-controls={open ? "basic-menu" : undefined}
                 aria-haspopup="true"
@@ -295,9 +309,8 @@ const HomePage = ({ children }) => {
                 </MenuItem>
               </Menu>
             </div>
-          </div>
+          </div>}
         </motion.div>
-
         <main>{children}</main>
       </div>
     </>
