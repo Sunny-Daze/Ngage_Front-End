@@ -30,6 +30,11 @@ async function likeAndUnLikePost(liked, postId) {
   );
 }
 
+
+const handleSeeMore = () => {
+  navigate('/comments');
+}
+
 function renderPost(userId) {
   let userDetails = JSON.parse(localStorage.getItem("user") ?? "");
 
