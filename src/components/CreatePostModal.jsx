@@ -14,9 +14,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { domain, endPoints } from "../services/endPoints";
 import axios from "axios";
 
-
 let selectedtype = "";
-
 
 const style = {
   position: "absolute",
@@ -91,7 +89,6 @@ export default function CreatePostModal(props) {
     setBadge2ButtonStyle(inactiveButtonStyle);
   };
 
-
   function handleEmail(e) {
     setTitle(e.target.value);
   }
@@ -99,11 +96,11 @@ export default function CreatePostModal(props) {
   async function createPost() {
     if (selectedtype == "") return;
     let token = localStorage.getItem("token");
-    console.log({
-      content: code,
-      category: selectedtype,
-      title: title,
-    });
+    // console.log({
+    //   content: code,
+    //   category: selectedtype,
+    //   title: title,
+    // });
     let response = await axios.post(
       domain + endPoints.createPost,
       {
@@ -115,12 +112,12 @@ export default function CreatePostModal(props) {
     );
 
     if (response.data.success) {
-      console.log(props);
+      // console.log(props);
       props.addNewPost(response.data.result);
     }
 
     handleClose();
-    setCode('');
+    setCode("");
   }
 
   return (
@@ -162,10 +159,11 @@ export default function CreatePostModal(props) {
               onClick={() => {
                 setBadge2ButtonStyle(inactiveButtonStyle);
                 badge1ButtonStyle === inactiveButtonStyle
-                ? setBadge1ButtonStyle(activeButtonStyle)
-                : setBadge1ButtonStyle(inactiveButtonStyle);
-                selectedtype = "Question";
-                console.log(selectedtype);
+                  ? setBadge1ButtonStyle(activeButtonStyle)
+                  : setBadge1ButtonStyle(inactiveButtonStyle);
+                badge1ButtonStyle === inactiveButtonStyle
+                  ? (selectedtype = "Question")
+                  : (selectedtype = "");
               }}
             />
             <Chip
@@ -175,11 +173,11 @@ export default function CreatePostModal(props) {
               onClick={() => {
                 setBadge1ButtonStyle(inactiveButtonStyle);
                 badge2ButtonStyle === inactiveButtonStyle
-                ? setBadge2ButtonStyle(activeButtonStyle)
-                : setBadge2ButtonStyle(inactiveButtonStyle);
-                selectedtype = "Discussion";
-                console.log(selectedtype);
-
+                  ? setBadge2ButtonStyle(activeButtonStyle)
+                  : setBadge2ButtonStyle(inactiveButtonStyle);
+                badge2ButtonStyle === inactiveButtonStyle
+                  ? (selectedtype = "Discussion")
+                  : (selectedtype = "");
               }}
             />
           </Box>

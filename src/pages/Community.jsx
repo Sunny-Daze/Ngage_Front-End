@@ -17,7 +17,12 @@ import { domain, endPoints } from "../services/endPoints";
 import axios from "axios";
 
 function Community() {
-  //Emitter
+  
+ function deletePostFromPosts(postId){
+   let updatedPosts = posts.filter((post)=> post.id != postId);
+   setPosts([...updatedPosts])
+  }
+
 
   function appendNewPost(post) {
     posts.splice(0, 0, {
@@ -34,7 +39,6 @@ function Community() {
     setPosts([...posts]);
   }
 
-  //Emitter End
 
   const [filter, setFilter] = React.useState("none");
   const [sort, setSort] = React.useState("newest");
@@ -106,7 +110,7 @@ function Community() {
           id="outlined-size-sm  all"
           onChange={(e) => {
             if (e.target.value === "") setPosts([...posts]);
-            console.warn(e.target.value);
+            // console.warn(e.target.value);
             let searchedPosts = posts.filter((pt) =>
               pt.title.includes(e.target.value)
             );
@@ -165,7 +169,7 @@ function Community() {
 
       <div className="postBody">
         {posts.map((item, key) => {
-          return <Post {...item} />;
+          return <Post {...{...item,deletePostFromPosts}} />;
         })}
       </div>
       <CreatePostModal
