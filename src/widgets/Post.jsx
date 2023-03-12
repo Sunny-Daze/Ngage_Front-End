@@ -31,9 +31,7 @@ async function likeAndUnLikePost(liked, postId) {
 }
 
 
-const handleSeeMore = () => {
-  navigate('/comments');
-}
+
 
 function renderPost(userId) {
   let userDetails = JSON.parse(localStorage.getItem("user") ?? "");
@@ -73,6 +71,10 @@ function Post(props) {
   let [likeCounts, setLikeCount] = React.useState(props.likeCounts);
 
   // console.warn(likeCounts);
+
+  const handleSeeMore = () => {
+    navigate('/comments');
+  }
 
   return (
     <div className="PostCard">
