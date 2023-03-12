@@ -26,9 +26,25 @@ async function likeAndUnLikePost(liked, postId) {
   );
 }
 
-async function deletePost(postId, deletePostFunction) {
+function renderPost(userId) {
   let userDetails = JSON.parse(localStorage.getItem("user") ?? "");
-  if (userDetails.role == "Admin" || userDetails.role == "SuperAdmin" ) {
+
+  if (
+    userDetails.role === "Admin" ||
+    userDetails.role === "SuperAdmin" ||
+    userId === userDetails._id
+  )
+    return true;
+  else return false;
+}
+
+async function deletePost(postId, userId, deletePostFunction) {
+  let userDetails = JSON.parse(localStorage.getItem("user") ?? "");
+  if (
+    userDetails.role === "Admin" ||
+    userDetails.role === "SuperAdmin" ||
+    userDetails._id === userId
+  ) {
     let url = `${domain}${endPoints.deletePost}`;
     let token = localStorage.getItem("token");
     let response = await axios.post(
@@ -156,23 +172,31 @@ function Post(props) {
           >
             see more <ChevronRightIcon />
           </Button>
-          <Button
-            onClick={() => deletePost(props.id, props.deletePostFromPosts)}
-            variant="outlined"
-            color="error"
-            style={{
-              borderColor: "red",
-              height: "1.8rem",
-              fontSize: "0.75rem",
-              color: "red",
-            }}
-            size="small"
-          >
-            DELETE POST
-            <DeleteIcon
-              style={{ fontSize: "1.1rem", marginLeft: "0.5rem", color: "red" }}
-            />
-          </Button>
+          {renderPost(props.user._id) && (
+            <Button
+              onClick={() =>
+                deletePost(props.id, props.user._id, props.deletePostFromPosts)
+              }
+              variant="outlined"
+              color="error"
+              style={{
+                borderColor: "red",
+                height: "1.8rem",
+                fontSize: "0.75rem",
+                color: "red",
+              }}
+              size="small"
+            >
+              DELETE POST
+              <DeleteIcon
+                style={{
+                  fontSize: "1.1rem",
+                  marginLeft: "0.5rem",
+                  color: "red",
+                }}
+              />
+            </Button>
+          )}
         </div>
       </div>
     </div>
