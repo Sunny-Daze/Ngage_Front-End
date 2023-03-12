@@ -41,7 +41,7 @@ function UserProfile() {
           <TextField size='small' id="outlined-basic" label="Email" variant="outlined" style={{marginTop:'0.5rem', width:'20rem'}} />
           </Box>
           <div className="editProfileButtonStyling">
-          <Button variant='outlined' size='small' style={{color:'#001f54', marginTop: '1.5rem', width:'12rem' , borderColor:'#001f54'}}>update profile <EditIcon style={{color:'#001f54', marginLeft:'0.3rem'}} /> </Button>
+          <Button variant='outlined' size='small' style={{color:'#001f54', marginTop: '1.5rem', width:'11rem' , borderColor:'#001f54'}}>update profile <EditIcon style={{color:'#001f54', marginLeft:'0.3rem'}} /> </Button>
           </div>
       </div>
     </div>

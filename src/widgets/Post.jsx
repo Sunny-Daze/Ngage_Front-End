@@ -71,7 +71,7 @@ function Post(props) {
   // console.warn(likeCounts);
 
   const handleSeeMore = () => {
-    navigate('/comments');
+    navigate(`/community/comments/${props.id}`);
   }
 
   return (

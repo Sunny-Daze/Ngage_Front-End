@@ -24,9 +24,10 @@ export const endPoints = {
   fetchPosts  : '/api/post/fetchPosts',
   likePost : '/api/like/likePost',
   unlikePost : '/api/like/unlikePost',
-  deletePost : '/api/post/deletePost'
+  deletePost : '/api/post/deletePost',
 
-
+  //Post Comments
+  fetchComments : '/api/comment/fetchComment'
    
 
 
