@@ -13,6 +13,7 @@ import { FavoriteRounded } from "@mui/icons-material";
 import { domain, endPoints } from "../services/endPoints";
 import axios from "axios";
 import { FavoriteBorderRounded } from "@mui/icons-material";
+import { useNavigate } from 'react-router-dom';
 
 async function likeAndUnLikePost(liked, postId) {
   let url = liked
@@ -28,10 +29,14 @@ async function likeAndUnLikePost(liked, postId) {
 }
 
 function Post(props) {
+  const navigate = useNavigate();
+
   let [likedButton, setLikeButton] = React.useState(props.liked);
   let [likeCounts, setLikeCount] = React.useState(props.likeCounts);
 
-  console.warn(likeCounts);
+  const handleSeeMore = () => {
+    navigate('/comments');
+  }
 
   return (
     <div className="PostCard">
@@ -131,6 +136,7 @@ function Post(props) {
               fontSize: "0.75rem",
             }}
             size="small"
+            onClick={handleSeeMore}
           >
             see more <ChevronRightIcon />
           </Button>
