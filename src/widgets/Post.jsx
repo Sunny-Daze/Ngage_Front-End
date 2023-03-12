@@ -56,7 +56,7 @@ function Post(props) {
             )}
             {!likedButton && (
               <FavoriteBorderRounded
-                style={{ fontSize: "1.85rem", color: "grey" }}
+                style={{ fontSize: "1.85rem", color: "#001f54" }}
               />
             )}
           </IconButton>
@@ -68,7 +68,7 @@ function Post(props) {
             {likeCounts}
           </Typography>
           <IconButton style={{ paddingBottom: "0px" }}>
-            <AiOutlineComment style={{ fontSize: "1.9rem"}} />
+            <AiOutlineComment style={{ fontSize: "1.9rem", color: "#001f54"}} />
           </IconButton>
           <Typography
             variant="body2"
@@ -77,7 +77,7 @@ function Post(props) {
             0
           </Typography>
           <IconButton>
-            <BsBookmark style={{ fontSize: "1.5rem", marginLeft:'3' }} />
+            <BsBookmark style={{ fontSize: "1.5rem", marginLeft:'3', color: "#001f54" }} />
             {/* IMP DO NOT REMOVE - display below icon when clicked */}
             {/* <FaBookmark style={{ fontSize: "1.55rem", marginLeft:'3' , color:'#001f54' }} /> */}
           </IconButton>

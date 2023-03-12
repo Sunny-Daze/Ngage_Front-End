@@ -289,7 +289,9 @@ const HomePage = ({ children }) => {
                   "aria-labelledby": "basic-button",
                 }}
               >
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={() => {
+                    navigate("/user-profile");
+                  }}>
                   <ListItemIcon>
                     <Avatar sx={{ width: 32, height: 32, marginRight: 1 }} />
                   </ListItemIcon>

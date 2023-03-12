@@ -10,6 +10,7 @@ import RenderRecreation from './components/RenderRecreation'
 import RenderLearningManagement from './components/RenderLearningManagement'
 import RenderProfessionalGrowth from './components/RenderProfessionalGrowth'
 import RenderComments from './components/RenderComments'
+import RenderUserProfile from './components/RenderUserProfile'
 
 function App() {
   const [user, setLoginUser] = useState({});
@@ -32,6 +33,7 @@ function App() {
           <Route path="/training/learning-management" element={<RenderLearningManagement />} />
           <Route path="/training/professional-growth" element={<RenderProfessionalGrowth />} />
           <Route path="/comments" element={<RenderComments />} />
+          <Route path="/user-profile" element={<RenderUserProfile />} />
         </Routes>
       </Router>
     </div>
