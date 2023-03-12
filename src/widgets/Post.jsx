@@ -3,6 +3,8 @@ import Chip from "../widgets/Chip";
 import "./Post.css";
 import "../index.css";
 import { IconButton, Typography, Avatar, Button } from "@mui/material";
+import CommentIcon from "@mui/icons-material/Comment";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import { grey } from "@mui/material/colors";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -26,7 +28,37 @@ async function likeAndUnLikePost(liked, postId) {
     { post: postId },
     { headers: { Authorization: `Bearer ${token}` } }
   );
-  console.log(response);
+}
+
+function renderPost(userId) {
+  let userDetails = JSON.parse(localStorage.getItem("user") ?? "");
+
+  if (
+    userDetails.role === "Admin" ||
+    userDetails.role === "SuperAdmin" ||
+    userId === userDetails._id
+  )
+    return true;
+  else return false;
+}
+
+async function deletePost(postId, userId, deletePostFunction) {
+  let userDetails = JSON.parse(localStorage.getItem("user") ?? "");
+  if (
+    userDetails.role === "Admin" ||
+    userDetails.role === "SuperAdmin" ||
+    userDetails._id === userId
+  ) {
+    let url = `${domain}${endPoints.deletePost}`;
+    let token = localStorage.getItem("token");
+    let response = await axios.post(
+      url,
+      { post: postId },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    console.log(response);
+    deletePostFunction(postId);
+  }
 }
 
 function Post(props) {
@@ -35,9 +67,7 @@ function Post(props) {
   let [likedButton, setLikeButton] = React.useState(props.liked);
   let [likeCounts, setLikeCount] = React.useState(props.likeCounts);
 
-  const handleSeeMore = () => {
-    navigate('/comments');
-  }
+  // console.warn(likeCounts);
 
   return (
     <div className="PostCard">
@@ -46,8 +76,8 @@ function Post(props) {
           <IconButton
             onClick={() => {
               likeAndUnLikePost(likedButton, props.id);
-              setLikeButton(!likedButton)
-              setLikeCount(likedButton?likeCounts-=1:likeCounts+=1)
+              setLikeButton(!likedButton);
+              setLikeCount(likedButton ? (likeCounts -= 1) : (likeCounts += 1));
             }}
             style={{ paddingBottom: "0px" }}
           >
@@ -63,16 +93,24 @@ function Post(props) {
 
           <Typography
             variant="body2"
-            style={{ color: "darkslategray", textAlign: "center", marginRight: '2px' }}
+            style={{
+              color: "darkslategray",
+              textAlign: "center",
+              marginRight: "2px",
+            }}
           >
             {likeCounts}
           </Typography>
           <IconButton style={{ paddingBottom: "0px" }}>
-            <AiOutlineComment style={{ fontSize: "1.9rem", color: "#001f54"}} />
+            <CommentIcon style={{ fontSize: "1.7rem" }} />
           </IconButton>
           <Typography
             variant="body2"
-            style={{ color: "darkslategray", textAlign: "center", marginRight: '2px' }}
+            style={{
+              color: "darkslategray",
+              textAlign: "center",
+              marginRight: "2px",
+            }}
           >
             0
           </Typography>
@@ -143,22 +181,31 @@ function Post(props) {
           >
             see more <ChevronRightIcon />
           </Button>
-          <Button
-            variant="outlined"
-            color="error"
-            style={{
-              borderColor: "red",
-              height: "1.8rem",
-              fontSize: "0.75rem",
-              color:'red'
-            }}
-            size="small"
-          >
-            delete post{" "}
-            <DeleteIcon
-              style={{ fontSize: "1.1rem", marginLeft: "0.5rem", color:'red' }}
-            />
-          </Button>
+          {renderPost(props.user._id) && (
+            <Button
+              onClick={() =>
+                deletePost(props.id, props.user._id, props.deletePostFromPosts)
+              }
+              variant="outlined"
+              color="error"
+              style={{
+                borderColor: "red",
+                height: "1.8rem",
+                fontSize: "0.75rem",
+                color: "red",
+              }}
+              size="small"
+            >
+              DELETE POST
+              <DeleteIcon
+                style={{
+                  fontSize: "1.1rem",
+                  marginLeft: "0.5rem",
+                  color: "red",
+                }}
+              />
+            </Button>
+          )}
         </div>
       </div>
     </div>

@@ -24,17 +24,17 @@ function EditUserDetails({ props }) {
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
-    console.log(email);
+    // console.log(email);
   };
 
   const handleUsername = (e) => {
     setUsername(e.target.value);
-    console.log(username);
+    // console.log(username);
   };
 
   const handleChange = (event) => {
     setRole(event.target.value);
-    console.log(role);
+    // console.log(role);
   };
 
   const editUser = async () => {
@@ -57,7 +57,7 @@ function EditUserDetails({ props }) {
       console.log("done");
       props.dialogClose();
     } else {
-      console.log("fucked");
+      // console.log("fucked");
     }
 
     // console.log(user);
