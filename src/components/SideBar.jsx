@@ -108,6 +108,26 @@ function getuserDetails(type) {
   }
 }
 
+function getUserRoutes() {
+  let role = getuserDetails("role");
+
+  if (role === "Employee") {
+    return [routes[0], routes[1], routes[2], routes[4]];
+  }
+
+  if (role === "Customer") {
+    return [routes[0], routes[1]];
+  }
+
+  if (role === "Admin") {
+    return routes;
+  }
+
+  if (role === "SuperAdmin") {
+    return routes;
+  }
+}
+
 const HomePage = ({ children }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [showProfileCard, setShowProfileCard] = useState(true);
@@ -123,7 +143,7 @@ const HomePage = ({ children }) => {
   const toggle = () => {
     setIsOpen(!isOpen);
     setShowProfileCard(!showProfileCard);
-  }
+  };
 
   const showAnimation = {
     hidden: {
@@ -199,7 +219,7 @@ const HomePage = ({ children }) => {
             </div>
           </div>
           <section className="routes">
-            {routes.map((route, index) => {
+            {getUserRoutes().map((route, index) => {
               if (route.subRoutes) {
                 return (
                   <SidebarMenu
@@ -242,76 +262,100 @@ const HomePage = ({ children }) => {
             })}
           </section>
 
-          {showProfileCard && <div className="profileCard">
-            <div className="avatar">
-              <Avatar style={{width:'2.3rem', height:'2.3rem'}}>{getuserDetails("avatar")}</Avatar>
-            </div>
-            <div className="info">
-              <div className="logged-in-username">
-              <Typography style={{color:'white', fontWeight: '540', fontSize:'0.9rem'}} variant='body2'>
-                {getuserDetails("name")}
-              </Typography>
-                </div>
-              <div className="roleParent">
-                <div className="role">
-                <Typography style={{color:'#001f54', fontWeight:'700', fontSize:'0.7rem'}} variant='body2'>
-                  {getuserDetails("role")}
-                  </Typography>
-                  </div>
-                {/* <Chip label="primary" color="primary" /> */}
+          {showProfileCard && (
+            <div className="profileCard">
+              <div className="avatar">
+                <Avatar style={{ width: "2.3rem", height: "2.3rem" }}>
+                  {getuserDetails("avatar")}
+                </Avatar>
               </div>
-            </div>
-            <div className="notification">
-              <Badge
-                // style={{ color: "white", fontSize:'1px' }}
-                badgeContent={1}
-                // color="error"
-                sx={{ "& .MuiBadge-badge": {background: 'red', color: 'white', fontSize: 12, height: 18, minWidth: 10 } }}
-              >
-                <MailIcon style={{fontSize:'1.4rem', color:'white'}} />
-              </Badge>
-            </div>
-            <div className="settings">
-              <SettingsIcon
-              style={{fontSize:'1.4rem'}}
-                id="basic-menu"
-                aria-controls={open ? "basic-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
-                onClick={handleClick}
-              />
-              <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                  "aria-labelledby": "basic-button",
-                }}
-              >
-                <MenuItem onClick={() => {
-                    navigate("/user-profile");
-                  }}>
-                  <ListItemIcon>
-                    <Avatar sx={{ width: 32, height: 32, marginRight: 1 }} />
-                  </ListItemIcon>
-                  My Account
-                </MenuItem>
-                <Divider />
-                <MenuItem
-                  onClick={() => {
-                    localStorage.clear();
-                    navigate("/");
+              <div className="info">
+                <div className="logged-in-username">
+                  <Typography
+                    style={{
+                      color: "white",
+                      fontWeight: "540",
+                      fontSize: "0.9rem",
+                    }}
+                    variant="body2"
+                  >
+                    {getuserDetails("name")}
+                  </Typography>
+                </div>
+                <div className="roleParent">
+                  <div className="role">
+                    <Typography
+                      style={{
+                        color: "#001f54",
+                        fontWeight: "700",
+                        fontSize: "0.7rem",
+                      }}
+                      variant="body2"
+                    >
+                      {getuserDetails("role")}
+                    </Typography>
+                  </div>
+                  {/* <Chip label="primary" color="primary" /> */}
+                </div>
+              </div>
+              <div className="notification">
+                <Badge
+                  // style={{ color: "white", fontSize:'1px' }}
+                  badgeContent={1}
+                  // color="error"
+                  sx={{
+                    "& .MuiBadge-badge": {
+                      background: "red",
+                      color: "white",
+                      fontSize: 12,
+                      height: 18,
+                      minWidth: 10,
+                    },
                   }}
                 >
-                  <ListItemIcon>
-                    <Logout fontSize="small" />
-                  </ListItemIcon>
-                  Logout
-                </MenuItem>
-              </Menu>
+                  <MailIcon style={{ fontSize: "1.4rem", color: "white" }} />
+                </Badge>
+              </div>
+              <div className="settings">
+                <SettingsIcon
+                  style={{ fontSize: "1.4rem" }}
+                  id="basic-menu"
+                  aria-controls={open ? "basic-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  onClick={handleClick}
+                />
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}
+                >
+                  <MenuItem onClick={handleClose}>
+                    <ListItemIcon>
+                      <Avatar sx={{ width: 32, height: 32, marginRight: 1 }} />
+                    </ListItemIcon>
+                    My Account
+                  </MenuItem>
+                  <Divider />
+                  <MenuItem
+                    onClick={() => {
+                      localStorage.clear();
+                      navigate("/");
+                    }}
+                  >
+                    <ListItemIcon>
+                      <Logout fontSize="small" />
+                    </ListItemIcon>
+                    Logout
+                  </MenuItem>
+                </Menu>
+              </div>
             </div>
-          </div>}
+          )}
         </motion.div>
         <main>{children}</main>
       </div>
