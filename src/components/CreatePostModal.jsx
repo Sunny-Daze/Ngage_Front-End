@@ -13,6 +13,7 @@ import "quill/dist/quill.snow.css";
 import AddIcon from "@mui/icons-material/Add";
 import { domain, endPoints } from "../services/endPoints";
 import axios from "axios";
+import CustomizedSnackbar from '../widgets/CustomizedSnackbar'
 
 
 let selectedtype = "";
@@ -80,6 +81,7 @@ export default function CreatePostModal(props) {
     React.useState(inactiveButtonStyle);
   const [badge2ButtonStyle, setBadge2ButtonStyle] =
     React.useState(inactiveButtonStyle);
+  const [snackbar, setSnackbar] = React.useState(false);
 
   const handleProcedureContentChange = (content, delta, source, editor) => {
     setCode(content);
@@ -121,6 +123,7 @@ export default function CreatePostModal(props) {
 
     handleClose();
     setCode('');
+    setSnackbar(true);
   }
 
   return (
@@ -224,6 +227,7 @@ export default function CreatePostModal(props) {
           </Button>
         </Box>
       </Modal>
+      <CustomizedSnackbar snackbarSwitch={snackbar} handleSnackbar={setSnackbar} snackbarMessage="Post created successfully!"/>
     </div>
   );
 }

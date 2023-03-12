@@ -1,6 +1,7 @@
 import React from "react";
 import "./Comments.css";
 import PostComment from '../widgets/PostComment';
+import CommentSectionPost from "../widgets/CommentSectionPost"
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -8,7 +9,9 @@ import Button from "@mui/material/Button";
 function Comments() {
   return (
     <div className="Comments">
-      <div className="Comments-Post"></div>
+      <div className="Comments-Post">
+      <CommentSectionPost />
+      </div>
 
       <div className="Post-Comments">
         <div className="Comments-Form">

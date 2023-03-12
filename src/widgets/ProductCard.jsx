@@ -59,7 +59,7 @@ function ProductCard(props) {
           <ChevronRightIcon />
         </Button>
       </div>
-      <CustomizedSnackbar snackbarSwitch={open} handleSnackbar={setOpen}/>
+      <CustomizedSnackbar snackbarSwitch={open} handleSnackbar={setOpen} snackbarMessage="Order is placed successfully!"/>
     </div>
   );
 }

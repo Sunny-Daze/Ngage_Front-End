@@ -3,8 +3,6 @@ import Chip from "../widgets/Chip";
 import "./Post.css";
 import "../index.css";
 import { IconButton, Typography, Avatar, Button } from "@mui/material";
-import CommentIcon from "@mui/icons-material/Comment";
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import { grey } from "@mui/material/colors";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -14,6 +12,9 @@ import { domain, endPoints } from "../services/endPoints";
 import axios from "axios";
 import { FavoriteBorderRounded } from "@mui/icons-material";
 import { useNavigate } from 'react-router-dom';
+import { AiOutlineComment } from 'react-icons/ai';
+import { BsBookmark } from 'react-icons/bs';
+import { FaBookmark } from 'react-icons/fa';
 
 async function likeAndUnLikePost(liked, postId) {
   let url = liked
@@ -67,7 +68,7 @@ function Post(props) {
             {likeCounts}
           </Typography>
           <IconButton style={{ paddingBottom: "0px" }}>
-            <CommentIcon style={{ fontSize: "1.7rem"}} />
+            <AiOutlineComment style={{ fontSize: "1.9rem"}} />
           </IconButton>
           <Typography
             variant="body2"
@@ -76,7 +77,9 @@ function Post(props) {
             0
           </Typography>
           <IconButton>
-            <BookmarkBorderIcon style={{ fontSize: "1.8rem" }} />
+            <BsBookmark style={{ fontSize: "1.5rem", marginLeft:'3' }} />
+            {/* IMP DO NOT REMOVE - display below icon when clicked */}
+            {/* <FaBookmark style={{ fontSize: "1.55rem", marginLeft:'3' , color:'#001f54' }} /> */}
           </IconButton>
         </div>
       </div>
