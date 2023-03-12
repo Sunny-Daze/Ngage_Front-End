@@ -3,8 +3,6 @@ import Chip from "../widgets/Chip";
 import "./Post.css";
 import "../index.css";
 import { IconButton, Typography, Avatar, Button } from "@mui/material";
-import CommentIcon from "@mui/icons-material/Comment";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import { grey } from "@mui/material/colors";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -109,7 +107,7 @@ function Post(props) {
             {likeCounts}
           </Typography>
           <IconButton style={{ paddingBottom: "0px" }}>
-            <CommentIcon style={{ fontSize: "1.7rem" }} />
+          <AiOutlineComment style={{ fontSize: "1.9rem", color: "#001f54"}} />
           </IconButton>
           <Typography
             variant="body2"
