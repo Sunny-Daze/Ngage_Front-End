@@ -96,7 +96,7 @@ export default function CreatePostModal(props) {
   }
 
   async function createPost() {
-    if (selectedtype == "") return;
+    // if (selectedtype == "") return;
     let token = localStorage.getItem("token");
     // console.log({
     //   content: code,
