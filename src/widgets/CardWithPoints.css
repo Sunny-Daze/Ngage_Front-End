@@ -1,0 +1,22 @@
+.CardBody {
+    display: flex;
+    justify-content: space-between;
+    height: 4.2rem;
+    align-items: center;
+}
+
+.right-container {
+    width: 6.5rem;
+    height: 2.5rem;
+    border: solid 1px darkslategray;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 1.5rem;
+}
+
+.coin {
+    display: flex;
+    justify-content: space-between;
+}

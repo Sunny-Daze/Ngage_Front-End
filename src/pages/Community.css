@@ -1,0 +1,21 @@
+.Community {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.CommunitySearchBar {
+  height: 4.5rem;
+  min-height: 4.5rem;
+  width: 50rem;
+  background: white;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.createPostButton {
+  display:flex;
+  justify-content: flex-end;
+}

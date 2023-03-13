@@ -1,0 +1,11 @@
+.LearningManagement {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.TrainingCourses {
+    width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+}

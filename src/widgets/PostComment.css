@@ -1,0 +1,34 @@
+.PostCommentBody {
+    display: flex;
+    justify-content: space-around;
+}
+
+.PostCommentCard {
+    background: white;
+    width:40rem;
+    height:7rem;
+    border-radius: 5px;
+    padding: 1rem;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    /* box-shadow:
+      1px 1px 1px hsla(220, 16%, 78%, 0.7); */
+}
+
+.PostCommentAvatar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.AvatarBorder {
+    border: 2px solid #BDBDBD;
+    border-radius: 50%;
+    padding: 0.2rem;
+}
+
+.AvatarChain {
+    height: 3.5rem;
+    background: gray;
+    border-left: 2px solid #BDBDBD;
+    margin: 0.5rem;
+}

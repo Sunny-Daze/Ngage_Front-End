@@ -1,0 +1,39 @@
+.UserProfileBody{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.UserProfileDataDisplay {
+    width: 50rem;
+    height: 12rem;
+    background: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.UserProfileEditable{
+    width: 50rem;
+    margin-top: 1rem;
+    height: 21rem;
+    padding: 1rem;
+    background: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.editProfileButtonStyling {
+    display:flex;
+    justify-content: center;
+    
+}
+
+.UserProfileHeading{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+}

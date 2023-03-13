@@ -1,0 +1,26 @@
+.CourseLevelHeading {
+    display:flex;
+    align-items: center;
+}
+
+.CourseLevelScore {
+    display:flex;
+    align-items: center;
+    background: #001F54;
+    padding: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
+    height: 1.4rem;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+.CourseLevelTitle{
+    margin-top: 1.1rem;
+}
+
+.CourseLevelBody{
+margin-top: 0.7rem;
+}
