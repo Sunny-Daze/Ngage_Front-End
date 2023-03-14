@@ -2,8 +2,10 @@ import React from 'react'
 import './PostComment.css'
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
+import formatDate from '../utils/dateFormater';
 
-function PostComment() {
+
+function PostComment(prop) {
   return (
     <div className='PostCommentBody'>
         <div className="PostCommentAvatar">
@@ -18,13 +20,14 @@ function PostComment() {
               variant="body2"
               style={{ fontSize: "1rem", fontWeight:'500',  lineHeight: "1.5rem" }}
             >
-              sunny yadav
+              {prop.user.userName}
             </Typography>
             <Typography variant="body2" style={{fontSize:'0.75rem', marginBottom:'1rem'}}>
-              8/8/2023, 10:29:31 PM
+               
+               {formatDate(new Date(prop.createdAt))}
             </Typography>
             <Typography variant='body2' style={{color:'black'}}>
-                Hey check this awesome website!
+                {prop.comment}
             </Typography>
         </div>
     </div>

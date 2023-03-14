@@ -1,35 +1,42 @@
-import React from 'react'
-import './CommentSectionPost.css'
+import React from "react";
+import "./CommentSectionPost.css";
 import Chip from "../widgets/Chip";
 import "../index.css";
 import { IconButton, Typography, Avatar } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { FavoriteRounded } from "@mui/icons-material";
-import { AiOutlineComment } from 'react-icons/ai';
+import { AiOutlineComment } from "react-icons/ai";
+import formatDate from "../utils/dateFormater";
 
 function CommentSectionPost(props) {
   return (
-    <div className='CommentSectionPostBody'>
+    <div className="CommentSectionPostBody">
       <div className="postUtils">
         <div className="postUtilsIcons">
-          <IconButton
-            style={{ paddingBottom: "0px" }}
-          >
-             <FavoriteRounded style={{ fontSize: "1.85rem", color: "red" }} />
+          <IconButton style={{ paddingBottom: "0px" }}>
+            <FavoriteRounded style={{ fontSize: "1.85rem", color: "red" }} />
           </IconButton>
 
           <Typography
             variant="body2"
-            style={{ color: "darkslategray", textAlign: "center", marginRight: '2px' }}
+            style={{
+              color: "darkslategray",
+              textAlign: "center",
+              marginRight: "2px",
+            }}
           >
-            0
+            {props.likeCounts}
           </Typography>
           <IconButton style={{ paddingBottom: "0px" }}>
-            <AiOutlineComment style={{ fontSize: "1.9rem"}} />
+            <AiOutlineComment style={{ fontSize: "1.9rem" }} />
           </IconButton>
           <Typography
             variant="body2"
-            style={{ color: "darkslategray", textAlign: "center", marginRight: '2px' }}
+            style={{
+              color: "darkslategray",
+              textAlign: "center",
+              marginRight: "2px",
+            }}
           >
             0
           </Typography>
@@ -46,10 +53,10 @@ function CommentSectionPost(props) {
               variant="body1"
               style={{ fontSize: "1rem", lineHeight: "1.5rem" }}
             >
-              abhinav yadav
+              {props.user.userName}
             </Typography>
             <Typography variant="body2">
-              date over here
+              {formatDate(new Date(props.createdAt))}
             </Typography>
           </div>
         </div>
@@ -64,29 +71,23 @@ function CommentSectionPost(props) {
               marginBottom: "0.5rem",
             }}
           >
-            post tiel over here
+            {props.title}
           </Typography>
-          {props.category !== "" && <Chip title="hello" />}
+          {props.category !== "" && <Chip title={props.category} />}
         </div>
 
         <div className="postContent">
           <div className="postContentBody">
             <Typography variant="body1" style={{ fontSize: "0.9rem" }}>
-              {/* <div dangerouslySetInnerHTML={{ __html: props.content }} />{" "} */}
-              post body over here
+              <div dangerouslySetInnerHTML={{ __html: props.content }} />{" "}
             </Typography>
           </div>
-          <div className="postContentImage">
-            {/* <img src="https://images.unsplash.com/photo-1566438480900-0609be27a4be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8aW1hZ2V8ZW58MHx8MHx8&w=1000&q=80" alt="" /> */}
-          </div>
         </div>
 
-        <div className="postfooterCommentsSection">
-        </div>
+        <div className="postfooterCommentsSection"></div>
       </div>
-    
     </div>
-  )
+  );
 }
 
-export default CommentSectionPost
+export default CommentSectionPost;

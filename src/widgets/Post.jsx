@@ -11,10 +11,10 @@ import { FavoriteRounded } from "@mui/icons-material";
 import { domain, endPoints } from "../services/endPoints";
 import axios from "axios";
 import { FavoriteBorderRounded } from "@mui/icons-material";
-import { useNavigate } from 'react-router-dom';
-import { AiOutlineComment } from 'react-icons/ai';
-import { BsBookmark } from 'react-icons/bs';
-import { FaBookmark } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom";
+import { AiOutlineComment } from "react-icons/ai";
+import { BsBookmark } from "react-icons/bs";
+import { FaBookmark } from "react-icons/fa";
 
 async function likeAndUnLikePost(liked, postId) {
   let url = liked
@@ -27,9 +27,6 @@ async function likeAndUnLikePost(liked, postId) {
     { headers: { Authorization: `Bearer ${token}` } }
   );
 }
-
-
-
 
 function renderPost(userId) {
   let userDetails = JSON.parse(localStorage.getItem("user") ?? "");
@@ -71,8 +68,17 @@ function Post(props) {
   // console.warn(likeCounts);
 
   const handleSeeMore = () => {
-    navigate(`/community/comments/${props.id}`);
-  }
+    navigate(`/community/comments/${props.id}`, {
+      state: {
+        title: props.title,
+        user: props.user,
+        createdAt: props.createdAt,
+        content: props.content,
+        category: props.category,
+        likeCounts: props.likeCounts,
+      },
+    });
+  };
 
   return (
     <div className="PostCard">
@@ -107,7 +113,9 @@ function Post(props) {
             {likeCounts}
           </Typography>
           <IconButton style={{ paddingBottom: "0px" }}>
-          <AiOutlineComment style={{ fontSize: "1.9rem", color: "#001f54"}} />
+            <AiOutlineComment
+              style={{ fontSize: "1.9rem", color: "#001f54" }}
+            />
           </IconButton>
           <Typography
             variant="body2"
@@ -120,7 +128,9 @@ function Post(props) {
             0
           </Typography>
           <IconButton>
-            <BsBookmark style={{ fontSize: "1.5rem", marginLeft:'3', color: "#001f54" }} />
+            <BsBookmark
+              style={{ fontSize: "1.5rem", marginLeft: "3", color: "#001f54" }}
+            />
             {/* IMP DO NOT REMOVE - display below icon when clicked */}
             {/* <FaBookmark style={{ fontSize: "1.55rem", marginLeft:'3' , color:'#001f54' }} /> */}
           </IconButton>
