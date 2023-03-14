@@ -1,0 +1,18 @@
+.RenderLearningCourse {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    background: lightgray;
+    overflow-x: hidden;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+}
+
+.LearningCourseBody{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

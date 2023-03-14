@@ -1,10 +1,17 @@
 import React from "react";
 import "./ActiveCourseCard.css";
-import { Button, Typography } from "@mui/material";
+import { Button, Typography, Box } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import courseImage from "../assets/courseCardPhoto.JPG";
+import { useNavigate } from 'react-router-dom';
 
 function ActiveCourseCard(props) {
+  const navigate = useNavigate();
+
+  const handleCourseClick = () => {
+    // navigate(`/training/learning-management/${id}`)
+    navigate('/training/learning-management/course')
+  }
   return (
     <div className="Active-Course-Card">
       <div className="Active-Course-photo">
@@ -16,8 +23,8 @@ function ActiveCourseCard(props) {
           style={{
             color: "darkslategray",
             fontSize: "1.3rem",
-            marginBottom: "0.5rem",
-            marginTop:"1rem",
+            marginBottom: "0.2rem",
+            marginTop:"0.5rem",
           }}
         >
           {props.courseName}
@@ -60,11 +67,13 @@ function ActiveCourseCard(props) {
           {props.courseExpiryDate}
         </Typography>
         </div>
+        <Box>
         <Button
+          onClick={handleCourseClick}
           variant="outlined"
           style={{
             color: "#001f54",
-            marginTop: "1rem",
+            marginTop: "0.8rem",
             borderColor: "#001f54",
             height: "1.6rem",
             width: "7.5rem",
@@ -73,6 +82,7 @@ function ActiveCourseCard(props) {
           continue
           <ChevronRightIcon />
         </Button>
+        </Box>
       </div>
     </div>
   );

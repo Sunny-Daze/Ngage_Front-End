@@ -1,0 +1,14 @@
+.CourseContentCardBody {
+    display: flex;
+    justify-content: space-between;
+    height: 5rem;
+    align-items: center;
+}
+
+.Course-Content-right-container {
+    /* width: 6.5rem; */
+    /* height: 2.5rem; */
+    display: flex;
+    margin-bottom: 3rem;
+    margin-right: 0.5rem;
+}

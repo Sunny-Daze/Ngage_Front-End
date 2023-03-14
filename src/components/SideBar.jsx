@@ -73,12 +73,12 @@ const routes = [
     icon: <FiUsers />,
     subRoutes: [
       {
-        path: "/user-control",
+        path: "/management/user-control",
         name: "User ",
         icon: <AiOutlineStar />,
       },
       {
-        path: "/admin-control",
+        path: "/management/admin-control",
         name: "Admin Control",
         icon: <AiOutlineStar />,
       },
@@ -112,7 +112,7 @@ function getUserRoutes() {
   let role = getuserDetails("role");
 
   if (role === "Employee") {
-    return [routes[0], routes[1], routes[2], routes[4]];
+    return [routes[0], routes[1], routes[2], routes[5]];
   }
 
   if (role === "Customer") {

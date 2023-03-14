@@ -11,6 +11,8 @@ import RenderLearningManagement from './components/RenderLearningManagement'
 import RenderProfessionalGrowth from './components/RenderProfessionalGrowth'
 import RenderComments from './components/RenderComments'
 import RenderUserProfile from './components/RenderUserProfile'
+import RenderLearningCourse from './components/RenderLearningCourse'
+import RenderAdminControl from './components/RenderAdminControl'
 
 function App() {
   const [user, setLoginUser] = useState({});
@@ -27,13 +29,15 @@ function App() {
             <Route path="/" element={<Login setLoginUser={setLoginUser} />} />
           )} */}
           <Route path="/community" element={<RenderCommunity />} />
-          <Route path="/user-control" element={<RenderUserControl />} />
+          <Route path="/management/user-control" element={<RenderUserControl />} />
+          <Route path="/management/admin-control" element={<RenderAdminControl />} />
           <Route path="/store" element={<RenderStore />} />
           <Route path="/recreation" element={<RenderRecreation />} />
           <Route path="/training/learning-management" element={<RenderLearningManagement />} />
           <Route path="/training/professional-growth" element={<RenderProfessionalGrowth />} />
           <Route path="/community/comments/:id" element={<RenderComments />} />
           <Route path="/user-profile" element={<RenderUserProfile />} />
+          <Route path="/training/learning-management/course" element={<RenderLearningCourse />} />
         </Routes>
       </Router>
     </div>
