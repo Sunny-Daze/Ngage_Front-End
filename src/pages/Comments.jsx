@@ -66,6 +66,7 @@ function Comments(post) {
       if (response.data.success) {
         comments.unshift(response.data.result);
         setComments([...comments])
+        setComment('')
       }
     }
   }
