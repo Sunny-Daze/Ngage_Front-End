@@ -1,0 +1,29 @@
+.AdminControlStoreProductCard{
+    background: white;
+    border-radius: 5px;
+    width:100%;
+    margin-top: 1.5rem;
+    height: 9rem;
+    display: flex;
+}
+
+.admin-control-store-left-container {
+    width: 20%;
+    height: 100%;
+}
+
+.admin-control-store-right-container {
+    width: 80%;
+    height: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    gap: 0.3rem;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.admin-control-store-products-buttons {
+    margin-top: 0.6rem;
+    display: flex;
+}

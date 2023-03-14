@@ -12,6 +12,7 @@ import RenderProfessionalGrowth from './components/RenderProfessionalGrowth'
 import RenderComments from './components/RenderComments'
 import RenderUserProfile from './components/RenderUserProfile'
 import RenderLearningCourse from './components/RenderLearningCourse'
+import RenderAdminControl from './components/RenderAdminControl'
 
 function App() {
   const [user, setLoginUser] = useState({});
@@ -28,7 +29,8 @@ function App() {
             <Route path="/" element={<Login setLoginUser={setLoginUser} />} />
           )} */}
           <Route path="/community" element={<RenderCommunity />} />
-          <Route path="/user-control" element={<RenderUserControl />} />
+          <Route path="/management/user-control" element={<RenderUserControl />} />
+          <Route path="/management/admin-control" element={<RenderAdminControl />} />
           <Route path="/store" element={<RenderStore />} />
           <Route path="/recreation" element={<RenderRecreation />} />
           <Route path="/training/learning-management" element={<RenderLearningManagement />} />
