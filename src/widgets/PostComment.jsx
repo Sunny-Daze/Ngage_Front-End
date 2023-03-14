@@ -21,7 +21,6 @@ function validUserForDeleteComment(userId) {
 }
 
 function PostComment(prop) {
-  console.warn(prop);
   return (
     <div className="PostCommentBody">
       <div className="PostCommentAvatar">
