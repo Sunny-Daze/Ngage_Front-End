@@ -1,8 +1,8 @@
-export const domain = "http://localhost:3001";
+// export const domain = "http://localhost:3001";
 
 // export const domain = "https://ngage-backend.onrender.com";
 
-// export const domain = "http://3.108.221.195:3001"; // AWS FOR PRODUCTION
+export const domain = "http://3.108.221.195:3001"; // AWS FOR PRODUCTION
 
 
 

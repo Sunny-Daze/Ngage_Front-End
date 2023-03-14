@@ -64,7 +64,7 @@ function Comments(post) {
       );
 
       if (response.data.success) {
-        comments.push(response.data.result);
+        comments.unshift(response.data.result);
         setComments([...comments])
       }
     }
