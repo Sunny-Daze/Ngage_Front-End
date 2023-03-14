@@ -65,9 +65,25 @@ function Comments(post) {
 
       if (response.data.success) {
         comments.unshift(response.data.result);
-        setComments([...comments])
-        setComment('')
+        setComments([...comments]);
+        setComment("");
       }
+    }
+  }
+
+  async function deleteComment(commentId) {
+    let token = localStorage.getItem("token");
+
+    let response = await axios.post(
+      domain + endPoints.deleteComment,
+      {
+        commentId: commentId,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (response.data.success) {
+      setComments([...comments.filter((e) => e.id != commentId)]);
     }
   }
 
@@ -113,7 +129,7 @@ function Comments(post) {
 
           <div className="Comments-list">
             {comments.map((e) => {
-              return <PostComment {...{ ...e }} />;
+              return <PostComment {...{ ...e,deleteComment }} />;
             })}
           </div>
         </div>
