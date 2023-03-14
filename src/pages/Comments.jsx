@@ -64,11 +64,11 @@ function Comments(post) {
       );
 
       if (response.data.success) {
-        comments.unshift(response.data.result);
+        comments.push(response.data.result);
         setComments([...comments])
-        setComment('')
       }
     }
+    setComment("")
   }
 
   return (
