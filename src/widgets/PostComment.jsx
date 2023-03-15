@@ -1,8 +1,8 @@
 import React from "react";
 import "./PostComment.css";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-
+import IconButton from "@mui/material/IconButton";
+import ConfirmPostModal from '../components/ConfirmPostModal';
 import Typography from "@mui/material/Typography";
 import formatDate from "../utils/dateFormater";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -21,6 +21,8 @@ function validUserForDeleteComment(userId) {
 }
 
 function PostComment(prop) {
+  const [confirmModal, setConfirmModal] = React.useState(false);
+
   return (
     <div className="PostCommentBody">
       <div className="PostCommentAvatar">
@@ -52,27 +54,19 @@ function PostComment(prop) {
           </div>
 
           <div className="delete-button">
-          { validUserForDeleteComment(prop.user._id) &&  <    Button
-              onClick={() => prop.deleteComment(prop.id)}
-              variant="outlined"
+          { validUserForDeleteComment(prop.user._id) &&  
+              <IconButton
+              onClick={() => setConfirmModal(true)}
+              // onClick={() => prop.deleteComment(prop.id)}
               color="error"
-              style={{
-                borderColor: "red",
-                height: "1.8rem",
-                fontSize: "0.75rem",
-                color: "red",
-              }}
-              size="small"
             >
-              DELETE POST
               <DeleteIcon
                 style={{
-                  fontSize: "1.1rem",
-                  marginLeft: "0.5rem",
+                  fontSize: "1.5rem",
                   color: "red",
                 }}
               />
-            </Button>}
+            </IconButton>}
           </div>
         </div>
 
@@ -80,6 +74,7 @@ function PostComment(prop) {
           {prop.comment}
         </Typography>
       </div>
+      <ConfirmPostModal deleteModalSwitch={confirmModal} element="comment" setDeleteModalSwitch={setConfirmModal} deletefunction={prop.deleteComment} id={prop.id}/>
     </div>
   );
 }

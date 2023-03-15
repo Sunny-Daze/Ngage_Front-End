@@ -2,16 +2,19 @@ import { React, useEffect, useState } from "react";
 import "./Comments.css";
 import PostComment from "../widgets/PostComment";
 import CommentSectionPost from "../widgets/CommentSectionPost";
+import CustomizedSnackbar from "../widgets/CustomizedSnackbar";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { domain, endPoints } from "../services/endPoints";
 import { useParams, useLocation } from "react-router-dom";
 import axios from "axios";
+import NotesIcon from '@mui/icons-material/Notes';
 
 function Comments(post) {
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
+  const [snackSwitch, setSnackSwitch] = useState(false);
   const { id } = useParams();
   const { state } = useLocation();
 
@@ -69,6 +72,7 @@ function Comments(post) {
         setComment("");
       }
     }
+    setSnackSwitch(true);
   }
 
   async function deleteComment(commentId) {
@@ -89,6 +93,11 @@ function Comments(post) {
 
   return (
     <div className="Comments">
+       <CustomizedSnackbar
+        snackbarSwitch={snackSwitch}
+        handleSnackbar={setSnackSwitch}
+        snackbarMessage="Comment posted successfully!"
+      />
       <div className="Comments-Post">
         <CommentSectionPost {...state} />
       </div>
@@ -119,11 +128,12 @@ function Comments(post) {
               onClick={handleCreateComment}
               style={{
                 background: "#001f54",
-                marginLeft: "40.6rem",
+                marginLeft: "39.5rem",
                 fontSize: "0.8rem",
               }}
             >
               Comment
+              <NotesIcon style={{color:'white', fontSize:'1.2rem', marginLeft:'0.5rem'}} />
             </Button>
           </Box>
 

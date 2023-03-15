@@ -28,7 +28,7 @@ function CommentSectionPost(props) {
             {props.likeCounts}
           </Typography>
           <IconButton style={{ paddingBottom: "0px" }}>
-            <AiOutlineComment style={{ fontSize: "1.9rem" }} />
+            <AiOutlineComment style={{ fontSize: "1.9rem", color:'#001f54' }} />
           </IconButton>
           <Typography
             variant="body2"

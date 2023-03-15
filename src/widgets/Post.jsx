@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineComment } from "react-icons/ai";
 import { BsBookmark } from "react-icons/bs";
 import { FaBookmark } from "react-icons/fa";
+import ConfirmPostModal from '../components/ConfirmPostModal'
 
 async function likeAndUnLikePost(liked, postId) {
   let url = liked
@@ -64,7 +65,7 @@ function Post(props) {
 
   let [likedButton, setLikeButton] = React.useState(props.liked);
   let [likeCounts, setLikeCount] = React.useState(props.likeCounts);
-
+  const [deleteModalSwitch, setDeleteModalSwitch] = React.useState(false);
   // console.warn(likeCounts);
 
   const handleSeeMore = () => {
@@ -82,6 +83,7 @@ function Post(props) {
 
   return (
     <div className="PostCard">
+      <ConfirmPostModal deleteModalSwitch={deleteModalSwitch} element="post" setDeleteModalSwitch={setDeleteModalSwitch} />
       <div className="postUtils">
         <div className="postUtilsIcons">
           <IconButton
@@ -199,7 +201,7 @@ function Post(props) {
           {renderPost(props.user._id) && (
             <Button
               onClick={() =>
-                deletePost(props.id, props.user._id, props.deletePostFromPosts)
+                deletePost(props.id,props.user._id,props.deletePostFromPosts)
               }
               variant="outlined"
               color="error"
