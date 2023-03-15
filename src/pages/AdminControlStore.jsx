@@ -30,7 +30,7 @@ function AdminControlStore() {
             productDesc: e.productDesc,
             productImage: e.productImage,
             productName: e.productName,
-            userPoints: e.userPoints,
+            userPoints: parseFloat(e.userPoints),
           });
         });
         setStoreProducts([...storeProducts]);
@@ -40,7 +40,7 @@ function AdminControlStore() {
     if (storeProducts.length == 0) {
       fetchData();
     }
-  });
+  },[]);
 
   return (
     <div className="AdminControlStore">

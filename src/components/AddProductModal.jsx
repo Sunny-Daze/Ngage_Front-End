@@ -25,18 +25,8 @@ const defaultValue = {
   body: "",
   cost: "",
 };
-function setDefaultValue(data) {
-  defaultValue.body = data.productDesc;
-  defaultValue.title = data.productName;
-  defaultValue.cost = data.userPoints;
-
-  return data.productImage;
-}
 
 export default function AddProductModal(props) {
-  if (props.data) {
-    setDefaultValue(props.data);
-  }
   const [userData, setUserData] = React.useState(defaultValue);
   const [selectedImage, setSelectedImage] = React.useState(null);
 
@@ -67,9 +57,9 @@ export default function AddProductModal(props) {
     console.warn(response);
 
     if (response.data.success) {
-      props.close(response.data.result);
+      props.close(false);
     } else {
-      props.close();
+      props.close(false);
     }
   }
 
@@ -103,7 +93,6 @@ export default function AddProductModal(props) {
               id="outlined-basic"
               label="Title"
               variant="outlined"
-              value={defaultValue.title}
             />
             <TextField
               name="body"
@@ -114,13 +103,11 @@ export default function AddProductModal(props) {
               id="outlined-basic"
               label="Body"
               variant="outlined"
-              value={defaultValue.body}
             />
             <TextField
               name="cost"
               onChange={(e) => handleChange(e)}
               size="small"
-              value={defaultValue.cost}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
