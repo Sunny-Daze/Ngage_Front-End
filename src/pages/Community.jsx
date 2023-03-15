@@ -12,7 +12,8 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import Post from "../widgets/Post";
 import CreatePostModal from "../components/CreatePostModal";
-
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import { domain, endPoints } from "../services/endPoints";
 import axios from "axios";
 
@@ -44,6 +45,7 @@ function Community() {
   const [sort, setSort] = React.useState("newest");
   const [postModal, setpostModal] = React.useState(false);
   const [posts, setPosts] = React.useState([]);
+  const [showLoading, setShowLoading] = React.useState(false);
 
   const handleFilter = (event) => {
     console.log(event.target.value);
@@ -167,7 +169,15 @@ function Community() {
         </Button>
       </div>
 
-      <div className="postBody">
+      
+         <div className="postBody">
+         {posts.length === 0 &&
+      <Backdrop
+      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={true}
+    >
+      <CircularProgress color="inherit" />
+    </Backdrop>}
         {posts.map((item, key) => {
           return <Post {...{...item,deletePostFromPosts}} />;
         })}
