@@ -12,6 +12,13 @@
     height: 100%;
 }
 
+.admin-control-store-left-container img {
+    height:100%;
+    width:100%;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
 .admin-control-store-right-container {
     width: 80%;
     height: 100%;
