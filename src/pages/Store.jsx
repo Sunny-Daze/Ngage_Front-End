@@ -6,7 +6,6 @@ import { domain, endPoints } from "../services/endPoints";
 import axios from "axios";
 
 function UserControl() {
-
   const [state, setState] = React.useState([]);
   React.useEffect(() => {
     async function fetchData() {
@@ -18,11 +17,11 @@ function UserControl() {
       );
 
       if (response.data.success) {
-        let listOfusers = response.data.result;
+        let products = response.data.result;
 
         let arr = [];
 
-        listOfusers.forEach((e) => {
+        products.forEach((e) => {
           arr.push({
             id: e._id,
             productName: e.productName,
@@ -36,8 +35,10 @@ function UserControl() {
       }
     }
 
-    fetchData();
-  });
+    if (state.length < 0) {
+      fetchData();
+    }
+  }, []);
 
   return (
     <div className="Store">

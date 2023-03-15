@@ -6,6 +6,8 @@ import TollIcon from "@mui/icons-material/Toll";
 import ClearIcon from "@mui/icons-material/Clear";
 import AddIcon from "@mui/icons-material/Add";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import axios from "axios";
+import { domain, endPoints } from "../services/endPoints";
 
 const style = {
   position: "absolute",
@@ -19,22 +21,56 @@ const style = {
 };
 
 const defaultValue = {
-    title: "",
-    body: "",
-    cost: ""
+  title: "",
+  body: "",
+  cost: "",
+};
+function setDefaultValue(data) {
+  defaultValue.body = data.productDesc;
+  defaultValue.title = data.productName;
+  defaultValue.cost = data.userPoints;
+
+  return data.productImage;
 }
 
 export default function AddProductModal(props) {
-    const [userData, setUserData] = React.useState(defaultValue);
+  if (props.data) {
+    setDefaultValue(props.data);
+  }
+  const [userData, setUserData] = React.useState(defaultValue);
+  const [selectedImage, setSelectedImage] = React.useState(null);
 
   const handleClose = () => props.close(false);
 
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
-  }
+  };
 
-  function addProduct() {
-    console.log(userData);
+  async function addProduct() {
+    let body = new FormData();
+    let token = localStorage.getItem("token");
+    body.append("productImage", selectedImage);
+    body.append("productName", userData.body);
+    body.append("userPoints", parseFloat(userData.cost));
+    body.append("productDesc", userData.body);
+
+    let response = await axios({
+      method: "post",
+      url: `${domain}${endPoints.createNewShopProduct}`,
+      data: body,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    console.warn(response);
+
+    if (response.data.success) {
+      props.close(response.data.result);
+    } else {
+      props.close();
+    }
   }
 
   return (
@@ -61,27 +97,30 @@ export default function AddProductModal(props) {
             style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
           >
             <TextField
-                name="title"
-                onChange={(e) => handleChange(e)}
+              name="title"
+              onChange={(e) => handleChange(e)}
               size="small"
               id="outlined-basic"
               label="Title"
               variant="outlined"
+              value={defaultValue.title}
             />
             <TextField
-            name="body"
-            onChange={(e) => handleChange(e)}
+              name="body"
+              onChange={(e) => handleChange(e)}
               size="small"
               multiline
               rows={2}
               id="outlined-basic"
               label="Body"
               variant="outlined"
+              value={defaultValue.body}
             />
             <TextField
-            name="cost"
-            onChange={(e) => handleChange(e)}
+              name="cost"
+              onChange={(e) => handleChange(e)}
               size="small"
+              value={defaultValue.cost}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -101,7 +140,10 @@ export default function AddProductModal(props) {
               style={{ borderColor: "#001f54", color: "#001f54" }}
               component="label"
             >
-              upload product image{" "}
+              {selectedImage
+                ? selectedImage.name.toString()
+                : "upload product image"}
+
               <PhotoCamera
                 style={{
                   fontSize: "1.2rem",
@@ -109,7 +151,16 @@ export default function AddProductModal(props) {
                   marginLeft: "0.5rem",
                 }}
               />
-              <input hidden accept="image/*" multiple type="file" />
+              <input
+                hidden
+                accept="image/*"
+                multiple
+                type="file"
+                onChange={(event) => {
+                  console.log(event.target.files);
+                  setSelectedImage(event.target.files[0]);
+                }}
+              />
             </Button>
 
             <Box style={{ display: "flex", justifyContent: "center" }}>
@@ -129,7 +180,12 @@ export default function AddProductModal(props) {
                   }}
                 />
               </Button>
-              <Button onClick={addProduct} size="small" variant="outlined" color="success">
+              <Button
+                onClick={addProduct}
+                size="small"
+                variant="outlined"
+                color="success"
+              >
                 add product
                 <AddIcon
                   style={{
