@@ -64,7 +64,14 @@ function Comments(post) {
       );
 
       if (response.data.success) {
-        comments.unshift(response.data.result);
+        let latestComment = response.data.result;
+
+        comments.unshift({
+          id: latestComment._id,
+          user: latestComment.user,
+          comment: latestComment.comment,
+          createdAt: latestComment.createdAt,
+        });
         setComments([...comments]);
         setComment("");
       }
@@ -129,7 +136,7 @@ function Comments(post) {
 
           <div className="Comments-list">
             {comments.map((e) => {
-              return <PostComment {...{ ...e,deleteComment }} />;
+              return <PostComment {...{ ...e, deleteComment }} />;
             })}
           </div>
         </div>
