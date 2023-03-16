@@ -36,7 +36,7 @@ function UserControl() {
       }
     }
 
-    if (state.length < 0) {
+    if (state.length === 0) {
       fetchData();
     }
   }, []);

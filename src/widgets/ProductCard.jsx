@@ -24,6 +24,7 @@ function ProductCard(props) {
           style={{
             color: "darkslategray",
             fontSize: "1.3rem",
+            // lineHeight:'1.5rem'
             marginBottom: "0.5rem",
           }}
         >
@@ -46,13 +47,14 @@ function ProductCard(props) {
         </div>
         <Button
           variant="outlined"
+          size="small"
           onClick={handleClick}
           style={{
             color: "#001f54",
             marginTop: "1rem",
             borderColor: "#001f54",
-            height: "1.6rem",
-            width: "7.5rem",
+            // height: "1.6rem",
+            // width: "7.5rem",
           }}
         >
           PURCHASE
