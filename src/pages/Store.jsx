@@ -18,10 +18,11 @@ function UserControl() {
 
       if (response.data.success) {
         let products = response.data.result;
+        let products = response.data.result;
 
         let arr = [];
 
-        products.forEach((e) => {
+        listOfusers.forEach((e) => {
           arr.push({
             id: e._id,
             productName: e.productName,
@@ -35,6 +36,10 @@ function UserControl() {
       }
     }
 
+    if (state.length === 0) {
+      fetchData();
+    }
+  }, []);
     if (state.length < 0) {
       fetchData();
     }

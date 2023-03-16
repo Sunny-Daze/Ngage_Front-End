@@ -5,6 +5,7 @@
     border-radius: 4px;
     margin: 10px;
     color: darkslategray;
+    /* padding-bottom:0.3rem; */
 }
 
 .product-photo {
@@ -16,9 +17,10 @@
     /* background: red; */
 }
 
-.product-photo > img {
-    height: 5rem;
-    width: 7rem;
+.product-photo img {
+    border-radius:5px;
+    height: 6rem;
+    width: 10rem;
 }
 
 .price {
