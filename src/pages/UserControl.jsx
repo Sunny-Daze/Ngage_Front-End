@@ -29,6 +29,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  color:'white'
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -38,6 +39,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
+    color:'white',
     width: "50%",
     height: "20%",
     [theme.breakpoints.up("md")]: {
