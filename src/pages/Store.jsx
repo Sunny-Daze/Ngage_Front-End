@@ -18,7 +18,6 @@ function UserControl() {
 
       if (response.data.success) {
         let products = response.data.result;
-        let products = response.data.result;
 
         let arr = [];
 
