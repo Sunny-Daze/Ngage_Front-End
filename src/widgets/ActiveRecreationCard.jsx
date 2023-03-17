@@ -2,8 +2,15 @@ import React from "react";
 import "./ActiveRecreationCard.css";
 import { Typography, Button } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { useNavigate } from 'react-router-dom'
 
 function ActiveRecreationCard(props) {
+  const navigate = useNavigate()
+
+  function handleClick(){
+    navigate('/recreation/activity/id')
+  }
+
   return (
     <div className="ActiveRecreationCard">
       <div className="ActiveReacreationCardimagebody">
@@ -51,6 +58,7 @@ function ActiveRecreationCard(props) {
         <Button
           variant="outlined"
           size="small"
+          onClick={handleClick}
           style={{
             marginBottom: "0.5rem",
             marginTop: "0.5rem",

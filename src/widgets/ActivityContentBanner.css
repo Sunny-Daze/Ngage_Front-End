@@ -1,0 +1,12 @@
+.ActivityContentCardBody {
+    display: flex;
+    justify-content: space-between;
+    height: 5rem;
+    align-items: center;
+}
+
+.Activity-Content-right-container {
+    display: flex;
+    margin-bottom: 3rem;
+    margin-right: 0.5rem;
+}

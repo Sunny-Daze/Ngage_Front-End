@@ -13,6 +13,7 @@ import RenderComments from './components/RenderComments'
 import RenderUserProfile from './components/RenderUserProfile'
 import RenderLearningCourse from './components/RenderLearningCourse'
 import RenderAdminControl from './components/RenderAdminControl'
+import RenderRecreationActivity from './components/RenderRecreationActivity'
 
 function App() {
   const [user, setLoginUser] = useState({});
@@ -38,6 +39,7 @@ function App() {
           <Route path="/community/comments/:id" element={<RenderComments />} />
           <Route path="/user-profile" element={<RenderUserProfile />} />
           <Route path="/training/learning-management/course" element={<RenderLearningCourse />} />
+          <Route path="/recreation/activity/id" element={<RenderRecreationActivity />} />
         </Routes>
       </Router>
     </div>
