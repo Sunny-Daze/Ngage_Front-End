@@ -3,6 +3,7 @@ import './Recreation.css'
 import Card from '../widgets/CardWithPoints'
 import { Divider, styled } from '@mui/material';
 import RecreationCard from '../widgets/RecreationCard'
+import ActiveRecreationCard from '../widgets/ActiveRecreationCard'
 
 const Root = styled('div')(({ theme }) => ({
     width: '100%',
@@ -20,6 +21,9 @@ function Recreation() {
         subheading="Welcome to the recreation, where you can mantain you work life balance"
         coins="100"
       />
+      <div className="ActiveRecreationActivity">
+        <ActiveRecreationCard />
+      </div>
       <Root>
     <Divider style={{marginTop:'0.8rem', marginBottom:'1rem'}}>All Activities</Divider>
     </Root>

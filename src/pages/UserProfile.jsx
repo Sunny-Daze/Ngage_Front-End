@@ -22,8 +22,8 @@ function UserProfile() {
           </Typography>
         <Divider style={{color:'green', width:'18rem'}} />
           </div>
+    <div className="UserProfileEditBody">
         <Box style={{marginLeft:'13.9rem'}}>
-
           <Typography variant='body1' style={{marginTop: '2rem', fontSize:'0.9'}}>
           Username
           </Typography>
@@ -31,17 +31,19 @@ function UserProfile() {
           Set your display name. It will be visible in posts and projects.
           </Typography>
 
-          <TextField size='small' id="outlined-basic" label="Username" variant="outlined" style={{marginTop:'0.5rem', width:'20rem'}} />
+          <TextField size='small' id="outlined-basic" variant="outlined" style={{marginTop:'0.5rem', width:'20rem'}} />
           <Typography variant='body1' style={{marginTop: '0.6rem', fontSize:'0.9'}}>
           Email
           </Typography>
           <Typography variant='body2' style={{fontSize:'0.75rem'}}>
           Change your email address.
           </Typography>
-          <TextField size='small' id="outlined-basic" label="Email" variant="outlined" style={{marginTop:'0.5rem', width:'20rem'}} />
+          <TextField size='small' id="outlined-basic" variant="outlined" style={{marginTop:'0.5rem', width:'20rem'}} />
+
           </Box>
           <div className="editProfileButtonStyling">
           <Button variant='outlined' size='small' style={{color:'#001f54', marginTop: '1.5rem', width:'11rem' , borderColor:'#001f54'}}>update profile <EditIcon style={{color:'#001f54', marginLeft:'0.3rem'}} /> </Button>
+          </div>
           </div>
       </div>
     </div>

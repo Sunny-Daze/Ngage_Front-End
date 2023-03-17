@@ -12,6 +12,7 @@ function ActiveCourseCard(props) {
     // navigate(`/training/learning-management/${id}`)
     navigate('/training/learning-management/course')
   }
+  
   return (
     <div className="Active-Course-Card">
       <div className="Active-Course-photo">

@@ -1,0 +1,26 @@
+.ActiveRecreationCard {
+    width: 13rem;
+    height:16rem;
+    background: white;
+    border-radius: 5px;
+    padding: 0.5rem;
+}
+
+.ActiveReacreationCardimagebody {
+    background:pink;
+    width:100%;
+    /* height:7rem; */
+    height:43%;
+}
+
+.ActiveReacreationCardimagebody img {
+    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+}
+
+.ActiveReacreationCarddescbody{
+    width: 100%;
+    height:55%;
+    padding:0.5rem;
+}

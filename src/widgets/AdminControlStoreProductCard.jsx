@@ -4,7 +4,6 @@ import { Typography, Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteModal from "../components/DeleteModal";
-import AddProductModal from "../components/AddProductModal";
 import EditProductModal from "../components/editProductModel";
 import axios from "axios";
 import { domain, endPoints } from "../services/endPoints";

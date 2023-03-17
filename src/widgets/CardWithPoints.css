@@ -1,7 +1,8 @@
 .CardBody {
     display: flex;
     justify-content: space-between;
-    height: 4.2rem;
+    /* height: 4.2rem; */
+    height:4.5rem;
     align-items: center;
 }
 

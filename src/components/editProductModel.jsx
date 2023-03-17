@@ -150,14 +150,14 @@ export default function EditProductModal(props) {
             <div style={{ overflow: "hidden" }}>
               <Button
                 variant="outlined"
-                style={{ borderColor: "#001f54", color: "#001f54" }}
+                style={{ borderColor: "#001f54", color: "#001f54", width:'100%' }}
                 component="label"
               >
                 {selectedImage
                   ? selectedImage.name.toString()
-                  : selectedImageURL
-                  ? selectedImageURL
-                  : `${props.title}'s Image`}
+                  // : selectedImageURL
+                  // ? selectedImageURL
+                  : `${props.data.productName}'s Image`}
 
                 <PhotoCamera
                   style={{
