@@ -18,7 +18,8 @@ function Recreation() {
   
   function addActivity() {
     const val = {title:'Singing Competition', desc:'lets have a singing faceoff', reward:'2000'}
-    setActiveActivity([...activeActivity.push(val)])
+    activeActivity.push(val)
+    setActiveActivity([...activeActivity])
     console.log(activeActivity);
   }
 
