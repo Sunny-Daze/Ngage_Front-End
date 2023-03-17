@@ -19,7 +19,7 @@ function CardWithPoints(props) {
 
   return (
     <>
-      <Box sx={{ minWidth: 800 }}>
+      <Box sx={{ minWidth: 800, maxWidth: 820  }}>
         <Card variant="outlined">
           <CardContent>
             <div className="CardBody">
