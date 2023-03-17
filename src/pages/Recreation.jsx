@@ -14,6 +14,14 @@ const Root = styled('div')(({ theme }) => ({
   }));
 
 function Recreation() {
+  const [activeActivity, setActiveActivity] = React.useState([]);
+  
+  function addActivity() {
+    const val = {title:'Singing Competition', desc:'lets have a singing faceoff', reward:'2000'}
+    setActiveActivity([...activeActivity.push(val)])
+    console.log(activeActivity);
+  }
+
     return (
       <div className='Recreation'>
          <Card
@@ -21,16 +29,21 @@ function Recreation() {
         subheading="Welcome to the recreation, where you can mantain you work life balance"
         coins="100"
       />
+      {activeActivity.length>0 && 
       <div className="ActiveRecreationActivity">
-        <ActiveRecreationCard />
+        {activeActivity.map((e) => (
+          <ActiveRecreationCard title={e.title} desc={e.desc} reward={e.reward}/>
+        ))}
+        {/* <ActiveRecreationCard title="Industry Visit" desc="lets have a singing faceoff" reward="2000" /> */}
       </div>
+      }
       <Root>
     <Divider style={{marginTop:'0.8rem', marginBottom:'1rem'}}>All Activities</Divider>
     </Root>
       <div className="Recreation-Activities">
-        <RecreationCard />
-        <RecreationCard />
-        <RecreationCard />
+        <RecreationCard addActivity={addActivity}/>
+        <RecreationCard  addActivity={addActivity}/>
+        <RecreationCard  addActivity={addActivity}/>
       </div>
       </div>
     );
