@@ -40,7 +40,23 @@ function AdminControlStore() {
     if (storeProducts.length == 0) {
       fetchData();
     }
-  },[]);
+  }, []);
+
+  function editProductFunction(prod) {
+    let index = storeProducts.findIndex((e) => e.productId === prod._id);
+    storeProducts[index] = {
+      productId: prod._id,
+      productDesc: prod.productDesc,
+      productImage: prod.productImage,
+      productName: prod.productName,
+      userPoints: parseFloat(prod.userPoints),
+    };
+    setStoreProducts([...storeProducts]);
+  }
+
+  function deleteProductFunction(prod) {
+    setStoreProducts([...storeProducts.filter((e) => e.productId != prod._id)]);
+  }
 
   return (
     <div className="AdminControlStore">
@@ -64,7 +80,9 @@ function AdminControlStore() {
       </div>
 
       {storeProducts.map((e) => (
-        <AdminControlStoreProductCard {...e} />
+        <AdminControlStoreProductCard
+          {...{ ...e, editProductFunction, deleteProductFunction }}
+        />
       ))}
     </div>
   );

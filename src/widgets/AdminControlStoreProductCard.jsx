@@ -5,7 +5,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteModal from "../components/DeleteModal";
 import AddProductModal from "../components/AddProductModal";
-
+import EditProductModal from "../components/editProductModel";
+import axios from "axios";
+import { domain, endPoints } from "../services/endPoints";
 
 function AdminControlStoreProductCard(props) {
   const [editModel, seteditModel] = React.useState(false);
@@ -17,9 +19,32 @@ function AdminControlStoreProductCard(props) {
     setDeleteModalSwitch(true);
   };
 
-  const deleteProduct = () => {
-    console.log("Post deleted successfully!");
-  };
+  async function deleteProduct() {
+    let body = new FormData();
+    let token = localStorage.getItem("token");
+
+    body.append("productId", props.productId);
+
+    let response = await axios({
+      method: "post",
+      url: `${domain}${endPoints.deleteShopProduct}`,
+      data: body,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    console.warn(response);
+
+    if (response.data.success) {
+
+      props.deleteProductFunction(response.data.result)
+      props.close(false);
+    } else {
+      props.close(false);
+    }
+  }
 
   async function editProduct() {
     seteditModel(true);
@@ -27,12 +52,18 @@ function AdminControlStoreProductCard(props) {
 
   return (
     <>
-      <AddProductModal data={props} open={editModel} close={seteditModel} />
+      <EditProductModal
+        data={props}
+        open={editModel}
+        close={seteditModel}
+        editProduct={props.editProductFunction}
+        deleteProduct={props.deleteProductFunction}
+      />
       <div className="AdminControlStoreProductCard">
         <DeleteModal
           deleteModalSwitch={deleteModalSwitch}
           deletefunction={deleteProduct}
-          thing="Food Coupon"
+          thing={props.productName}
           setDeleteModalSwitch={setDeleteModalSwitch}
         />
         <div className="admin-control-store-left-container">
