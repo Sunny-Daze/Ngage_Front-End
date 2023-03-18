@@ -24,10 +24,10 @@ function CardWithPoints(props) {
           <CardContent>
             <div className="CardBody">
             <div className="left">
-            <Typography variant="h5" component="div">
+            <Typography variant="h5" style={{fontSize:'1.6rem'}} component="div">
               {props.heading}
             </Typography>
-            <Typography variant="body2">{props.subheading}</Typography>
+            <Typography style={{marginTop:'0.5rem'}} variant="body2">{props.subheading}</Typography>
             </div>
             <div className="right">
                <div className="right-container">

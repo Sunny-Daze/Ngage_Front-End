@@ -1,8 +1,9 @@
 .CardBody {
+    padding-left: 0.5rem;
     display: flex;
     justify-content: space-between;
     /* height: 4.2rem; */
-    height:4.5rem;
+    height:4.2rem;
     align-items: center;
 }
 
@@ -15,6 +16,7 @@
     align-items: center;
     justify-content: space-around;
     margin-bottom: 1.5rem;
+    margin-top:0.5rem;
 }
 
 .coin {
