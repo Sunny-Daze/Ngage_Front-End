@@ -6,6 +6,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import axios from "axios";
 import { domain, endPoints } from "../services/endPoints";
 import AddIcon from "@mui/icons-material/Add";
+import {FormControl} from '@mui/material'
 
 const style = {
   position: "absolute",
@@ -19,22 +20,22 @@ const style = {
 };
 
 export default function EditLevelModal(props) {
-  const[title, setTitle] = React.useState(props.data.title)
-  const[body, setBody] = React.useState(props.data.body)
-  const[reward, setReward] = React.useState(props.data.title)
+  const[levelEdittitle, setLevelEditTitle] = React.useState(props.data.title)
+  const[levelEditbody, setLevelEditBody] = React.useState(props.data.body)
+  const[levelEditreward, setLevelEditReward] = React.useState(props.data.title)
 
   const handleClose = () => props.close(false);
 
   const changeTitle = (e) => {
-    setTitle(e.target.value)
+    setLevelEditTitle(e.target.value)
   }
   
   const changeBody = (e) => {
-    setBody(e.target.value)
+    setLevelEditBody(e.target.value)
   }
 
   const changeReward = (e) => {
-    setReward(e.target.value)
+    setLevelEditReward(e.target.value)
   }
 
   return (
@@ -60,7 +61,9 @@ export default function EditLevelModal(props) {
           <Box
             style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
           >
+            <FormControl>
             <TextField
+              // onChange={(e) => handleChange(e)}
               name="title"
               id="outlined-basic"
               multiline
@@ -68,8 +71,10 @@ export default function EditLevelModal(props) {
               label="Level Title"
               variant="outlined"
               onChange={(e) => changeTitle(e)}
-              value={title}
+              // value={levelEdittitle}
+              value={levelEdittitle}
             />
+            </FormControl>
             <TextField
               name="body"
               // onChange={(e) => handleChange(e)}
@@ -79,7 +84,7 @@ export default function EditLevelModal(props) {
               label="Level Body"
               variant="outlined"
               onChange={(e) => changeBody(e)}
-              value={body}
+              value={levelEditbody}
             />
             <TextField
               name="reward"
@@ -88,7 +93,7 @@ export default function EditLevelModal(props) {
               label="Level Reward"
               variant="outlined"
               onChange={(e) => changeReward(e)}
-              value={reward}
+              value={levelEditreward}
             />
 
             <Box style={{ display: "flex", justifyContent: "center" }}>
