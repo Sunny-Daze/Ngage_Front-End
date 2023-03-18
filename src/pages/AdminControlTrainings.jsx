@@ -40,7 +40,6 @@ function AdminControlTrainings() {
   function addLevel(userData) {
     levels.push(userData);
     setLevels([...levels]);
-    console.log(levels);
   }
 
   return (

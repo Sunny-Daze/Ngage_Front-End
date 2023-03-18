@@ -3,6 +3,8 @@ import { Button, TextField, Divider, Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import ClearIcon from "@mui/icons-material/Clear";
+import axios from "axios";
+import { domain, endPoints } from "../services/endPoints";
 import AddIcon from "@mui/icons-material/Add";
 
 const style = {
@@ -10,25 +12,26 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 295,
+  width: 400,
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 2,
 };
 
 const defaultValue = {
-    title: "",
-    body: ""
-}
+  title: "",
+  body: "",
+  reward: "",
+};
 
-export default function AddRecreationModal(props) {
-    const [userData, setUserData] = React.useState(defaultValue);
+export default function AddMilestone(props) {
+  const [userData, setUserData] = React.useState(defaultValue);
 
   const handleClose = () => props.close(false);
 
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
-  }
+  };
 
   return (
     <div>
@@ -44,9 +47,9 @@ export default function AddRecreationModal(props) {
               id="modal-modal-title"
               variant="h6"
               component="h2"
-              style={{ fontSize: "0.8rem" }}
+              style={{ fontSize: "1.5rem" }}
             >
-              ADD NEW ACTIVITY
+              Add Activity Milestone
             </Typography>
           </Divider>
 
@@ -54,31 +57,40 @@ export default function AddRecreationModal(props) {
             style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
           >
             <TextField
-                name="title"
-                onChange={(e) => handleChange(e)}
-              size="small"
+              name="title"
+              onChange={(e) => handleChange(e)}
               id="outlined-basic"
-              label="Title"
+              multiline
+              rows={2}
+              label="Milestone Title"
               variant="outlined"
             />
             <TextField
-            name="body"
-            onChange={(e) => handleChange(e)}
-              size="small"
+              name="body"
+              onChange={(e) => handleChange(e)}
               multiline
-              rows={2}
+              rows={6}
               id="outlined-basic"
-              label="Body"
+              label="Milestone Body"
+              variant="outlined"
+            />
+            <TextField
+              name="reward"
+              onChange={(e) => handleChange(e)}
+              id="outlined-basic"
+              label="Milestone Reward"
               variant="outlined"
             />
 
             <Box style={{ display: "flex", justifyContent: "center" }}>
               <Button
-                style={{ marginRight: "1rem" }}
+                style={{
+                  marginRight: "1rem",
+                  color: "red",
+                  borderColor: "red",
+                }}
                 onClick={() => handleClose()}
-                size="small"
                 variant="outlined"
-                color="error"
               >
                 Cancel{" "}
                 <ClearIcon
@@ -89,8 +101,15 @@ export default function AddRecreationModal(props) {
                   }}
                 />
               </Button>
-              <Button onClick={() => props.addActivity(userData)} size="small" variant="outlined" color="success">
-                add activity
+              <Button
+                variant="outlined"
+                style={{ color: "green", borderColor: "green" }}
+                onClick={() => {
+                  props.addMilestone(userData);
+                  handleClose();
+                }}
+              >
+                Add Milestone
                 <AddIcon
                   style={{
                     fontSize: "1.4rem",

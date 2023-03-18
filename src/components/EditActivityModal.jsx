@@ -1,9 +1,14 @@
 import * as React from "react";
-import { Button, TextField, Divider, Box } from "@mui/material";
+import { Button, TextField, Divider, Box, InputAdornment } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import TollIcon from "@mui/icons-material/Toll";
 import ClearIcon from "@mui/icons-material/Clear";
 import AddIcon from "@mui/icons-material/Add";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import axios from "axios";
+import { domain, endPoints } from "../services/endPoints";
+import { Edit } from "@mui/icons-material";
 
 const style = {
   position: "absolute",
@@ -14,21 +19,31 @@ const style = {
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 2,
+  borderRadius: 1.5
 };
 
-const defaultValue = {
-    title: "",
-    body: ""
-}
-
-export default function AddRecreationModal(props) {
-    const [userData, setUserData] = React.useState(defaultValue);
+export default function EditActivityModal(props) {
+  const [trainingTitle, setTrainingTitle] = React.useState(props.data.title);
+  const [trainingBody, setTrainingBody] = React.useState(props.data.body);
 
   const handleClose = () => props.close(false);
 
-  const handleChange = (e) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
-  }
+  const handleChange = (e, feild) => {
+    switch (feild) {
+      case "trainingName":
+        setTrainingTitle(e.target.value);
+
+        break;
+
+      case "trainingDesc":
+        setTrainingBody(e.target.value);
+
+        break;
+
+      default:
+        break;
+    }
+  };
 
   return (
     <div>
@@ -44,9 +59,9 @@ export default function AddRecreationModal(props) {
               id="modal-modal-title"
               variant="h6"
               component="h2"
-              style={{ fontSize: "0.8rem" }}
+              style={{ fontSize: "1rem" }}
             >
-              ADD NEW ACTIVITY
+              Edit Activity
             </Typography>
           </Divider>
 
@@ -54,31 +69,38 @@ export default function AddRecreationModal(props) {
             style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
           >
             <TextField
-                name="title"
-                onChange={(e) => handleChange(e)}
+              name="title"
+              onChange={(e) => handleChange(e, "trainingName")}
               size="small"
               id="outlined-basic"
               label="Title"
               variant="outlined"
+            //   value={trainingTitle}
+            defaultValue={props.data.title}
             />
             <TextField
-            name="body"
-            onChange={(e) => handleChange(e)}
+              name="body"
+              onChange={(e) => handleChange(e, "trainingDesc")}
               size="small"
               multiline
               rows={2}
               id="outlined-basic"
               label="Body"
               variant="outlined"
+            // value={trainingBody}
+            defaultValue={props.data.body}
             />
 
             <Box style={{ display: "flex", justifyContent: "center" }}>
               <Button
-                style={{ marginRight: "1rem" }}
+                style={{
+                  marginRight: "1rem",
+                  color: "red",
+                  borderColor: "red",
+                }}
                 onClick={() => handleClose()}
                 size="small"
                 variant="outlined"
-                color="error"
               >
                 Cancel{" "}
                 <ClearIcon
@@ -89,9 +111,14 @@ export default function AddRecreationModal(props) {
                   }}
                 />
               </Button>
-              <Button onClick={() => props.addActivity(userData)} size="small" variant="outlined" color="success">
-                add activity
-                <AddIcon
+              <Button
+                onClick={() => props.editActivity({id:props.data.id, title:trainingTitle, body:trainingBody})}
+                size="small"
+                variant="outlined"
+                style={{ color: "green", borderColor: "green" }}
+              >
+               edit Activity
+                <Edit
                   style={{
                     fontSize: "1.4rem",
                     marginBottom: "0.2rem",
