@@ -1,8 +1,10 @@
 import * as React from "react";
-import { Button, TextField, Divider, Box } from "@mui/material";
+import { Button, TextField, Divider, Box} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import ClearIcon from "@mui/icons-material/Clear";
+import axios from "axios";
+import { domain, endPoints } from "../services/endPoints";
 import AddIcon from "@mui/icons-material/Add";
 
 const style = {
@@ -10,30 +12,30 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 295,
+  width: 400,
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 2,
 };
 
 const defaultValue = {
-    title: "",
-    body: "",
-    creater:"creater"
+  title:"",
+  body:"",
+  reward:""
 }
 
-export default function AddTrainingModal(props) {
-    const [userData, setUserData] = React.useState(defaultValue);
+export default function EditTrainingModal(props) {
+  const [userData, setUserData] = React.useState(defaultValue);
 
   const handleClose = () => props.close(false);
 
   const handleChange = (e) => {
+    console.log(userData)
     setUserData({ ...userData, [e.target.name]: e.target.value });
-  }
+  };
 
-  function addTraining() {
-    props.addTrainingCourse(userData);
-    handleClose();
+  function handleClick() {
+    console.log(userData)
   }
 
   return (
@@ -50,9 +52,9 @@ export default function AddTrainingModal(props) {
               id="modal-modal-title"
               variant="h6"
               component="h2"
-              style={{ fontSize: "0.8rem" }}
+              style={{ fontSize: "1.5rem" }}
             >
-              ADD NEW TRAINING
+              Add Training Level
             </Typography>
           </Divider>
 
@@ -60,31 +62,40 @@ export default function AddTrainingModal(props) {
             style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
           >
             <TextField
-                name="title"
-                onChange={(e) => handleChange(e)}
-              size="small"
+              name="title"
+              onChange={(e) => handleChange(e)}
               id="outlined-basic"
-              label="Title"
+              multiline
+              rows={2}
+              label="Level Title"
               variant="outlined"
             />
             <TextField
-            name="body"
-            onChange={(e) => handleChange(e)}
-              size="small"
+              name="body"
+              onChange={(e) => handleChange(e)}
               multiline
-              rows={2}
+              rows={6}
               id="outlined-basic"
-              label="Body"
+              label="Level Body"
+              variant="outlined"
+            />
+            <TextField
+              name="reward"
+              onChange={(e) => handleChange(e)}
+              id="outlined-basic"
+              label="Level Reward"
               variant="outlined"
             />
 
             <Box style={{ display: "flex", justifyContent: "center" }}>
               <Button
-                style={{ marginRight: "1rem" }}
+                style={{
+                  marginRight: "1rem",
+                  color: "red",
+                  borderColor: "red",
+                }}
                 onClick={() => handleClose()}
-                size="small"
                 variant="outlined"
-                color="error"
               >
                 Cancel{" "}
                 <ClearIcon
@@ -95,8 +106,12 @@ export default function AddTrainingModal(props) {
                   }}
                 />
               </Button>
-              <Button onClick={addTraining} size="small" variant="outlined" color="success">
-                add course
+              <Button
+                variant="outlined"
+                style={{ color: "green", borderColor: "green" }}
+                onClick={handleClick}
+              >
+                Add Level
                 <AddIcon
                   style={{
                     fontSize: "1.4rem",

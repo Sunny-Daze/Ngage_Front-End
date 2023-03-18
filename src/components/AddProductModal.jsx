@@ -152,11 +152,10 @@ export default function AddProductModal(props) {
 
             <Box style={{ display: "flex", justifyContent: "center" }}>
               <Button
-                style={{ marginRight: "1rem" }}
+                style={{ marginRight: "1rem", color:'red', borderColor:'red' }}
                 onClick={() => handleClose()}
                 size="small"
                 variant="outlined"
-                color="error"
               >
                 Cancel{" "}
                 <ClearIcon
@@ -171,7 +170,7 @@ export default function AddProductModal(props) {
                 onClick={addProduct}
                 size="small"
                 variant="outlined"
-                color="success"
+                style={{color:'green', borderColor:'green'}}
               >
                 add product
                 <AddIcon
