@@ -18,20 +18,24 @@ const style = {
   p: 2,
 };
 
-const defaultValue = {
-  title: "",
-  body: "",
-  reward: "",
-};
-
-export default function EditTrainingModal(props) {
-  const [userData, setUserData] = React.useState(defaultValue);
+export default function EditLevelModal(props) {
+  const[title, setTitle] = React.useState(props.data.title)
+  const[body, setBody] = React.useState(props.data.body)
+  const[reward, setReward] = React.useState(props.data.title)
 
   const handleClose = () => props.close(false);
 
-  const handleChange = (e) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
-  };
+  const changeTitle = (e) => {
+    setTitle(e.target.value)
+  }
+  
+  const changeBody = (e) => {
+    setBody(e.target.value)
+  }
+
+  const changeReward = (e) => {
+    setReward(e.target.value)
+  }
 
   return (
     <div>
@@ -49,7 +53,7 @@ export default function EditTrainingModal(props) {
               component="h2"
               style={{ fontSize: "1.5rem" }}
             >
-              Add Training Level
+              Edit Training Level
             </Typography>
           </Divider>
 
@@ -58,28 +62,34 @@ export default function EditTrainingModal(props) {
           >
             <TextField
               name="title"
-              onChange={(e) => handleChange(e)}
+              // onChange={(e) => handleChange(e)}
               id="outlined-basic"
               multiline
               rows={2}
               label="Level Title"
               variant="outlined"
+              onChange={(e) => changeTitle(e)}
+              value={title}
             />
             <TextField
               name="body"
-              onChange={(e) => handleChange(e)}
+              // onChange={(e) => handleChange(e)}
               multiline
               rows={6}
               id="outlined-basic"
               label="Level Body"
               variant="outlined"
+              onChange={(e) => changeBody(e)}
+              value={body}
             />
             <TextField
               name="reward"
-              onChange={(e) => handleChange(e)}
+              // onChange={(e) => handleChange(e)}
               id="outlined-basic"
               label="Level Reward"
               variant="outlined"
+              onChange={(e) => changeReward(e)}
+              value={reward}
             />
 
             <Box style={{ display: "flex", justifyContent: "center" }}>
@@ -105,11 +115,12 @@ export default function EditTrainingModal(props) {
                 variant="outlined"
                 style={{ color: "green", borderColor: "green" }}
                 onClick={() => {
-                  props.addLevel(userData);
-                  handleClose();
+                  console.log(props.data)
+                  // props.addLevel(userData)
+                  handleClose()
                 }}
               >
-                Add Level
+                Edit Level
                 <AddIcon
                   style={{
                     fontSize: "1.4rem",

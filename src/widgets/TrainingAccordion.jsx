@@ -9,14 +9,11 @@ import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
-import TrainingLevelCard from '../widgets/TrainingLevelCard'
+import TrainingLevelCard from "../widgets/TrainingLevelCard";
 
 function TrainingAccordion(props) {
-  const [levels, setLevels] = React.useState([{title:"Code Structure", body:"Learn the code and directory structure", reward:"2000"}])
-
   return (
     <div className="ActivityAccordion">
-
       <Accordion style={{ width: "48.5rem" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -48,7 +45,14 @@ function TrainingAccordion(props) {
             onClick={() => props.setAddLevelModal(true)}
           >
             Add Level
-            <AddIcon style={{color:'green', fontSize:'1.3rem', marginBottom:'0.2rem', marginLeft:'0.2rem'}} />
+            <AddIcon
+              style={{
+                color: "green",
+                fontSize: "1.3rem",
+                marginBottom: "0.2rem",
+                marginLeft: "0.2rem",
+              }}
+            />
           </Button>
           <Button
             style={{
@@ -60,12 +64,19 @@ function TrainingAccordion(props) {
             variant="outlined"
             size="small"
             onClick={() => {
-              props.editModalSwitch(true)
-              props.userData(props.data)
+              props.editModalSwitch(true);
+              props.userData(props.data);
             }}
           >
             Edit Training
-            <EditIcon style={{color:'#001f54', fontSize:'1.1rem', marginBottom:'0.2rem', marginLeft:'0.5rem'}} />
+            <EditIcon
+              style={{
+                color: "#001f54",
+                fontSize: "1.1rem",
+                marginBottom: "0.2rem",
+                marginLeft: "0.5rem",
+              }}
+            />
           </Button>
           <Button
             style={{ fontSize: "0.8rem", color: "red", borderColor: "red" }}
@@ -73,10 +84,24 @@ function TrainingAccordion(props) {
             size="small"
           >
             Delete Training
-            <DeleteIcon style={{color:'red', fontSize:'1.1rem', marginBottom:'0.2rem', marginLeft:'0.4rem'}} />
+            <DeleteIcon
+              style={{
+                color: "red",
+                fontSize: "1.1rem",
+                marginBottom: "0.2rem",
+                marginLeft: "0.4rem",
+              }}
+            />
           </Button>
-          {levels.map((e) => (
-            <TrainingLevelCard title={e.title} body={e.body} reward={e.reward} />
+          {props.levels.map((e) => (
+            <TrainingLevelCard
+              setEditLevelToggle={props.setEditLevelToggle}
+              title={e.title}
+              body={e.body}
+              reward={e.reward}
+              data={e}
+              setEditLevelData={props.setEditLevelData}
+            />
           ))}
         </AccordionDetails>
       </Accordion>

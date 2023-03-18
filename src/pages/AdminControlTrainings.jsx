@@ -4,15 +4,28 @@ import TrainingAccordion from "../widgets/TrainingAccordion";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AddTrainingModal from "../components/AddTrainingModal";
-import EditTrainingModal from '../components/EditTrainingModal'
-import AddLevelModal from '../components/AddLevelModal'
+import EditTrainingModal from "../components/EditTrainingModal";
+import AddLevelModal from "../components/AddLevelModal";
+import EditLevelModal from "../components/EditLevelModal";
 
 function AdminControlTrainings() {
   const [createTrainingModal, setCreateTrainingModal] = React.useState(false);
-  const [trainingCourses, setTrainingCourses] = React.useState([{id:'0123', title:'blah', body:'blah', creater:'blah'}]);
-  const [trainginEditModal, setTrainingEditModal] = React.useState(false)
+  const [trainingCourses, setTrainingCourses] = React.useState([
+    { id: "0123", title: "blah", body: "blah", creater: "blah" },
+  ]);
+  const [trainginEditModal, setTrainingEditModal] = React.useState(false);
   const [addLevelModal, setAddLevelModal] = React.useState(false);
-  const [userData, setUserData] = React.useState({})
+  const [userData, setUserData] = React.useState({});
+  const [levels, setLevels] = React.useState([
+    {
+      title: "Code Structure",
+      body: "Learn the code and directory structure",
+      reward: "2000",
+    },
+  ]);
+  const [editLevelToggle, setEditLevelToggle] = React.useState(false);
+  const [editLevelData, setEditLevelData] = React.useState({});
+
   function addTrainingCourse(userData) {
     trainingCourses.push(userData);
     setTrainingCourses([...trainingCourses]);
@@ -20,12 +33,19 @@ function AdminControlTrainings() {
   }
 
   const editTraining = (newUserData) => {
-    console.log(userData)
+    console.log(userData);
     // console.log(newUserData)
+  };
+
+  function addLevel(userData) {
+    levels.push(userData);
+    setLevels([...levels]);
+    console.log(levels);
   }
 
   return (
     <div>
+      <EditLevelModal open={editLevelToggle} close={setEditLevelToggle} data={editLevelData} />
       <EditTrainingModal
         data={userData}
         open={trainginEditModal}
@@ -33,9 +53,10 @@ function AdminControlTrainings() {
         editTrainingfunc={editTraining}
         // editProduct={editTraining}
       />
-      <AddLevelModal 
+      <AddLevelModal
         open={addLevelModal}
         close={setAddLevelModal}
+        addLevel={addLevel}
       />
       <div className="AdminControlButton">
         <AddTrainingModal
@@ -60,7 +81,18 @@ function AdminControlTrainings() {
         </Button>
       </div>
       {trainingCourses.map((e) => (
-        <TrainingAccordion userData={setUserData} setAddLevelModal={setAddLevelModal} editModalSwitch={setTrainingEditModal} trainingTitle={e.title} trainingBody={e.body} trainingCreater={e.creater} data={e} />
+        <TrainingAccordion
+          setEditLevelData={setEditLevelData}
+          setEditLevelToggle={setEditLevelToggle}
+          levels={levels}
+          userData={setUserData}
+          setAddLevelModal={setAddLevelModal}
+          editModalSwitch={setTrainingEditModal}
+          trainingTitle={e.title}
+          trainingBody={e.body}
+          trainingCreater={e.creater}
+          data={e}
+        />
       ))}
     </div>
   );
