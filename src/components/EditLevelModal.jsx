@@ -62,7 +62,6 @@ export default function EditLevelModal(props) {
           >
             <TextField
               name="title"
-              // onChange={(e) => handleChange(e)}
               id="outlined-basic"
               multiline
               rows={2}
