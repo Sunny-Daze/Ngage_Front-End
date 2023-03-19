@@ -60,7 +60,7 @@ export default function DeleteEssentialModal(props) {
             sx={{ mt: 2 }}
           >
             Are you absolutely sure? This action cannot be undone. This will
-            permanently delete the <b>project name</b>.
+            permanently delete the <b>{props.thing}</b>.
           </Typography>
           <Typography
             style={{ color: "darkslategray" }}
@@ -68,7 +68,7 @@ export default function DeleteEssentialModal(props) {
             id="modal-modal-description"
             sx={{ mt: 2 }}
           >
-            Please type <b>project name</b> to confirm.
+            Please type <b>"{props.thing}"</b> to confirm.
           </Typography>
           <TextField
             style={{ width: "100%", marginTop: "0.6rem" }}
@@ -78,7 +78,7 @@ export default function DeleteEssentialModal(props) {
             id="outlined-basic"
             variant="outlined"
           />
-          {projectName === "project name" ? (
+          {projectName === props.thing ? (
             <Button
               style={{
                 textTransform: "none",

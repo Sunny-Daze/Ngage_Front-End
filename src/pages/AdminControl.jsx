@@ -60,7 +60,7 @@ function AdminControl() {
   }
 
   return (
-    <div classNmae="AdminControl">
+    <div className="AdminControl">
       <div className="AdminControlHeading">
         <Typography variant="h5">Administrator Controls</Typography>
       </div>
