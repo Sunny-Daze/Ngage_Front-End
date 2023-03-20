@@ -35,7 +35,6 @@ const defaultValue = {
 };
 
 export default function EditTaskModal(props) {
-console.log(props.data.priority)
   const [userData, setUserData] = React.useState(defaultValue);
   const [priority, setpriority] = React.useState(props.data.priority);
 
@@ -93,7 +92,6 @@ console.log(props.data.priority)
                 </InputLabel>
                 <Select
                   size="small"
-                //   defaultValue={props.data.priority}
                   name="priority"
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
