@@ -26,12 +26,29 @@ const defaultValue = {
 
 export default function AddMilestone(props) {
   const [userData, setUserData] = React.useState(defaultValue);
-
-  const handleClose = () => props.close(false);
-
+  const handleClose = () => props.close();
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
+
+  async function addNewMilestone() {
+    let token = localStorage.getItem("token");
+    let response = await axios.post(
+      domain + endPoints.createRecreationMileStone,
+      {
+        recreationId: props.recreationId,
+        title: userData.title,
+        desc: userData.body,
+        userPoints: parseInt(userData.reward),
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (response.data.success) {
+      handleClose();
+      props.addNewMileStone(response.data.result);
+    }
+  }
 
   return (
     <div>
@@ -80,6 +97,7 @@ export default function AddMilestone(props) {
               id="outlined-basic"
               label="Milestone Reward"
               variant="outlined"
+              type={"number"}
             />
 
             <Box style={{ display: "flex", justifyContent: "center" }}>
@@ -104,10 +122,7 @@ export default function AddMilestone(props) {
               <Button
                 variant="outlined"
                 style={{ color: "green", borderColor: "green" }}
-                onClick={() => {
-                  props.addMilestone(userData);
-                  handleClose();
-                }}
+                onClick={() => addNewMilestone()}
               >
                 Add Milestone
                 <AddIcon

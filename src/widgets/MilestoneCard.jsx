@@ -8,10 +8,10 @@ function MilestoneCard(props) {
   return (
     <div className="TrainingLevelCard">
       <Typography variant="body2">Milestone: 1</Typography>
-      <Typography variant="body2">Milestone Title: {props.title}</Typography>
-      <Typography variant="body2">Milestone Body: {props.body} </Typography>
-      <Typography variant="body2">Milestone Reward: {props.reward} </Typography>
-      <Button
+      <Typography variant="body2">Milestone Title: {props.mile.title}</Typography>
+      <Typography variant="body2">Milestone Body: {props.mile.desc} </Typography>
+      <Typography variant="body2">Milestone Reward: {props.mile.userPoints} </Typography>
+      {/* <Button
         style={{
           fontSize: "0.8rem",
           marginRight: "1rem",
@@ -55,7 +55,7 @@ function MilestoneCard(props) {
             marginLeft: "0.4rem",
           }}
         />
-      </Button>
+      </Button> */}
     </div>
   );
 }

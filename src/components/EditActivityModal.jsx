@@ -19,12 +19,12 @@ const style = {
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 2,
-  borderRadius: 1.5
+  borderRadius: 1.5,
 };
 
 export default function EditActivityModal(props) {
-  const [trainingTitle, setTrainingTitle] = React.useState(props.data.title);
-  const [trainingBody, setTrainingBody] = React.useState(props.data.body);
+  const [trainingTitle, setTrainingTitle] = React.useState("");
+  const [trainingBody, setTrainingBody] = React.useState("");
 
   const handleClose = () => props.close(false);
 
@@ -75,8 +75,7 @@ export default function EditActivityModal(props) {
               id="outlined-basic"
               label="Title"
               variant="outlined"
-            //   value={trainingTitle}
-            defaultValue={props.data.title}
+              //   value={trainingTitle}
             />
             <TextField
               name="body"
@@ -87,8 +86,7 @@ export default function EditActivityModal(props) {
               id="outlined-basic"
               label="Body"
               variant="outlined"
-            // value={trainingBody}
-            defaultValue={props.data.body}
+              // value={trainingBody}
             />
 
             <Box style={{ display: "flex", justifyContent: "center" }}>
@@ -112,12 +110,18 @@ export default function EditActivityModal(props) {
                 />
               </Button>
               <Button
-                onClick={() => props.editActivity({id:props.data.id, title:trainingTitle, body:trainingBody})}
+                onClick={() =>{}
+                  // props.editActivity({
+                  //   id: props.data.id,
+                  //   title: trainingTitle,
+                  //   body: trainingBody,
+                  // })
+                }
                 size="small"
                 variant="outlined"
                 style={{ color: "green", borderColor: "green" }}
               >
-               edit Activity
+                edit Activity
                 <Edit
                   style={{
                     fontSize: "1.4rem",

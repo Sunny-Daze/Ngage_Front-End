@@ -1,55 +1,65 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import "./AdminControlRecreation.css";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import ActivityAccordion from "../widgets/ActivityAccordion";
 import AddRecreationModal from "../components/AddRecreationModal";
-import EditActivityModal from "../components/EditActivityModal"
-import AddMilestone from "../components/AddMilestone"
-import EditMilestoneModal from "../components/EditMilestoneModal"
-
+import EditActivityModal from "../components/EditActivityModal";
+import AddMilestone from "../components/AddMilestone";
+import EditMilestoneModal from "../components/EditMilestoneModal";
+import axios from "axios";
+import { domain, endPoints } from "../services/endPoints";
 
 function AdminControlRecreation() {
-  const [addActivityModal, setAddActivityModal] = React.useState(false);
-  const [activities, setActivities] = React.useState([{title:'hello', body:'pello'}]);
-  const [editActivityModal, setEditActivityModal] = React.useState(false);
-  const [editableDAta, setEditableData] = React.useState({});
-  const [addMilestoneModal, setMilestoneModal] = React.useState(false);
-  const [milestones, setMilestones] = React.useState([{title:'hello', body:'pello', reward:'69'}]);
-  const [editMilestoneModal, setEditMilsetoneModal] = React.useState(false);
-  const [milestoneData, setmilestoneData] = React.useState({});
+  const [activities, setActivities] = useState([]);
 
-  function addActivity(activityData) {
-    activities.push(activityData)
-    setActivities([...activities])
-    setAddActivityModal(false)
-  }
+  // Avoid Intialized above this line for performance issue
+  // fetching data just after intialization of required variable;
 
-  function editActivity(newData) {
-    console.log(newData)
-  }
 
-  function addMilestone(milestoneData) {
-    milestones.push(milestoneData)
-    setMilestones([...milestones])
-    setMilestoneModal(false)
-    console.log(milestones)
-  }
+  useEffect(() => {
+    async function fetchData() {
+      let token = localStorage.getItem("token");
+      let response = await axios.post(
+        domain + endPoints.fetchRecreations,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
-  function editMilestone(milestoneData) {
-    console.log(milestoneData)
-  }
+      if (response.data.success) {
+        let arr = [];
+        response.data.result.forEach((e) => {
+          arr.push({
+            id: e._id,
+            title: e.title,
+            desc: e.desc,
+            milestones: e.milestones,
+            createdBy: e.createdBy,
+          });
+        });
+
+        setActivities([...arr]);
+      }
+    }
+
+    fetchData();
+  }, []);
+  
+  
+  // Decleared this function on Purpose
+  
+  const [addRecreationModal, setaddRecreationModal] = useState(false);
+  const [editRecreationModal, seteditRecreationModal] = useState(false);
 
   return (
     <div className="AdminControlRecreation">
-      <AddRecreationModal open={addActivityModal} close={setAddActivityModal} addActivity={addActivity} />
-      <EditActivityModal open={editActivityModal} close={setEditActivityModal} data={editableDAta} editActivity={editActivity} />
-      <AddMilestone open={addMilestoneModal} close={setMilestoneModal} addMilestone={addMilestone} />
-      <EditMilestoneModal open={editMilestoneModal} close={setEditMilsetoneModal} data={milestoneData} editMilestone={editMilestone} />
+      <AddRecreationModal />
+      <EditActivityModal />
 
       <div className="AdminControlButton">
         <Button
-          onClick={() => setAddActivityModal(true)}
+          onClick={() => setaddRecreationModal(true)}
           variant="contained"
           size="small"
           style={{ background: "#157F1F" }}
@@ -64,18 +74,12 @@ function AdminControlRecreation() {
           />
         </Button>
       </div>
-      {activities.map((e) => (
-        <ActivityAccordion 
-        title={e.title} 
-        body={e.body} 
-        setEditActivityModal={setEditActivityModal} 
-        data={e}
-        setEditableData={setEditableData}
-        setMilestoneModal={setMilestoneModal}
-        milestones={milestones}
-        setEditMilsetoneModal={setEditMilsetoneModal}
-        setmilestoneData={setmilestoneData}
-        />  
+      {activities.map((recreation, index) => (
+        <ActivityAccordion
+          editModal={editRecreationModal}
+          addModal={addRecreationModal}
+          recreation={recreation}
+        />
       ))}
     </div>
   );
