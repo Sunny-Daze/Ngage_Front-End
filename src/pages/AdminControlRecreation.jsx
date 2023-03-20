@@ -40,17 +40,40 @@ function AdminControlRecreation() {
     fetchData();
   }, []);
 
-  function updateActivites(value) {}
+  function updateActivites(value, id) {
+    let index = activities.findIndex((e) => e._id == id);
+    activities[index] = {
+      id: value._id,
+      title: value.title,
+      desc: value.desc,
+      milestones: value.milestones,
+      createdBy: value.createdBy,
+    };
+    setActivities([...activities]);
+  }
 
-  function deleteActivites(id) {}
+  function deleteActivity(id) {
+    let arr = activities.filter((e) => e.id != id);
+    setActivities([...arr]);
+  }
 
-  function addNewActivity(value) {}
+  function addNewActivity(value) {
+    activities.unshift({
+      id: value._id,
+      title: value.title,
+      desc: value.desc,
+      milestones: value.milestones,
+      createdBy: value.createdBy,
+    });
+    setActivities([...activities]);
+  }
 
   return (
     <div className="AdminControlRecreation">
       <AddRecreationModal
         open={addRecreationModal}
         close={() => setaddRecreationModal(false)}
+        addNewActivity={addNewActivity}
       />
 
       <div className="AdminControlButton">
@@ -73,9 +96,10 @@ function AdminControlRecreation() {
       {activities.map((recreation, index) => (
         <ActivityAccordion
           updateActivites={updateActivites}
-          deleteActivites = {deleteActivites}
+          deleteActivity={deleteActivity}
           addModal={addRecreationModal}
           recreation={recreation}
+          key={recreation.id}
         />
       ))}
     </div>

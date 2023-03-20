@@ -2,10 +2,8 @@ import * as React from "react";
 import { Button, TextField, Divider, Box, InputAdornment } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import TollIcon from "@mui/icons-material/Toll";
 import ClearIcon from "@mui/icons-material/Clear";
-import AddIcon from "@mui/icons-material/Add";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
+
 import axios from "axios";
 import { domain, endPoints } from "../services/endPoints";
 import { Edit } from "@mui/icons-material";
@@ -23,7 +21,9 @@ const style = {
 };
 
 export default function EditActivityModal(props) {
-  const [trainingTitle, setTrainingTitle] = React.useState(props.recreation.title);
+  const [trainingTitle, setTrainingTitle] = React.useState(
+    props.recreation.title
+  );
   const [trainingBody, setTrainingBody] = React.useState(props.recreation.desc);
 
   const handleClose = () => props.close(false);
@@ -44,6 +44,24 @@ export default function EditActivityModal(props) {
         break;
     }
   };
+
+  async function editActivity() {
+    let token = localStorage.getItem("token");
+    let response = await axios.post(
+      domain + endPoints.updateRecreation,
+      {
+        recreationId: props.recreation.id,
+        title: trainingTitle,
+        desc: trainingBody,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (response.data.success) {
+      props.updateActivites(response.data.result);
+      handleClose();
+    }
+  }
 
   return (
     <div>
@@ -75,7 +93,7 @@ export default function EditActivityModal(props) {
               id="outlined-basic"
               label="Title"
               variant="outlined"
-              //   value={trainingTitle}
+              value={trainingTitle}
             />
             <TextField
               name="body"
@@ -86,7 +104,7 @@ export default function EditActivityModal(props) {
               id="outlined-basic"
               label="Body"
               variant="outlined"
-              // value={trainingBody}
+              value={trainingBody}
             />
 
             <Box style={{ display: "flex", justifyContent: "center" }}>
@@ -110,18 +128,14 @@ export default function EditActivityModal(props) {
                 />
               </Button>
               <Button
-                onClick={() =>{}
-                  // props.editActivity({
-                  //   id: props.data.id,
-                  //   title: trainingTitle,
-                  //   body: trainingBody,
-                  // })
-                }
+                onClick={() => {
+                  editActivity()
+                }}
                 size="small"
                 variant="outlined"
                 style={{ color: "green", borderColor: "green" }}
               >
-                edit Activity
+              Edit Activity
                 <Edit
                   style={{
                     fontSize: "1.4rem",

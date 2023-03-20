@@ -11,6 +11,8 @@ import AddIcon from "@mui/icons-material/Add";
 import MilestoneCard from "../widgets/MilestoneCard";
 import AddMilestone from "../components/AddMilestone";
 import EditActivityModal from "../components/EditActivityModal";
+import axios from "axios";
+import { domain, endPoints } from "../services/endPoints";
 
 function ActivityAccordion(props) {
   let recreationMilestones = props.recreation.milestones;
@@ -46,6 +48,21 @@ function ActivityAccordion(props) {
     setMileStones([...recreationMilestones]);
   }
 
+  async function deleteActivity(recreationId) {
+    let token = localStorage.getItem("token");
+    let response = await axios.post(
+      domain + endPoints.deleteRecreation,
+      {
+        recreationId: recreationId,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (response.data.success) {
+      props.deleteActivity(response.data.result._id);
+    }
+  }
+
   return (
     <>
       <AddMilestone
@@ -54,8 +71,10 @@ function ActivityAccordion(props) {
         addNewMileStone={addNewMileStone}
         recreationId={props.recreation.id}
       />
+      {/* deleteActivites = {deleteActivites} */}
       <EditActivityModal
         recreation={props.recreation}
+        updateActivites={props.updateActivites}
         open={editRecreationModal}
         close={() => setEditRecreationModal(false)}
       />
@@ -127,6 +146,9 @@ function ActivityAccordion(props) {
               style={{ fontSize: "0.8rem", color: "red", borderColor: "red" }}
               variant="outlined"
               size="small"
+              onClick={() => {
+                deleteActivity(props.recreation.id);
+              }}
             >
               Delete Activity
               <DeleteIcon
