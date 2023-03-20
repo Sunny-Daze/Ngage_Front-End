@@ -6,7 +6,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import axios from "axios";
 import { domain, endPoints } from "../services/endPoints";
 import AddIcon from "@mui/icons-material/Add";
-import {FormControl} from '@mui/material'
+import { FormControl } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -17,26 +17,47 @@ const style = {
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 2,
-  borderRadius:1.5
+  borderRadius: 1.5,
 };
 
 export default function EditMilestoneModal(props) {
-  const[levelEdittitle, setLevelEditTitle] = React.useState(props.data.title)
-  const[levelEditbody, setLevelEditBody] = React.useState(props.data.body)
-  const[levelEditreward, setLevelEditReward] = React.useState(props.data.title)
+  const [levelEdittitle, setLevelEditTitle] = React.useState(props.mile.title);
+  const [levelEditbody, setLevelEditBody] = React.useState(props.mile.desc);
+  const [levelEditreward, setLevelEditReward] = React.useState(
+    props.mile.userPoints
+  );
 
   const handleClose = () => props.close(false);
 
   const changeTitle = (e) => {
-    setLevelEditTitle(e.target.value)
-  }
-  
+    setLevelEditTitle(e.target.value);
+  };
+
   const changeBody = (e) => {
-    setLevelEditBody(e.target.value)
-  }
+    setLevelEditBody(e.target.value);
+  };
 
   const changeReward = (e) => {
-    setLevelEditReward(e.target.value)
+    setLevelEditReward(e.target.value);
+  };
+
+  async function editMileStone() {
+    let token = localStorage.getItem("token");
+    let response = await axios.post(
+      domain + endPoints.updateRecreationMileStone,
+      {
+        recreationMileStoneId: props.mile._id,
+        title: levelEdittitle,
+        desc: levelEditbody,
+        userPoints: parseInt(levelEditreward),
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (response.data.success) {
+      handleClose();
+      props.updateMilestoneList(response.data.result,props.mile._id);
+    }
   }
 
   return (
@@ -63,19 +84,17 @@ export default function EditMilestoneModal(props) {
             style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
           >
             <FormControl>
-            <TextField
-              // onChange={(e) => handleChange(e)}
-              name="title"
-              id="outlined-basic"
-              multiline
-              rows={2}
-              label="Milestone Title"
-              variant="outlined"
-              onChange={(e) => changeTitle(e)}
-              // value={levelEdittitle}
-            //   value={levelEdittitle}
-            defaultValue={props.data.title}
-            />
+              <TextField
+                // onChange={(e) => handleChange(e)}
+                name="title"
+                id="outlined-basic"
+                multiline
+                rows={2}
+                label="Milestone Title"
+                variant="outlined"
+                onChange={(e) => changeTitle(e)}
+                value={levelEdittitle}
+              />
             </FormControl>
             <TextField
               name="body"
@@ -86,8 +105,7 @@ export default function EditMilestoneModal(props) {
               label="Milestone Body"
               variant="outlined"
               onChange={(e) => changeBody(e)}
-            //   value={levelEditbody}
-            defaultValue={props.data.body}
+              value={levelEditbody}
             />
             <TextField
               name="reward"
@@ -95,9 +113,9 @@ export default function EditMilestoneModal(props) {
               id="outlined-basic"
               label="Milestone Reward"
               variant="outlined"
+              type={"number"}
               onChange={(e) => changeReward(e)}
-            //   value={levelEditreward}
-            defaultValue={props.data.reward}
+              value={levelEditreward}
             />
 
             <Box style={{ display: "flex", justifyContent: "center" }}>
@@ -123,8 +141,7 @@ export default function EditMilestoneModal(props) {
                 variant="outlined"
                 style={{ color: "green", borderColor: "green" }}
                 onClick={() => {
-                  props.editMilestone({title:levelEdittitle, body:levelEditbody, reward:levelEditreward})
-                  handleClose()
+                  editMileStone();
                 }}
               >
                 Edit Milstone

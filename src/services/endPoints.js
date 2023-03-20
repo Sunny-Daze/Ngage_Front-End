@@ -29,13 +29,10 @@ export const endPoints = {
   deletePost : '/api/post/deletePost',
   fetchPostById : '/api/post/fetchPostById',
 
-
-
   //Post Comments
   fetchComment: '/api/comment/fetchComment',
   createComment : '/api/comment/createComment',
   deleteComment : '/api/comment/deleteComment',
-
 
   //Recreation
   fetchRecreations :  '/api/recreation/fetchRecreations',
@@ -43,7 +40,6 @@ export const endPoints = {
   updateRecreation :  '/api/recreation/updateRecreation',
   deleteRecreation :  '/api/recreation/deleteRecreation',
   
-
   // Recreation  Milestone 
   createRecreationMileStone :  '/api/recreationMilestone/createRecreationMileStone',
   updateRecreationMileStone :  '/api/recreationMilestone/updateRecreationMileStone',

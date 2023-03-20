@@ -5,18 +5,12 @@ import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import ActivityAccordion from "../widgets/ActivityAccordion";
 import AddRecreationModal from "../components/AddRecreationModal";
-import EditActivityModal from "../components/EditActivityModal";
-import AddMilestone from "../components/AddMilestone";
-import EditMilestoneModal from "../components/EditMilestoneModal";
 import axios from "axios";
 import { domain, endPoints } from "../services/endPoints";
 
 function AdminControlRecreation() {
   const [activities, setActivities] = useState([]);
-
-  // Avoid Intialized above this line for performance issue
-  // fetching data just after intialization of required variable;
-
+  const [addRecreationModal, setaddRecreationModal] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -45,17 +39,19 @@ function AdminControlRecreation() {
 
     fetchData();
   }, []);
-  
-  
-  // Decleared this function on Purpose
-  
-  const [addRecreationModal, setaddRecreationModal] = useState(false);
-  const [editRecreationModal, seteditRecreationModal] = useState(false);
+
+  function updateActivites(value) {}
+
+  function deleteActivites(id) {}
+
+  function addNewActivity(value) {}
 
   return (
     <div className="AdminControlRecreation">
-      <AddRecreationModal />
-      <EditActivityModal />
+      <AddRecreationModal
+        open={addRecreationModal}
+        close={() => setaddRecreationModal(false)}
+      />
 
       <div className="AdminControlButton">
         <Button
@@ -76,7 +72,8 @@ function AdminControlRecreation() {
       </div>
       {activities.map((recreation, index) => (
         <ActivityAccordion
-          editModal={editRecreationModal}
+          updateActivites={updateActivites}
+          deleteActivites = {deleteActivites}
           addModal={addRecreationModal}
           recreation={recreation}
         />

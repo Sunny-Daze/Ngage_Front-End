@@ -23,8 +23,8 @@ const style = {
 };
 
 export default function EditActivityModal(props) {
-  const [trainingTitle, setTrainingTitle] = React.useState("");
-  const [trainingBody, setTrainingBody] = React.useState("");
+  const [trainingTitle, setTrainingTitle] = React.useState(props.recreation.title);
+  const [trainingBody, setTrainingBody] = React.useState(props.recreation.desc);
 
   const handleClose = () => props.close(false);
 

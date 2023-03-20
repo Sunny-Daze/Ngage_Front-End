@@ -10,23 +10,40 @@ import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import MilestoneCard from "../widgets/MilestoneCard";
 import AddMilestone from "../components/AddMilestone";
-import EditMilestoneModal from "../components/EditMilestoneModal";
+import EditActivityModal from "../components/EditActivityModal";
 
 function ActivityAccordion(props) {
   let recreationMilestones = props.recreation.milestones;
-  const [mileStones, setMileStone] = React.useState(recreationMilestones);
+  const [mileStones, setMileStones] = React.useState(recreationMilestones);
   const [addMilestoneModal, setAddMilestoneModal] = React.useState(false);
-  const [editMileStone, setEditMilestoneModal] = React.useState(false);
+  const [editRecreationModal, setEditRecreationModal] = React.useState(false);
 
   function addNewMileStone(value) {
     console.warn(value);
     recreationMilestones.push({
+      _id: value.id,
       title: value.title,
       desc: value.desc,
       userPoints: value.userPoints,
     });
 
-    setMileStone([...recreationMilestones]);
+    setMileStones([...recreationMilestones]);
+  }
+
+  function updateMilestoneList(value, _id) {
+    let index = recreationMilestones.findIndex((mile) => mile._id == _id);
+    recreationMilestones[index] = {
+      title: value.title,
+      desc: value.desc,
+      userPoints: value.userPoints,
+    };
+    setMileStones([...recreationMilestones]);
+  }
+
+  function deleteMilestone(_id) {
+    let index = recreationMilestones.findIndex((mile) => mile._id == _id);
+    recreationMilestones = mileStones.splice(index, 1);
+    setMileStones([...recreationMilestones]);
   }
 
   return (
@@ -37,6 +54,12 @@ function ActivityAccordion(props) {
         addNewMileStone={addNewMileStone}
         recreationId={props.recreation.id}
       />
+      <EditActivityModal
+        recreation={props.recreation}
+        open={editRecreationModal}
+        close={() => setEditRecreationModal(false)}
+      />
+
       <div className="ActivityAccordion">
         <Accordion style={{ width: "48.5rem" }}>
           <AccordionSummary
@@ -87,8 +110,7 @@ function ActivityAccordion(props) {
               variant="outlined"
               size="small"
               onClick={() => {
-                // props.setEditActivityModal(true);
-                // props.setEditableData(props.data);
+                setEditRecreationModal(true);
               }}
             >
               Edit Activity
@@ -116,21 +138,14 @@ function ActivityAccordion(props) {
                 }}
               />
             </Button>
-            {/* {
-            props.milestones.map((e) => (
-              <MilestoneCard 
-              title={e.title} 
-              body={e.body} 
-              reward={e.reward} 
-              data={e} 
-              setEditMilsetoneModal={props.setEditMilsetoneModal} 
-              setmilestoneData={props.setmilestoneData} 
-              />
-            ))
-          } */}
 
-            {mileStones.map((e) => (
-              <MilestoneCard mile={e} />
+            {mileStones.map((e, index) => (
+              <MilestoneCard
+                mile={e}
+                index={index}
+                editMile={updateMilestoneList}
+                deleteMile={deleteMilestone}
+              />
             ))}
           </AccordionDetails>
         </Accordion>
