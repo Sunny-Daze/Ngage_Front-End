@@ -1,0 +1,21 @@
+.ProjectTaskCard {
+    width: 100%;
+    background: white;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    padding-top: 0.5rem;
+}
+
+.ProjectTaskCardHeading {
+    display: flex;
+    width:100%;
+    padding-top: 0.5rem;
+}
+
+.ProjectTaskStatus {
+    display: flex;
+    background: yellow;
+}

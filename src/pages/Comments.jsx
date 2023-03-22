@@ -10,11 +10,13 @@ import { domain, endPoints } from "../services/endPoints";
 import { useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 import NotesIcon from '@mui/icons-material/Notes';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Comments(post) {
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
   const [snackSwitch, setSnackSwitch] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const { state } = useLocation();
 
@@ -46,13 +48,12 @@ function Comments(post) {
       });
       setComments([...comments]);
     }
-
-    console.log(response.data);
   }
 
   async function handleCreateComment() {
     if (comment === "") return;
     else {
+      setLoading(true);
       let userDetails = JSON.parse(localStorage.getItem("user") ?? "");
       let token = localStorage.getItem("token");
 
@@ -79,6 +80,7 @@ function Comments(post) {
         setComment("");
       }
     }
+    setLoading(false)
     setSnackSwitch(true);
   }
 
@@ -129,6 +131,23 @@ function Comments(post) {
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />
+
+            {loading ?
+            <Button
+              variant="contained"
+              size="small"
+              disabled
+              style={{
+                background: "lightgrey",
+                marginLeft: "39.5rem",
+                fontSize: "0.8rem",
+                color:'darkslategray'
+              }}
+            >
+              Comment
+              <CircularProgress style={{color:'darkslategray', fontSize:'0.5rem', height:'1rem', width:'1rem', marginLeft:'0.7rem'}} />
+            </Button>
+            :
             <Button
               variant="contained"
               size="small"
@@ -142,6 +161,7 @@ function Comments(post) {
               Comment
               <NotesIcon style={{color:'white', fontSize:'1.2rem', marginLeft:'0.5rem'}} />
             </Button>
+            }
           </Box>
 
           <div className="Comments-list">

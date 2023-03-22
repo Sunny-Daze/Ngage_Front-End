@@ -1,17 +1,10 @@
 import React from "react";
-import "./AdminControl.css";
-import { Typography } from "@mui/material";
-import PropTypes from "prop-types";
+import ProjectHeaderCard from "../widgets/ProjectHeaderCard";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import AdminControlProjects from "./AdminControlProjects";
-import AdminControlTrainings from "./AdminControlTrainings";
-import AdminControlRecreation from "./AdminControlRecreation";
-import AdminControlStore from "./AdminControlStore";
-import { MdOutlineAccountTree } from "react-icons/md";
-import { BsLightningChargeFill, BsPlay } from "react-icons/bs";
-import { HiShoppingCart } from "react-icons/hi";
+import ProjectTasks from './ProjectTasks'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -25,19 +18,13 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p: 0 }}>
           <Typography>{children}</Typography>
         </Box>
       )}
     </div>
   );
 }
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
 
 function a11yProps(index) {
   return {
@@ -46,98 +33,94 @@ function a11yProps(index) {
   };
 }
 
-function AdminControl() {
+function Project() {
   const [value, setValue] = React.useState(0);
+  const [tabClicked, setTabClicked] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  const [tabClicked, setTabClicked] = React.useState(0);
 
   const handleTabColor = (val) => {
     setTabClicked(val);
   };
 
   return (
-    <div className="AdminControl">
-      <div className="AdminControlHeading">
-        <Typography variant="h5">Administrator Controls</Typography>
-      </div>
+    <div className="Project">
+      <ProjectHeaderCard />
 
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs
             value={value}
             onChange={handleChange}
-            TabIndicatorProps={{ style: { background: "#001F54" } }}
+            TabIndicatorProps={{ style: { background: "#001f54" } }}
             style={{
-              borderBottomLeftRadius: "5px",
-              borderBottomRightRadius: "5px",
+              background:'white'
             }}
             aria-label="basic tabs example"
           >
             <Tab
               style={{
-                width: "25%",
                 background: "white",
                 color: tabClicked === 0 ? "#001F54" : "",
+                fontSize:'0.8rem',
+                width:'1rem'
               }}
               onClick={() => handleTabColor(0)}
-              icon={<MdOutlineAccountTree style={{ fontSize: "1.5rem" }} />}
-              label="Projects"
+              label="tasks"
               {...a11yProps(0)}
             />
             <Tab
               style={{
-                width: "25%",
                 background: "white",
                 color: tabClicked === 1 ? "#001F54" : "",
+                fontSize:'0.8rem',
+                width:'10.5rem'
               }}
               onClick={() => handleTabColor(1)}
-              icon={<BsLightningChargeFill style={{ fontSize: "1.25rem" }} />}
-              label="Trainings"
+              label="service requests"
               {...a11yProps(1)}
             />
             <Tab
               style={{
-                width: "25%",
                 background: "white",
                 color: tabClicked === 2 ? "#001F54" : "",
+                fontSize:'0.8rem',
+                width:'11.49rem'
               }}
               onClick={() => handleTabColor(2)}
-              icon={<BsPlay style={{ fontSize: "1.7rem" }} />}
-              label="recreation"
+              label="customer feedback"
               {...a11yProps(2)}
             />
             <Tab
               style={{
-                width: "25%",
                 background: "white",
                 color: tabClicked === 3 ? "#001F54" : "",
+                fontSize:'0.8rem',
+                width:'7.4rem'
               }}
               onClick={() => handleTabColor(3)}
-              icon={<HiShoppingCart style={{ fontSize: "1.5rem" }} />}
-              label="store"
+              label="case study"
               {...a11yProps(3)}
             />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <AdminControlProjects />
+          <ProjectTasks />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <AdminControlTrainings />
+          Item Two
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <AdminControlRecreation />
+          Item Three
         </TabPanel>
         <TabPanel value={value} index={3}>
-          <AdminControlStore />
+          Item zero
         </TabPanel>
       </Box>
     </div>
   );
 }
 
-export default AdminControl;
+export default Project;

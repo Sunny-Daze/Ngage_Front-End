@@ -1,0 +1,11 @@
+.ProjectTasks {
+    width: 100%;
+    background:white;
+    padding: 2rem;
+}
+
+.priorityButton{
+    width: 100%;
+    display:flex;
+    justify-content: flex-end;
+}
