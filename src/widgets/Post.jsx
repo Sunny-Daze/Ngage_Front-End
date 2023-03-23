@@ -152,7 +152,7 @@ function Post(props) {
               {props.user.userName}
             </Typography>
             <Typography variant="body2">
-              {formatDate(new Date(props.createdAt))}
+              {formatDate(new Date(Date.now()))}
             </Typography>
           </div>
         </div>
