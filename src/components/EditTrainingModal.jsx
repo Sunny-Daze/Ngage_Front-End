@@ -19,37 +19,23 @@ const style = {
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 2,
-  borderRadius: 1.5
+  borderRadius: 1.5,
 };
 
 export default function EditTrainingModal(props) {
   const [trainingTitle, setTrainingTitle] = React.useState(props.data.title);
-  const [trainingBody, setTrainingBody] = React.useState(props.data.body);
+  const [trainingBody, setTrainingBody] = React.useState(props.data.desc);
 
-  const handleClose = () => props.close(false);
-
-  // const handleTitle = (e) => {
-  //   setTrainingTitle(e.target.value)
-  // }
-
-  // const handleBody = (e) => {
-  //   setTrainingBody(e.target.value)
-  // }
-
+  const handleClose = () => props.close();
   const handleChange = (e, feild) => {
     switch (feild) {
       case "trainingName":
         setTrainingTitle(e.target.value);
-
         break;
-
       case "trainingDesc":
         setTrainingBody(e.target.value);
-
         break;
-
       default:
-        break;
     }
   };
 
@@ -79,7 +65,6 @@ export default function EditTrainingModal(props) {
             <TextField
               name="title"
               onChange={(e) => handleChange(e, "trainingName")}
-              // onChange={(e) => handleTitle(e)}
               size="small"
               id="outlined-basic"
               label="Title"
@@ -90,7 +75,6 @@ export default function EditTrainingModal(props) {
             <TextField
               name="body"
               onChange={(e) => handleChange(e, "trainingDesc")}
-              // onChange={(e) => handleBody(e)}
               size="small"
               multiline
               rows={2}
@@ -122,7 +106,7 @@ export default function EditTrainingModal(props) {
                 />
               </Button>
               <Button
-                onClick={() => props.editTrainingfunc({id:props.data.id, title:trainingTitle, body:trainingBody})}
+                onClick={() => {}}
                 size="small"
                 variant="outlined"
                 style={{ color: "green", borderColor: "green" }}
