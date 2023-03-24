@@ -2,20 +2,47 @@
     width: 100%;
     background: white;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
     padding-bottom: 1rem;
-    padding-top: 0.5rem;
+    /* padding-top: 0.5rem; */
 }
 
 .ProjectTaskCardHeading {
     display: flex;
     width:100%;
-    padding-top: 0.5rem;
 }
 
 .ProjectTaskStatus {
     display: flex;
-    background: yellow;
+    padding:0.5rem;
+    margin-left: 3rem;
 }
+
+.ProjectTaskCardPriority{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    border-top-right-radius: 5rem;
+    border-bottom-right-radius: 5rem;
+    border-top-left-radius: 5rem;
+    border-bottom-left-radius: 5rem;
+    width: 3.6rem;
+    height: 1.3rem;
+    margin-top: 0.7rem;
+}
+
+.PTCHigh {
+    background:red;
+}
+
+.PTCMedium {
+    background:darkorange;
+}
+
+.PTCLow {
+    background: darkgreen;
+}
+
