@@ -6,7 +6,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import axios from "axios";
 import { domain, endPoints } from "../services/endPoints";
 import AddIcon from "@mui/icons-material/Add";
-import {FormControl} from '@mui/material'
+import { FormControl } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -17,26 +17,47 @@ const style = {
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 2,
-  borderRadius:1.5
+  borderRadius: 1.5,
 };
 
 export default function EditLevelModal(props) {
-  const[levelEdittitle, setLevelEditTitle] = React.useState(props.data.title)
-  const[levelEditbody, setLevelEditBody] = React.useState(props.data.body)
-  const[levelEditreward, setLevelEditReward] = React.useState(props.data.title)
+  const [levelEdittitle, setLevelEditTitle] = React.useState(props.task.title);
+  const [levelEditbody, setLevelEditBody] = React.useState(props.task.desc);
+  const [levelEditreward, setLevelEditReward] = React.useState(
+    props.task.userPoints
+  );
 
   const handleClose = () => props.close(false);
 
   const changeTitle = (e) => {
-    setLevelEditTitle(e.target.value)
-  }
-  
+    setLevelEditTitle(e.target.value);
+  };
+
   const changeBody = (e) => {
-    setLevelEditBody(e.target.value)
-  }
+    setLevelEditBody(e.target.value);
+  };
 
   const changeReward = (e) => {
-    setLevelEditReward(e.target.value)
+    setLevelEditReward(e.target.value);
+  };
+
+  async function editTask() {
+    let token = localStorage.getItem("token");
+    let response = await axios.post(
+      domain + endPoints.updateTrainingTask,
+      {
+        trainingTaskId: props.task._id,
+        title: levelEdittitle,
+        desc: levelEditbody,
+        userPoints: levelEditreward,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (response.data.success) {
+      props.editTask(response.data.result);
+      handleClose();
+    }
   }
 
   return (
@@ -63,18 +84,18 @@ export default function EditLevelModal(props) {
             style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
           >
             <FormControl>
-            <TextField
-              // onChange={(e) => handleChange(e)}
-              name="title"
-              id="outlined-basic"
-              multiline
-              rows={2}
-              label="Level Title"
-              variant="outlined"
-              onChange={(e) => changeTitle(e)}
-              // value={levelEdittitle}
-              value={levelEdittitle}
-            />
+              <TextField
+                // onChange={(e) => handleChange(e)}
+                name="title"
+                id="outlined-basic"
+                multiline
+                rows={2}
+                label="Level Title"
+                variant="outlined"
+                onChange={(e) => changeTitle(e)}
+                // value={levelEdittitle}
+                value={levelEdittitle}
+              />
             </FormControl>
             <TextField
               name="body"
@@ -120,9 +141,7 @@ export default function EditLevelModal(props) {
                 variant="outlined"
                 style={{ color: "green", borderColor: "green" }}
                 onClick={() => {
-                  console.log(props.data)
-                  // props.addLevel(userData)
-                  handleClose()
+                  editTask();
                 }}
               >
                 Edit Level

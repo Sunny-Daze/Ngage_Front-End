@@ -4,6 +4,8 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import ClearIcon from "@mui/icons-material/Clear";
 import AddIcon from "@mui/icons-material/Add";
+import axios from "axios";
+import { domain, endPoints } from "../services/endPoints";
 
 const style = {
   position: "absolute",
@@ -14,27 +16,38 @@ const style = {
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 2,
-  borderRadius:1.5
+  borderRadius: 1.5,
 };
 
 const defaultValue = {
-    title: "",
-    body: "",
-    creater:"creater"
-}
+  title: "",
+  body: "",
+  creater: "creater",
+};
 
 export default function AddTrainingModal(props) {
-    const [userData, setUserData] = React.useState(defaultValue);
-
+  const [userData, setUserData] = React.useState(defaultValue);
   const handleClose = () => props.close(false);
+
 
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
-  }
+  };
 
-  function addTraining() {
-    props.addTrainingCourse(userData);
-    handleClose();
+  async function addTraining() {
+    let token = localStorage.getItem("token");
+    let response = await axios.post(
+      domain + endPoints.createTraining,
+      {
+        title: userData.title,
+        desc: userData.body,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (response.data.success) {
+      props.close();
+    }
   }
 
   return (
@@ -61,16 +74,16 @@ export default function AddTrainingModal(props) {
             style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
           >
             <TextField
-                name="title"
-                onChange={(e) => handleChange(e)}
+              name="title"
+              onChange={(e) => handleChange(e)}
               size="small"
               id="outlined-basic"
               label="Title"
               variant="outlined"
             />
             <TextField
-            name="body"
-            onChange={(e) => handleChange(e)}
+              name="body"
+              onChange={(e) => handleChange(e)}
               size="small"
               multiline
               rows={2}
@@ -96,7 +109,12 @@ export default function AddTrainingModal(props) {
                   }}
                 />
               </Button>
-              <Button onClick={addTraining} size="small" variant="outlined" color="success">
+              <Button
+                onClick={addTraining}
+                size="small"
+                variant="outlined"
+                color="success"
+              >
                 add course
                 <AddIcon
                   style={{
