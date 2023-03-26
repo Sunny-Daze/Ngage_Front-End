@@ -52,6 +52,13 @@ export const endPoints = {
   deleteTraining :  '/api/training/deleteTraining',
 
 
+  //Training Tasks 
+  createTrainingTask : '/api/trainingTask/createTrainingTask',
+  updateTrainingTask : '/api/trainingTask/updateTrainingTask',
+  deleteTrainingTask : '/api/trainingTask/deleteTrainingTask',
+
+
+
    
 
   

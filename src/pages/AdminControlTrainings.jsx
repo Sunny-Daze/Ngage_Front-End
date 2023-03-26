@@ -40,8 +40,23 @@ function AdminControlTrainings() {
     fetchData();
   }, []);
 
-  function deleteTraining() {}
-  function editTraining() {}
+  function deleteTraining(trainingId) {
+    
+    let index = trainings.findIndex((e) => e.id == trainingId);
+    if (index != -1) {
+      trainings.splice(index,1);
+      setTraining([...trainings]);
+    }
+
+
+  }
+  function editTraining(train) {
+    let index = trainings.findIndex((e) => e.id == train._id);
+    if (index != -1) {
+      trainings[index] = train;
+      setTraining([...trainings]);
+    }
+  }
 
   return (
     <div>

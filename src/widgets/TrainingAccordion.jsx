@@ -11,6 +11,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import TrainingLevelCard from "../widgets/TrainingLevelCard";
 import EditTrainingModal from "../components/EditTrainingModal";
+import AddLevelModal from "../components/AddLevelModal";
+import axios from "axios";
+import { domain, endPoints } from "../services/endPoints";
 
 function TrainingAccordion(props) {
   let traningTasks = props.training.tasks;
@@ -18,10 +21,55 @@ function TrainingAccordion(props) {
   const [addTasksModal, setAddTasksModal] = React.useState(false);
   const [editTrainingModal, setEditTrainingModal] = React.useState(false);
 
-  function editTask() {}
+  async function deleteTraining() {
+    let token = localStorage.getItem("token");
+    let response = await axios.post(
+      domain + endPoints.deleteTraining,
+      {
+        trainingId: props.training.id,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (response.data.success) {
+      props.deleteTraining(response.data.result._id);
+    }
+  }
+
+  function addTask(newTask) {
+    console.log(newTask);
+
+    tasks.splice(0, 0, newTask);
+
+    settasks([...tasks]);
+  }
+
+  function editTask(task) {
+    let index = tasks.findIndex((e) => e._id == task._id);
+
+    if (index != -1) {
+      tasks[index] = task;
+      settasks([...tasks]);
+    }
+  }
+
+  function deleteTask(taskId) {
+    let index = tasks.findIndex((e) => e._id == taskId);
+    if (index != -1) {
+      tasks.splice(index, 1);
+      settasks([...tasks]);
+    }
+  }
 
   return (
     <>
+      <AddLevelModal
+        open={addTasksModal}
+        close={() => setAddTasksModal(false)}
+        addTask={addTask}
+        trainingId={props.training.id}
+      />
+
       <EditTrainingModal
         data={props.training}
         open={editTrainingModal}
@@ -58,7 +106,7 @@ function TrainingAccordion(props) {
               }}
               variant="outlined"
               size="small"
-              onClick={() => props.setAddLevelModal(true)}
+              onClick={() => setAddTasksModal(true)}
             >
               Add Level
               <AddIcon
@@ -79,13 +127,9 @@ function TrainingAccordion(props) {
               }}
               variant="outlined"
               size="small"
-
-
-
-
-
-              
-              onClick={() => {}}
+              onClick={() => {
+                setEditTrainingModal(true);
+              }}
             >
               Edit Training
               <EditIcon
@@ -101,6 +145,7 @@ function TrainingAccordion(props) {
               style={{ fontSize: "0.8rem", color: "red", borderColor: "red" }}
               variant="outlined"
               size="small"
+              onClick={() => deleteTraining()}
             >
               Delete Training
               <DeleteIcon
@@ -112,14 +157,13 @@ function TrainingAccordion(props) {
                 }}
               />
             </Button>
-            {props.training.tasks.map((e) => (
+            {props.training.tasks.map((e, index) => (
               <TrainingLevelCard
-                setEditLevelToggle={props.setEditLevelToggle}
-                title={e.title}
-                body={e.body}
-                reward={e.reward}
-                data={e}
-                setEditLevelData={props.setEditLevelData}
+                task={e}
+                editTask={editTask}
+                key={e._id}
+                index={index}
+                deleteTask={deleteTask}
               />
             ))}
           </AccordionDetails>

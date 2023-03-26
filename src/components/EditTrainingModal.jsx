@@ -26,6 +26,24 @@ export default function EditTrainingModal(props) {
   const [trainingTitle, setTrainingTitle] = React.useState(props.data.title);
   const [trainingBody, setTrainingBody] = React.useState(props.data.desc);
 
+  async function editTraining() {
+    let token = localStorage.getItem("token");
+    let response = await axios.post(
+      domain + endPoints.updateTraining,
+      {
+        trainingId: props.data.id,
+        title: trainingTitle,
+        desc: trainingBody,
+        user: props.data.createdBy,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    if (response.data.success) {
+      props.editTraining(response.data.result)
+      handleClose();
+    }
+  }
+
   const handleClose = () => props.close();
   const handleChange = (e, feild) => {
     switch (feild) {
@@ -106,7 +124,9 @@ export default function EditTrainingModal(props) {
                 />
               </Button>
               <Button
-                onClick={() => {}}
+                onClick={() => {
+                  editTraining();
+                }}
                 size="small"
                 variant="outlined"
                 style={{ color: "green", borderColor: "green" }}
