@@ -45,7 +45,21 @@ export const endPoints = {
   updateRecreationMileStone :  '/api/recreationMilestone/updateRecreationMileStone',
   deleteRecreationMileStone :  '/api/recreationMilestone/deleteRecreationMileStone',
 
+  //Training
+  createTraining :  '/api/training/createTraining',
+  fetchTrainings :  '/api/training/fetchTrainings',
+  updateTraining :  '/api/training/updateTraining',
+  deleteTraining :  '/api/training/deleteTraining',
 
+
+  //Training Tasks 
+  createTrainingTask : '/api/trainingTask/createTrainingTask',
+  updateTrainingTask : '/api/trainingTask/updateTrainingTask',
+  deleteTrainingTask : '/api/trainingTask/deleteTrainingTask',
+
+
+
+   
 
   
 

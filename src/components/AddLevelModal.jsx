@@ -33,6 +33,25 @@ export default function EditTrainingModal(props) {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
+  async function addNewTask() {
+    let token = localStorage.getItem("token");
+    let response = await axios.post(
+      domain + endPoints.createTrainingTask,
+      {
+        trainingId: props.trainingId,
+        title: userData.title,
+        desc: userData.body,
+        userPoints: userData.reward,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (response.data.success) {
+      props.addTask(response.data.result);
+      handleClose();
+    }
+  }
+
   return (
     <div>
       <Modal
@@ -105,8 +124,7 @@ export default function EditTrainingModal(props) {
                 variant="outlined"
                 style={{ color: "green", borderColor: "green" }}
                 onClick={() => {
-                  props.addLevel(userData);
-                  handleClose();
+                  addNewTask();
                 }}
               >
                 Add Level
