@@ -58,7 +58,7 @@ function ActivityContentBanner(props) {
                     title={
                       <React.Fragment>
                         <Typography style={{fontSize:'0.8rem'}} variant='body1' color="inherit">
-                          Alex Yadav
+                         {props.createdBy}
                         </Typography>
                       </React.Fragment>
                     }

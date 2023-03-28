@@ -12,18 +12,16 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import Post from "../widgets/Post";
 import CreatePostModal from "../components/CreatePostModal";
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 import { domain, endPoints } from "../services/endPoints";
 import axios from "axios";
 
 function Community() {
-  
- function deletePostFromPosts(postId){
-   let updatedPosts = posts.filter((post)=> post.id != postId);
-   setPosts([...updatedPosts])
+  function deletePostFromPosts(postId) {
+    let updatedPosts = posts.filter((post) => post.id != postId);
+    setPosts([...updatedPosts]);
   }
-
 
   function appendNewPost(post) {
     posts.splice(0, 0, {
@@ -39,7 +37,6 @@ function Community() {
 
     setPosts([...posts]);
   }
-
 
   const [filter, setFilter] = React.useState("none");
   const [sort, setSort] = React.useState("newest");
@@ -82,7 +79,7 @@ function Community() {
       if (response.data.success) {
         response.data.result.forEach((e) => {
           posts.push({
-            id:e._id,
+            id: e._id,
             category: e.category,
             title: e.title,
             user: e.user,
@@ -169,17 +166,16 @@ function Community() {
         </Button>
       </div>
 
-      
-         <div className="postBody">
-         {posts.length === 0 &&
+      <div className="postBody">
+        {/* {posts.length === 0 &&
       <Backdrop
       sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
       open={true}
     >
       <CircularProgress color="inherit" />
-    </Backdrop>}
+    </Backdrop>} */}
         {posts.map((item, key) => {
-          return <Post {...{...item,deletePostFromPosts}} />;
+          return <Post {...{ ...item, deletePostFromPosts }} />;
         })}
       </div>
       <CreatePostModal
