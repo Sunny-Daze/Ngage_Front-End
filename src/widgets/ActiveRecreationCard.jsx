@@ -2,13 +2,24 @@ import React from "react";
 import "./ActiveRecreationCard.css";
 import { Typography, Button } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+
+function getTotatUserPoints(milestones) {
+  let total = 0;
+  milestones.forEach((e) => {
+    total += e.userPoints;
+  });
+  return total;
+}
 
 function ActiveRecreationCard(props) {
-  const navigate = useNavigate()
-
-  function handleClick(){
-    navigate('/recreation/activity/id')
+  const navigate = useNavigate();
+  function handleClick() {
+    navigate(`/recreation/activity/${props.data._id}`, {
+      state: {
+        data: props.data,
+      },
+    });
   }
 
   return (
@@ -29,7 +40,7 @@ function ActiveRecreationCard(props) {
             // marginTop:"0.5rem",
           }}
         >
-          {props.title}
+          {props.data.title}
         </Typography>
 
         <Typography
@@ -41,7 +52,7 @@ function ActiveRecreationCard(props) {
             lineHeight: "0.9rem",
           }}
         >
-          {props.desc}
+          {props.data.desc}
         </Typography>
 
         <Typography
@@ -52,7 +63,7 @@ function ActiveRecreationCard(props) {
             marginTop: "0.5rem",
           }}
         >
-          Total reward: {props.reward}
+          Total reward: {getTotatUserPoints(props.data.milestones)}
         </Typography>
 
         <Button
@@ -65,8 +76,8 @@ function ActiveRecreationCard(props) {
             fontSize: "0.8rem",
             borderColor: "#001f54",
             color: "#001f54",
-            height:'1.7rem', 
-            paddingLeft:'1rem'
+            height: "1.7rem",
+            paddingLeft: "1rem",
           }}
         >
           joined
@@ -74,7 +85,7 @@ function ActiveRecreationCard(props) {
             style={{
               fontSize: "1.2rem",
               marginBottom: "0.2rem",
-              marginLeft:'0.2rem',
+              marginLeft: "0.2rem",
               color: "#001f54",
             }}
           />

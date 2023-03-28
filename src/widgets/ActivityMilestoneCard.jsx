@@ -6,13 +6,29 @@ import CardContent from "@mui/material/CardContent";
 import { Typography, Divider, Button } from "@mui/material";
 import TollIcon from "@mui/icons-material/Toll";
 import CheckIcon from "@mui/icons-material/Check";
+import axios from "axios";
+import { domain, endPoints } from "../services/endPoints";
+import { updateUserPoint } from "../utils/localuserDetails";
 
 function ActivityMilestoneCard(props) {
-  const [activityLevelStatus, setActivityLevelStatus] = React.useState(false);
+  const [activityLevelStatus, setActivityLevelStatus] = React.useState(props.data.status);
 
-  const handleActivityMilestoneButton = () => {
-    setActivityLevelStatus(true);
-  };
+  async function completeMileStone() {
+    let token = localStorage.getItem("token");
+    let response = await axios.post(
+      domain + endPoints.completeRecreationMileStone,
+      {
+        recreationMileStoneId: props.data._id,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (response.data.success) {
+      console.info(response.data.result);
+      setActivityLevelStatus(true);
+      updateUserPoint(props.data.userPoints);
+    }
+  }
 
   return (
     <>
@@ -23,11 +39,13 @@ function ActivityMilestoneCard(props) {
               paddingTop: "0.2rem",
               paddingRight: "1rem",
               paddingLeft: "1rem",
-              paddingBottom: "1rem"
+              paddingBottom: "1rem",
             }}
           >
             <div className="ActivityMilestoneHeading">
-              <Typography variant="body2">Milestone: 1</Typography>
+              <Typography variant="body2">
+                Milestone: {props.index + 1}
+              </Typography>
               <Divider
                 style={{
                   marginLeft: "0.5rem",
@@ -40,23 +58,21 @@ function ActivityMilestoneCard(props) {
               />
               <Box style={{ display: "flex" }}>
                 <Typography variant="body2">Status: </Typography>
-                {
-                activityLevelStatus
-                ? 
-                <Typography
-                variant="body2"
-                style={{ color: "green", marginLeft: "0.4rem" }}
-              >
-                Completed
-              </Typography>
-                : 
-                <Typography
-                  variant="body2"
-                  style={{ color: "goldenrod", marginLeft: "0.4rem" }}
-                >
-                  Pending
-                </Typography>
-                }
+                {activityLevelStatus ? (
+                  <Typography
+                    variant="body2"
+                    style={{ color: "green", marginLeft: "0.4rem" }}
+                  >
+                    Completed
+                  </Typography>
+                ) : (
+                  <Typography
+                    variant="body2"
+                    style={{ color: "goldenrod", marginLeft: "0.4rem" }}
+                  >
+                    Pending
+                  </Typography>
+                )}
               </Box>
               <Divider
                 style={{
@@ -68,7 +84,13 @@ function ActivityMilestoneCard(props) {
                 variant="middle"
                 flexItem
               />
-              <div className="ActivityLevelScore">
+              <div
+                className={
+                  activityLevelStatus
+                    ? "collected-userpoints-clip"
+                    : "userpoints-clip"
+                }
+              >
                 <TollIcon
                   style={{
                     fontSize: "1.2rem",
@@ -84,42 +106,54 @@ function ActivityMilestoneCard(props) {
                     color: "white",
                   }}
                 >
-                  200
+                  {props.data.userPoints}
                 </Typography>
               </div>
             </div>
 
             <div className="ActivityMilestoneTitle">
               <Typography variant="h5" style={{ fontSize: "1.2rem" }}>
-                {props.title}
+                {props.data.title}
               </Typography>
             </div>
 
             <div className="ActivityMilestoneBody">
               <Typography variant="body2" style={{}}>
-                {props.desc}
+                {props.data.desc}
               </Typography>
             </div>
 
+            <div className="mb-2"></div>
+
             <Button
-              onClick={handleActivityMilestoneButton}
+              onClick={completeMileStone}
               size="small"
-              style={{
-                marginTop: "1.2rem",
-                paddingLeft: "0.8rem",
-                paddingTop: "0.4rem",
-                paddingBottom: "0.4rem",
-                fontSize: "0.7rem",
-                background: "#001F54",
-              }}
+              style={
+                activityLevelStatus
+                  ? {
+                      width: "12rem",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      backgroundColor: "whitesmoke",
+                      color: "grey",
+                    }
+                  : {
+                      backgroundColor: "#001F54",
+                      color: "#ffffff",
+                      width: "12rem",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }
+              }
               variant="contained"
+              disabled={false}
             >
               mark as complete
               <CheckIcon
                 style={{
-                  color: "white",
-                  marginLeft: "0.4rem",
-                  fontSize: "1.2rem",
+                  height: "18px",
+                  width: "18px",
+                  textAlign: "center",
                 }}
               />
             </Button>

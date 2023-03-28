@@ -41,7 +41,7 @@ function App() {
           <Route path="/community/comments/:id" element={<RenderComments />} />
           <Route path="/user-profile" element={<RenderUserProfile />} />
           <Route path="/training/learning-management/course" element={<RenderLearningCourse />} />
-          <Route path="/recreation/activity/id" element={<RenderRecreationActivity />} />
+          <Route path="/recreation/activity/:id" element={<RenderRecreationActivity />} />
           <Route path="/project/id" element={<RenderProject />} />
           <Route path="/project/task/id" element={<RenderTaskInfo />} />
         </Routes>

@@ -12,5 +12,6 @@
     display:flex;
     flex-wrap: wrap;
     gap:1rem;
-    justify-content: space-around;
+    justify-content: start;
+    transition: 30ms;
 }
