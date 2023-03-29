@@ -25,9 +25,13 @@ function CourseCard(props) {
   return (
     <div className="CourseCard">
       <div className="CourseCardPhoto">
-        <img src={courseImage} alt="decoy" style={{
-          width:"100%"
-        }} />
+        <img
+          src={courseImage}
+          alt="decoy"
+          style={{
+            width: "100%",
+          }}
+        />
       </div>
       <div className="CourseCardDescription">
         <Typography
@@ -43,7 +47,7 @@ function CourseCard(props) {
         </Typography>
 
         <Button
-          onClick={() => enrolToCourse()}
+          onClick={() => (props.data.participated ? null : enrolToCourse())}
           variant="outlined"
           style={{
             color: "#001f54",
@@ -53,8 +57,8 @@ function CourseCard(props) {
             width: "7.5rem",
           }}
         >
-          enroll
-          <ChevronRightIcon />
+          {props.data.participated ? "Enrolled" : "Enrol"}
+          {!props.data.participated && <ChevronRightIcon />}
         </Button>
       </div>
     </div>

@@ -5,6 +5,7 @@ import { Divider, styled } from "@mui/material";
 import CourseCard from "../widgets/ActiveCourseCard";
 import { domain, endPoints } from "../services/endPoints";
 import axios from "axios";
+import {getUserPoints} from "../utils/localuserDetails"
 
 const Root = styled("div")(({ theme }) => ({
   width: "100%",
@@ -42,7 +43,7 @@ function LearningManagement() {
       <Card
         heading="Learning Management"
         subheading="lorem ipsum, dolor sit amet consectetur adipisicing elit"
-        coins="100"
+        coins={getUserPoints()}
       />
       <Root>
         <Divider style={{ marginTop: "0.8rem", marginBottom: "0.4rem" }}>

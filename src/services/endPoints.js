@@ -64,4 +64,5 @@ export const endPoints = {
   createTrainingTask: "/api/trainingTask/createTrainingTask",
   updateTrainingTask: "/api/trainingTask/updateTrainingTask",
   deleteTrainingTask: "/api/trainingTask/deleteTrainingTask",
+  completeTraningTask: "/api/trainingTask/completeTraningTask",
 };

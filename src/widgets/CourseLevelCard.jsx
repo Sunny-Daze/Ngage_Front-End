@@ -6,13 +6,34 @@ import CardContent from "@mui/material/CardContent";
 import { Typography, Divider, Button } from "@mui/material";
 import TollIcon from "@mui/icons-material/Toll";
 import CheckIcon from "@mui/icons-material/Check";
+import axios from "axios";
+import { domain, endPoints } from "../services/endPoints";
+import { updateUserPoint } from "../utils/localuserDetails";
 
 function CourseLevelCard(props) {
-  const [courseLevelStatus, setCourseLevelStatus] = React.useState(props.status);
+  const [courseLevelStatus, setCourseLevelStatus] = React.useState(
+    props.data.status
+  );
 
   const handlecourselevelbutton = () => {
     setCourseLevelStatus(true);
   };
+
+  async function completeTask() {
+    let token = localStorage.getItem("token");
+
+    let response = await axios.post(
+      domain + endPoints.completeTraningTask,
+      { trainingTaskId: props.data._id },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (response.data.success) {
+      console.warn(response.data);
+      setCourseLevelStatus(true);
+      updateUserPoint(props.data.userPoints);
+    }
+  }
 
   return (
     <>
@@ -66,7 +87,13 @@ function CourseLevelCard(props) {
                 variant="middle"
                 flexItem
               />
-              <div className="CourseLevelScore">
+              <div
+                className={
+                  courseLevelStatus
+                    ? "collected-userpoints-clip"
+                    : "userpoints-clip"
+                }
+              >
                 <TollIcon
                   style={{
                     fontSize: "1.2rem",
@@ -82,35 +109,47 @@ function CourseLevelCard(props) {
                     color: "white",
                   }}
                 >
-                  200
+                  {props.data.userPoints}
                 </Typography>
               </div>
             </div>
 
             <div className="CourseLevelTitle">
               <Typography variant="h5" style={{ fontSize: "1.2rem" }}>
-                Code Structure
+                {props.data.title}
               </Typography>
             </div>
 
             <div className="CourseLevelBody">
               <Typography variant="body2" style={{}}>
-                Learn the code and directory structure
+                {props.data.desc}
               </Typography>
             </div>
 
+            <div style={{ marginBottom: "1rem" }}></div>
+
             <Button
-              onClick={handlecourselevelbutton}
+              onClick={courseLevelStatus ? null : completeTask}
               size="small"
-              style={{
-                marginTop: "1.2rem",
-                paddingLeft: "0.8rem",
-                paddingTop: "0.4rem",
-                paddingBottom: "0.4rem",
-                fontSize: "0.7rem",
-                background: "#001F54",
-              }}
+              style={
+                courseLevelStatus
+                  ? {
+                      width: "12rem",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      backgroundColor: "whitesmoke",
+                      color: "grey",
+                    }
+                  : {
+                      backgroundColor: "#001F54",
+                      color: "#ffffff",
+                      width: "12rem",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }
+              }
               variant="contained"
+              disabled={false}
             >
               mark as complete
               <CheckIcon

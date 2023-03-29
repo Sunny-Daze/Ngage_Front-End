@@ -15,7 +15,7 @@ const HtmlTooltip = styled(({ className, ...props }) => (
     // backgroundColor: "#f5f5f9",
     backgroundColor: "#001F54",
     // color: "rgba(0, 0, 0, 0.87)",
-    color:'white',
+    color: "white",
     maxWidth: 220,
     fontSize: theme.typography.pxToRem(1),
     border: "1px solid #001F54",
@@ -23,6 +23,8 @@ const HtmlTooltip = styled(({ className, ...props }) => (
 }));
 
 function CourseContentBanner(props) {
+  console.log(props);
+
   return (
     <>
       <Box sx={{ minWidth: 800 }}>
@@ -35,10 +37,10 @@ function CourseContentBanner(props) {
                   style={{ fontSize: "1.7rem", marginTop: "1rem" }}
                   component="div"
                 >
-                  {props.heading}
+                  {props.data.title}
                 </Typography>
                 <Typography style={{ marginTop: "0.55rem" }} variant="body2">
-                  {props.subheading}
+                  {props.data.desc}
                 </Typography>
                 <Typography
                   style={{
@@ -48,7 +50,7 @@ function CourseContentBanner(props) {
                   }}
                   variant="body2"
                 >
-                  Total Levels: {props.courseLevelCount}
+                  Total Levels: {props.data.tasks.length}
                 </Typography>
               </div>
               <div className="right">
@@ -57,8 +59,12 @@ function CourseContentBanner(props) {
                   <HtmlTooltip
                     title={
                       <React.Fragment>
-                        <Typography style={{fontSize:'0.8rem'}} variant='body1' color="inherit">
-                          Alex Yadav
+                        <Typography
+                          style={{ fontSize: "0.8rem" }}
+                          variant="body1"
+                          color="inherit"
+                        >
+                          {props.data.createdBy.userName}
                         </Typography>
                       </React.Fragment>
                     }

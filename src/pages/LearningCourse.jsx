@@ -15,14 +15,10 @@ const Root = styled("div")(({ theme }) => ({
 function LearningCourse() {
   let { state } = useLocation();
   let [tasks, setTasks] = useState([...state.tasks]);
-  console.log(tasks);
-
   return (
     <div className="LearningCourse">
       <CourseContentBanner
-        heading={state.title}
-        subheading={state.desc}
-        courseLevelCount={state.tasks.length}
+       data = {state}
       />
       <Root>
         <Divider style={{ marginTop: "0.8rem", marginBottom: "0.8rem" }}>
@@ -31,9 +27,8 @@ function LearningCourse() {
       </Root>
 
       <div className="CourseLevels">
-        <CourseLevelCard />
         {tasks.map((e) => (
-          <CourseLevelCard data={e} />
+          <CourseLevelCard data={e} key={e._id} />
         ))}
       </div>
     </div>

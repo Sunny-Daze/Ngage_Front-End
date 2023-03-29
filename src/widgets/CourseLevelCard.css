@@ -3,6 +3,38 @@
     align-items: center;
 }
 
+
+
+.userpoints-clip {
+    display: flex;
+    align-items: center;
+    background: #001f54;
+    padding: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
+    height: 1.4rem;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+  }
+  
+  .collected-userpoints-clip {
+      display: flex;
+      align-items: center;
+      background: gray;
+      color: gray;
+      padding: 3px;
+      padding-left: 6px;
+      padding-right: 6px;
+      height: 1.4rem;
+      border-top-right-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+      border-top-left-radius: 1rem;
+      border-bottom-left-radius: 1rem;
+    }
+    
+
 .CourseLevelScore {
     display:flex;
     align-items: center;
