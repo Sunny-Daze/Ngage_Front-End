@@ -48,7 +48,7 @@ function CourseLevelCard(props) {
             }}
           >
             <div className="CourseLevelHeading">
-              <Typography variant="body2">Level: 1</Typography>
+              <Typography variant="body2">Level: {props.index}</Typography>
               <Divider
                 style={{
                   marginLeft: "0.5rem",

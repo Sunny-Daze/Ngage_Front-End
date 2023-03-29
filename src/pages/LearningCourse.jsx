@@ -27,8 +27,8 @@ function LearningCourse() {
       </Root>
 
       <div className="CourseLevels">
-        {tasks.map((e) => (
-          <CourseLevelCard data={e} key={e._id} />
+        {tasks.map((e,index) => (
+          <CourseLevelCard data={e} key={e._id} index= {index+1} />
         ))}
       </div>
     </div>

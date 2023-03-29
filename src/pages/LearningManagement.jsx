@@ -5,7 +5,7 @@ import { Divider, styled } from "@mui/material";
 import CourseCard from "../widgets/ActiveCourseCard";
 import { domain, endPoints } from "../services/endPoints";
 import axios from "axios";
-import {getUserPoints} from "../utils/localuserDetails"
+import { getUserPoints } from "../utils/localuserDetails";
 
 const Root = styled("div")(({ theme }) => ({
   width: "100%",
@@ -53,7 +53,7 @@ function LearningManagement() {
 
       <div className="TrainingCourses">
         {trainings.map((e) => (
-          <CourseCard data={e} />
+          <CourseCard data={e} key={e._id} />
         ))}
       </div>
     </div>
