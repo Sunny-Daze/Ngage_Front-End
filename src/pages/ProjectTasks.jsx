@@ -6,10 +6,16 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ProjectTaskCard from '../widgets/ProjectTaskCard'
 
 function ProjectTasks() {
+  const [arrow, setArrow] = React.useState(false)
+
+  function handleClick(){
+    setArrow(!arrow)
+  }
+
   return (
     <div className="ProjectTasks">
         <div className="priorityButton">
-            <Button size="small" endIcon={<ArrowUpwardIcon />} style={{color:'#001f54'}}>Priority</Button>
+            <Button size="small" onClick={handleClick} endIcon={arrow ? <ArrowDownwardIcon /> : <ArrowUpwardIcon />} style={{color:'#001f54'}}>Priority</Button>
         </div>
         <ProjectTaskCard />
         <ProjectTaskCard />

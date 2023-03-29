@@ -15,6 +15,7 @@ import RenderLearningCourse from './components/RenderLearningCourse'
 import RenderAdminControl from './components/RenderAdminControl'
 import RenderRecreationActivity from './components/RenderRecreationActivity'
 import RenderProject from './components/RenderProject'
+import RenderTaskInfo from './components/RenderTaskInfo'
 
 function App() {
   const [user, setLoginUser] = useState({});
@@ -42,6 +43,7 @@ function App() {
           <Route path="/training/learning-management/course" element={<RenderLearningCourse />} />
           <Route path="/recreation/activity/:id" element={<RenderRecreationActivity />} />
           <Route path="/project/id" element={<RenderProject />} />
+          <Route path="/project/task/id" element={<RenderTaskInfo />} />
         </Routes>
       </Router>
     </div>

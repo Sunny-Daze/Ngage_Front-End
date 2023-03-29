@@ -1,0 +1,48 @@
+.TaskInfoBodyContainer {
+    width: 53rem;
+    background: white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 1rem;
+}
+
+
+.TaskInfoPriority{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    border-top-right-radius: 5rem;
+    border-bottom-right-radius: 5rem;
+    border-top-left-radius: 5rem;
+    border-bottom-left-radius: 5rem;
+    width: 3.6rem;
+    height: 1.3rem;
+    margin-top: 0.2rem;
+}
+
+.TIHigh {
+    background:red;
+}
+
+.TIMedium {
+    background:darkorange;
+}
+
+.TILow {
+    background: darkgreen;
+}
+
+.TaskInfoContainer {
+    display:flex;
+}
+
+.TaskInfoLeft {
+    width:70%;
+}
+
+.TaskInfoRight {
+    width:50%;
+}
+
+

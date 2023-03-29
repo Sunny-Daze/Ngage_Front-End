@@ -2,9 +2,13 @@
     width: 53rem;
     background: white;
     margin-top: 1rem;
-    padding:1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
+    border-bottom: 1px solid lightgray;
 }
 
 .projectCostContainer {

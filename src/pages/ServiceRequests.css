@@ -1,0 +1,11 @@
+.ServiceRequests {
+    width: 100%;
+    background:white;
+    padding: 2rem;
+}
+
+.serviceRequestButton{
+    width: 100%;
+    display:flex;
+    justify-content: flex-end;
+}

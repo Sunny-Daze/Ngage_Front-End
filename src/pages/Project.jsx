@@ -5,6 +5,8 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import ProjectTasks from './ProjectTasks'
+import ServiceRequests from './ServiceRequests'
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -110,7 +112,7 @@ function Project() {
           <ProjectTasks />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Item Two
+          <ServiceRequests />
         </TabPanel>
         <TabPanel value={value} index={2}>
           Item Three

@@ -1,14 +1,24 @@
 import React from 'react'
 import './ProjectTaskCard.css'
-import {Typography, Divider, Box} from '@mui/material'
+import {Typography, Divider, Box, Button} from '@mui/material'
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ToolTip from '../widgets/ToolTipTaskCard'
 
 function ProjectTaskCard() {
   return (
     <div className="ProjectTaskCard">
         <div className="ProjectTaskCardHeading">
-            <Typography variant="body2">Asignee(s):</Typography>
+          <Box style={{display:'flex', width:'18rem'}}>
+            <Typography variant="body2" style={{marginTop:'1rem'}}>Asignee(s):
+            </Typography>
+            <ToolTip />
+            <ToolTip />
+            <ToolTip />
+            <ToolTip />
+            </Box>
             <div className="ProjectTaskStatus">
-              {/* <Box style={{ display: "flex" }}> */}
+              <Box style={{paddingTop:'0.5rem', display:'flex'}}>
                 <Typography variant="body2">Status: </Typography>
                 {/* <Typography variant="body2" style={{ color: "green", marginLeft: "0.4rem" }}> Completed </Typography> */}
                 <Typography
@@ -17,18 +27,48 @@ function ProjectTaskCard() {
                 >
                   Pending
                 </Typography>
-              {/* </Box> */}
+                </Box>
               <Divider
                 style={{
-                  marginLeft: "0.5rem",
+                  marginLeft: "1rem",
                   height: "1.5rem",
-                  marginRight: "0.5rem",
+                  marginRight: "1rem",
                 }}
                 orientation="vertical"
                 variant="middle"
                 flexItem
               />
+              <Box style={{paddingTop:'0.5rem', display:'flex'}}>
+              <AccessTimeIcon style={{fontSize:'1.3rem', marginRight:'0.5rem'}} />
+              <Typography variant='body2'>2022-08-10</Typography>
+              </Box>
+              <Divider
+                style={{
+                  marginLeft: "1rem",
+                  height: "1.5rem",
+                  marginRight: "1rem",
+                }}
+                orientation="vertical"
+                variant="middle"
+                flexItem
+              />
+              <div className='ProjectTaskCardPriority PTCHigh'>
+                <Typography style={{fontSize:'0.7rem'}} variant='body2'>High</Typography>
+              </div>
+              {/* <div className='ProjectTaskCardPriority PTCMedium'>
+                <Typography style={{fontSize:'0.7rem'}} variant='body2'>Medium</Typography>
+              </div> */}
+              {/* <div className='ProjectTaskCardPriority PTCLow'>
+                <Typography style={{fontSize:'0.7rem'}} variant='body2'>Low</Typography>
+              </div> */}
             </div>
+        </div>
+        <div className="ProjectTaskCardBody">
+          <Typography variant='h5' style={{fontWeight:'540', fontSize:'1.2rem', marginTop:'1rem'}}>Setup Environment</Typography>
+          <Typography variant='body2' style={{marginTop:'0.5rem'}}>Lorem lawda lasun</Typography>
+        </div>
+        <div className="ProjectTaskCardFooter">
+          <Button endIcon={<ChevronRightIcon style={{marginBottom:'0.2rem'}} />} variant='outlined' size='small' style={{marginTop:'1rem', color:'#001f54', borderColor:"#001f54", fontSize:'0.75rem'}} >view task</Button>
         </div>
     </div>
   )
