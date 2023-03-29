@@ -11,7 +11,9 @@ import { domain, endPoints } from "../services/endPoints";
 import { updateUserPoint } from "../utils/localuserDetails";
 
 function ActivityMilestoneCard(props) {
-  const [activityLevelStatus, setActivityLevelStatus] = React.useState(props.data.status);
+  const [activityLevelStatus, setActivityLevelStatus] = React.useState(
+    props.data.status
+  );
 
   async function completeMileStone() {
     let token = localStorage.getItem("token");
@@ -126,7 +128,7 @@ function ActivityMilestoneCard(props) {
             <div className="mb-2"></div>
 
             <Button
-              onClick={completeMileStone}
+              onClick={activityLevelStatus ? null : completeMileStone}
               size="small"
               style={
                 activityLevelStatus

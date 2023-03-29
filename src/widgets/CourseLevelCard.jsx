@@ -7,8 +7,8 @@ import { Typography, Divider, Button } from "@mui/material";
 import TollIcon from "@mui/icons-material/Toll";
 import CheckIcon from "@mui/icons-material/Check";
 
-function CourseLevelCard() {
-  const [courseLevelStatus, setCourseLevelStatus] = React.useState(false);
+function CourseLevelCard(props) {
+  const [courseLevelStatus, setCourseLevelStatus] = React.useState(props.status);
 
   const handlecourselevelbutton = () => {
     setCourseLevelStatus(true);
@@ -23,7 +23,7 @@ function CourseLevelCard() {
               paddingTop: "0.2rem",
               paddingRight: "1rem",
               paddingLeft: "1rem",
-              paddingBottom: "1rem"
+              paddingBottom: "1rem",
             }}
           >
             <div className="CourseLevelHeading">
@@ -40,23 +40,21 @@ function CourseLevelCard() {
               />
               <Box style={{ display: "flex" }}>
                 <Typography variant="body2">Status: </Typography>
-                {
-                courseLevelStatus
-                ? 
-                <Typography
-                variant="body2"
-                style={{ color: "green", marginLeft: "0.4rem" }}
-              >
-                Completed
-              </Typography>
-                : 
-                <Typography
-                  variant="body2"
-                  style={{ color: "goldenrod", marginLeft: "0.4rem" }}
-                >
-                  Pending
-                </Typography>
-                }
+                {courseLevelStatus ? (
+                  <Typography
+                    variant="body2"
+                    style={{ color: "green", marginLeft: "0.4rem" }}
+                  >
+                    Completed
+                  </Typography>
+                ) : (
+                  <Typography
+                    variant="body2"
+                    style={{ color: "goldenrod", marginLeft: "0.4rem" }}
+                  >
+                    Pending
+                  </Typography>
+                )}
               </Box>
               <Divider
                 style={{
@@ -126,6 +124,8 @@ function CourseLevelCard() {
           </CardContent>
         </Card>
       </Box>
+
+      <div style={{ marginBottom: "1rem" }}></div>
     </>
   );
 }

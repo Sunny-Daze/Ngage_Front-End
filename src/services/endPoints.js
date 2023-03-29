@@ -53,10 +53,12 @@ export const endPoints = {
   fetchedUsersRecreation: "/api/recreationUserMapRoutes/fetchedUsersRecreation",
 
   //Training
+
   createTraining: "/api/training/createTraining",
   fetchTrainings: "/api/training/fetchTrainings",
   updateTraining: "/api/training/updateTraining",
   deleteTraining: "/api/training/deleteTraining",
+  enrolForTraining: "/api/training/enrolForTraining",
 
   //Training Tasks
   createTrainingTask: "/api/trainingTask/createTrainingTask",
