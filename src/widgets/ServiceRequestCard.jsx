@@ -44,7 +44,15 @@ function ServiceRequestCard() {
             <td><Typography variant='body2' style={{fontSize:'0.8rem', color:'grey', marginBottom:'1rem', fontWeight:'lighter'}}>random</Typography></td>
             <td><Typography variant='body2' style={{fontSize:'0.8rem', color:'grey', marginBottom:'1rem', fontWeight:'lighter'}}>random</Typography></td>
             <td><Typography variant='body2' style={{fontSize:'0.8rem', color:'grey', marginBottom:'1rem', fontWeight:'lighter'}}>random</Typography></td>
-            <td><Typography variant='body2' style={{fontSize:'0.8rem', color:'grey', marginBottom:'1rem', fontWeight:'lighter'}}>random</Typography></td>
+            <td rowspan="5" style={{paddingLeft:'1.2rem'}}><Typography variant='body2' style={{fontSize:'0.8rem', color:'grey', marginBottom:'1rem', fontWeight:'lighter'}}>
+            <ul>
+                    <li>random</li>
+                    <li>random</li>
+                    <li>random</li>
+                    <li>random</li>
+                  </ul>
+              </Typography>
+              </td>
           </tr>
           <tr>
             <th><Typography variant='body2' style={{textAlign:'start', fontSize:'0.95rem'}}>Body</Typography></th>
@@ -54,15 +62,15 @@ function ServiceRequestCard() {
           <tr>
             <td><Typography variant='body2' style={{fontSize:'0.8rem', color:'grey', marginBottom:'1rem', fontWeight:'lighter'}}>random</Typography></td>
             <td><Typography variant='body2' style={{fontSize:'0.8rem', color:'grey', marginBottom:'1rem', fontWeight:'lighter'}}>random</Typography></td>
-            <td><Typography variant='body2' style={{fontSize:'0.8rem', color:'grey', marginBottom:'1rem', fontWeight:'lighter'}}>
+            <td rowspan="3" style={{paddingLeft:'1.2rem'}}><Typography variant='body2' style={{fontSize:'0.8rem', color:'grey', marginBottom:'1rem', fontWeight:'lighter'}}>
                 <ul>
                     <li>random</li>
                     <li>random</li>
                     <li>random</li>
                     <li>random</li>
-                    <li>random</li>
-                </ul>
-                </Typography></td>
+                  </ul>
+                </Typography>
+            </td>
           </tr>
           <tr>
             <th><Typography variant='body2' style={{textAlign:'start', fontSize:'0.95rem'}}>Budget</Typography></th>
