@@ -1,8 +1,8 @@
-// export const domain = "http://localhost:3001";
+export const domain = "http://localhost:3001";
 
 // export const domain = "https://ngage-backend.onrender.com";
 
-export const domain = "http://3.108.221.195:3001"; // AWS FOR PRODUCTION
+// export const domain = "http://3.108.221.195:3001"; // AWS FOR PRODUCTION
 
 export const endPoints = {
   signup: "/api/auth/signup",
@@ -65,4 +65,15 @@ export const endPoints = {
   updateTrainingTask: "/api/trainingTask/updateTrainingTask",
   deleteTrainingTask: "/api/trainingTask/deleteTrainingTask",
   completeTraningTask: "/api/trainingTask/completeTraningTask",
+
+
+  //Projects
+  fetchProject: "/api/project/fetchProject",
+  createProject: "/api/project/createProject",
+  deleteProject: "/api/project/deleteProject",
+  editProject: "/api/project/editProject",
+
+
+
+
 };

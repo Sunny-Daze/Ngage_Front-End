@@ -12,6 +12,7 @@ import TaskCardAdmin from "../widgets/ProjectCardAdmin"
 
 
 function ProjectAccordion(props) {
+  let {project} = props;
   return (
     <div className="ActivityAccordion">
       <Accordion style={{ width: "48.5rem" }}>
@@ -22,10 +23,10 @@ function ProjectAccordion(props) {
         >
           <div className="AccordionTitle">
             <Typography variant="body2">
-              Project title: {props.title}
+              Project title: {project.title}
             </Typography>
             <Typography variant="body2">
-              Project body: {props.body}
+              Project body: {project.desc}
             </Typography>
             <Typography variant="body2">
               Project Owner: admin123
@@ -98,7 +99,7 @@ function ProjectAccordion(props) {
             />
           </Button>
             {
-              props.tasks.map((e) => (
+              project.tasks.map((e) => (
                 <TaskCardAdmin 
                 title={e.title} 
                 body={e.body} 
