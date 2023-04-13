@@ -13,6 +13,7 @@ import TaskCardAdmin from "../widgets/ProjectCardAdmin"
 
 function ProjectAccordion(props) {
   let {project} = props;
+  console.log(project);
   return (
     <div className="ActivityAccordion">
       <Accordion style={{ width: "48.5rem" }}>

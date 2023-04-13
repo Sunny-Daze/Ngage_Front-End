@@ -11,11 +11,11 @@ function AdminControlProject() {
   const [projects, setProjects] = useState([]);
   const [addProjectModal, setAddProjectModal] = React.useState(false);
   function addProject(newData) {
-    if(newData) {
+    if (newData) {
       projects = [];
       fetchData(domain + endPoints.fetchRecreations, {}).then((e) => {
         if (e.data.success) {
-          projects.concat(e.data.result);
+          projects.push(...e.data.result);
           setProjects([...projects]);
         }
       });
@@ -25,8 +25,7 @@ function AdminControlProject() {
   useEffect(() => {
     fetchData(domain + endPoints.fetchProject, {}).then((e) => {
       if (e.data.success) {
-        projects.push([...e.data.result]);
-        console.log(e.data.result)
+        projects.push(...e.data.result);
         setProjects([...projects]);
       }
     });
@@ -46,7 +45,7 @@ function AdminControlProject() {
           size="small"
           style={{ background: "#157F1F" }}
         >
-          Add Product{" "}
+          New Project{" "}
           <AddIcon
             style={{
               fontSize: "1.2rem",
@@ -56,12 +55,9 @@ function AdminControlProject() {
           />
         </Button>
       </div>
+
       {projects.map((project, index) => (
-        <ProjectAccordion
-         
-          project={project}
-          key={project._id}
-        />
+        <ProjectAccordion project={project} key={project._id} />
       ))}
     </div>
   );
