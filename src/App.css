@@ -197,3 +197,22 @@
   cursor: pointer;
   color: white;
 }
+
+input[type="date"]{
+    background-color: white;
+    /* padding: 5px; */
+    font-family: "Roboto Mono",monospace;
+    color: darkslategray;
+    padding-top: 4px;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid darkgray;
+}
+::-webkit-calendar-picker-indicator{
+    background-color: #ffffff;
+    color:#001F54;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}

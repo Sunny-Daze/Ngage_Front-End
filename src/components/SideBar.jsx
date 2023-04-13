@@ -21,6 +21,7 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
+import Notification from "./NotificationPanel/Notification"
 
 const routes = [
   {
@@ -140,6 +141,7 @@ const HomePage = ({ children }) => {
   };
 
   const [isOpen, setIsOpen] = useState(true);
+  const [Notification, setNotification] = useState(false);
   const toggle = () => {
     setIsOpen(!isOpen);
     setShowProfileCard(!showProfileCard);
@@ -313,7 +315,7 @@ const HomePage = ({ children }) => {
                     },
                   }}
                 >
-                  <MailIcon style={{ fontSize: "1.4rem", color: "white" }} />
+                  <MailIcon onClick={()=>setNotification(true)} style={{ fontSize: "1.4rem", color: "white" }} />
                 </Badge>
               </div>
               <div className="settings">
@@ -361,6 +363,7 @@ const HomePage = ({ children }) => {
         </motion.div>
         <main>{children}</main>
       </div>
+      <Notification Notification={Notification} setNotification={setNotification} />
     </>
   );
 };

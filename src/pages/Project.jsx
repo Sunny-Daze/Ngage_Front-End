@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import ProjectTasks from './ProjectTasks'
 import ServiceRequests from './ServiceRequests'
-
+import CustomerFeedback from './CustomerFeedback'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -115,7 +115,7 @@ function Project() {
           <ServiceRequests />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Item Three
+          <CustomerFeedback />
         </TabPanel>
         <TabPanel value={value} index={3}>
           Item zero
