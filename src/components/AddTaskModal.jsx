@@ -10,6 +10,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
+import { fetchData } from "../services/request";
 
 const style = {
   position: "absolute",
@@ -47,6 +48,21 @@ export default function AddTaskModal(props) {
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
+
+  function validateField() {
+    let isEmpty = Object.keys(userData).filter((val) => val == "");
+    if (isEmpty.length == 0 && priority == "") return false;
+    return true;
+  }
+
+  function createTask() {
+    if (validateField()) {
+      let newData = Object.assign({ priority }, userData);
+      console.log(newData);
+
+      fetchData(`${domain}${endPoints.createProjectTask}`, newData);
+    }
+  }
 
   return (
     <div>
@@ -169,9 +185,7 @@ export default function AddTaskModal(props) {
                 size="small"
                 style={{ color: "green", borderColor: "green" }}
                 onClick={() => {
-                  userData.priority = priority;
-                  props.addTask(userData);
-                  handleClose();
+                  createTask();
                 }}
               >
                 Add Task

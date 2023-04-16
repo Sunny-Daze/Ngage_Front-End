@@ -74,6 +74,15 @@ export const endPoints = {
   editProject: "/api/project/editProject",
 
 
+  //ProjectTask 
+
+  createProjectTask : "/api/projectTask/createProjectTask"
+  // createProjectTask : "/api/projectTask/createProjectTask"
+  // createProjectTask : "/api/projectTask/createProjectTask"
+  // createProjectTask : "/api/projectTask/createProjectTask"
+
+
+
 
 
 };
