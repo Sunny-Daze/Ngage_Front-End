@@ -3,13 +3,13 @@ import { Button, TextField, Divider, Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import ClearIcon from "@mui/icons-material/Clear";
-import axios from "axios";
 import { domain, endPoints } from "../services/endPoints";
-import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
+import { fetchData } from "../services/request";
 
 const style = {
   position: "absolute",
@@ -29,14 +29,14 @@ const defaultValue = {
   assignedTo: "",
   cost: "",
   deadline: "",
-  internalNotes: "",
+  note: "",
   priority: "",
   status: "pending",
 };
 
 export default function EditTaskModal(props) {
-  const [userData, setUserData] = React.useState(defaultValue);
-  const [priority, setpriority] = React.useState(props.data.priority);
+  const [userData, setUserData] = React.useState(props.task);
+  const [priority, setpriority] = React.useState(props.task.priority);
 
   const handlePriorityChange = (event) => {
     setpriority(event.target.value);
@@ -47,6 +47,29 @@ export default function EditTaskModal(props) {
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
+
+  function validateField() {
+    let isEmpty = Object.keys(userData).filter((val) => val == "");
+    if (isEmpty.length == 0 && priority == "") return false;
+    return true;
+  }
+
+  function editTask() {
+    if (validateField()) {
+      userData.priority = priority;
+      userData.projectId = props.projectId;
+      userData.taskId = props.task._id;
+
+      fetchData(`${domain}${endPoints.editProjectTask}`, userData).then((e) => {
+        if (e) {
+          if (e.data.success) {
+            props.editTask(e.data.result);
+            handleClose();
+          }
+        }
+      });
+    }
+  }
 
   return (
     <div>
@@ -64,7 +87,7 @@ export default function EditTaskModal(props) {
               component="h2"
               style={{ fontSize: "1rem" }}
             >
-              Add Project Task
+              Edit Project Task
             </Typography>
           </Divider>
 
@@ -80,7 +103,7 @@ export default function EditTaskModal(props) {
                 label="Title"
                 variant="outlined"
                 style={{ width: "100%" }}
-                defaultValue={props.data.title}
+                defaultValue={userData.title}
               />
               <FormControl fullWidth>
                 <InputLabel
@@ -115,10 +138,10 @@ export default function EditTaskModal(props) {
               id="outlined-basic"
               label="Body"
               variant="outlined"
-              defaultValue={props.data.body}
+              defaultValue={userData.desc}
             />
             <TextField
-              name="internalNotes"
+              name="note"
               onChange={(e) => handleChange(e)}
               multiline
               rows={2}
@@ -126,7 +149,7 @@ export default function EditTaskModal(props) {
               id="outlined-basic"
               label="Internal Notes"
               variant="outlined"
-              defaultValue={props.data.internalNotes}
+              defaultValue={userData.note}
             />
             <TextField
               name="assignedTo"
@@ -137,7 +160,7 @@ export default function EditTaskModal(props) {
               id="outlined-basic"
               label="Asignees"
               variant="outlined"
-              defaultValue={props.data.assignedTo}
+              defaultValue={userData.assignedTo}
             />
             <TextField
               name="cost"
@@ -146,7 +169,7 @@ export default function EditTaskModal(props) {
               label="Cost"
               size="small"
               variant="outlined"
-              defaultValue={props.data.cost}
+              defaultValue={userData.cost}
             />
 
             <Box style={{ display: "flex", justifyContent: "center" }}>
@@ -174,13 +197,11 @@ export default function EditTaskModal(props) {
                 size="small"
                 style={{ color: "green", borderColor: "green" }}
                 onClick={() => {
-                  userData.priority = priority;
-                  props.editTask(userData);
-                  handleClose();
+                 editTask();
                 }}
               >
-                Add Task
-                <AddIcon
+                Edit Task
+                <EditIcon
                   style={{
                     fontSize: "1.4rem",
                     marginBottom: "0.2rem",

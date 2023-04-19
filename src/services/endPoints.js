@@ -76,8 +76,8 @@ export const endPoints = {
 
   //ProjectTask 
 
-  createProjectTask : "/api/projectTask/createProjectTask"
-  // createProjectTask : "/api/projectTask/createProjectTask"
+  createProjectTask: "/api/projectTask/createProjectTask",
+  editProjectTask: "/api/projectTask/editProjectTask"
   // createProjectTask : "/api/projectTask/createProjectTask"
   // createProjectTask : "/api/projectTask/createProjectTask"
 

@@ -3,7 +3,6 @@ import { Button, TextField, Divider, Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import ClearIcon from "@mui/icons-material/Clear";
-import axios from "axios";
 import { domain, endPoints } from "../services/endPoints";
 import AddIcon from "@mui/icons-material/Add";
 import InputLabel from "@mui/material/InputLabel";
@@ -25,12 +24,12 @@ const style = {
 
 const defaultValue = {
   title: "",
-  body: "",
+  desc: "",
   assignedBy: "user name",
   assignedTo: "",
   cost: "",
   deadline: "",
-  internalNotes: "",
+  note: "",
   priority: "",
   status: "pending",
 };
@@ -57,10 +56,20 @@ export default function AddTaskModal(props) {
 
   function createTask() {
     if (validateField()) {
-      let newData = Object.assign({ priority }, userData);
-      console.log(newData);
+      userData.priority = priority;
+      userData.projectId = props.projectId;
+      
 
-      fetchData(`${domain}${endPoints.createProjectTask}`, newData);
+      fetchData(`${domain}${endPoints.createProjectTask}`, userData).then(
+        (e) => {
+          if (e) {
+            if (e.data.success) {
+              props.addTask(e.data.result);
+              handleClose();
+            }
+          }
+        }
+      );
     }
   }
 
@@ -122,17 +131,17 @@ export default function AddTaskModal(props) {
               </FormControl>
             </Box>
             <TextField
-              name="body"
+              name="desc"
               onChange={(e) => handleChange(e)}
               multiline
               rows={2}
               size="small"
               id="outlined-basic"
-              label="Body"
+              label="desc"
               variant="outlined"
             />
             <TextField
-              name="internalNotes"
+              name="note"
               onChange={(e) => handleChange(e)}
               multiline
               rows={2}

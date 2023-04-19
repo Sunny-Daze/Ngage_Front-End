@@ -16,13 +16,37 @@ function ProjectAccordion(props) {
   let { project } = props;
   const [tasks, setTasks] = useState(project.tasks);
   const [addTaskModel, setAddTaskModel] = useState(false);
-  const [editTaskModel, setEditTaskModel] = useState(false);
+
+  function addNewTask(task) {
+    tasks.unshift(task);
+    setTasks([...tasks]);
+  }
+   
+  function editTask(task){
+    let index = tasks.findIndex((e)=>e._id == task._id);
+    if(index!=-1){
+      tasks[index] = task;
+      setTasks([...tasks])
+    }
+  }
+
+  function deleteTask(task){
+    let index = tasks.findIndex((e) => e._id == task._id);
+    if (index != -1) {
+      tasks.splice(index,1);
+      setTasks([...tasks]);
+    }
+  }
 
   console.log(project);
   return (
     <>
-      <AddTaskModal open={addTaskModel} close={()=> setAddTaskModel(false)} />
-      {/* <EditTaskModal open={editTaskModel} close={()=> setEditTaskModel(false)}/> */}
+      <AddTaskModal
+        open={addTaskModel}
+        close={() => setAddTaskModel(false)}
+        addTask={addNewTask}
+        projectId={project._id}
+      />
       <div className="ActivityAccordion">
         <Accordion style={{ width: "48.5rem" }}>
           <AccordionSummary
@@ -50,7 +74,7 @@ function ProjectAccordion(props) {
               }}
               variant="outlined"
               size="small"
-              onClick={() =>setAddTaskModel(true)}
+              onClick={() => setAddTaskModel(true)}
             >
               Add Task
               <AddIcon
@@ -106,20 +130,7 @@ function ProjectAccordion(props) {
               />
             </Button>
             {project.tasks.map((e) => (
-              <TaskCardAdmin
-                title={e.title}
-                body={e.body}
-                assignedBy={e.assignedBy}
-                assignedTo={e.assignedTo}
-                cost={e.cost}
-                deadline={e.deadline}
-                internalNotes={e.internalNotes}
-                priority={e.priority}
-                status={e.status}
-                data={e}
-                setEditTaskModal={props.setEditTaskModal}
-                setEditTaskData={props.setEditTaskData}
-              />
+              <TaskCardAdmin data={e} editTask= {editTask} deleteTask = {deleteTask} />
             ))}
           </AccordionDetails>
         </Accordion>
