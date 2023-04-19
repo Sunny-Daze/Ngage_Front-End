@@ -113,7 +113,7 @@ function getUserRoutes() {
   let role = getuserDetails("role");
 
   if (role === "Employee") {
-    return [routes[0], routes[1], routes[2], routes[5]];
+    return [routes[0], routes[1], routes[2], routes[3], routes[5]];
   }
 
   if (role === "Customer") {
@@ -141,7 +141,6 @@ const HomePage = ({ children }) => {
   };
 
   const [isOpen, setIsOpen] = useState(true);
-  const [Notification, setNotification] = useState(false);
   const toggle = () => {
     setIsOpen(!isOpen);
     setShowProfileCard(!showProfileCard);
@@ -164,6 +163,7 @@ const HomePage = ({ children }) => {
     },
   };
   const navigate = useNavigate();
+  const [Notification, setNotification] = useState(false);
 
   return (
     <>
@@ -294,7 +294,8 @@ const HomePage = ({ children }) => {
                       }}
                       variant="body2"
                     >
-                      {getuserDetails("role")}
+                      Super Admin
+                      {/* {getuserDetails("role")} */}
                     </Typography>
                   </div>
                   {/* <Chip label="primary" color="primary" /> */}
@@ -363,7 +364,7 @@ const HomePage = ({ children }) => {
         </motion.div>
         <main>{children}</main>
       </div>
-      <Notification Notification={Notification} setNotification={setNotification} />
+      {/* <Notification Notification={Notification} setNotification={setNotification} /> */}
     </>
   );
 };

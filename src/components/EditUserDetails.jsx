@@ -87,7 +87,7 @@ function EditUserDetails({ props }) {
         defaultValue={username}
       />
 
-      <FormControl fullWidth>
+      <FormControl style={{width:'14rem'}}>
         <InputLabel id="demo-simple-select-label">Role</InputLabel>
         <Select
           labelId="demo-simple-select-label"
