@@ -4,6 +4,8 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import ClearIcon from "@mui/icons-material/Clear";
 import AddIcon from "@mui/icons-material/Add";
+import { fetchData } from "../services/request";
+import { domain, endPoints } from "../services/endPoints";
 
 const style = {
   position: "absolute",
@@ -17,17 +19,34 @@ const style = {
 };
 
 const defaultValue = {
-    title: "",
-    body: ""
-}
+  title: "",
+  body: "",
+};
 
 export default function AddProjectModal(props) {
-    const [userData, setUserData] = React.useState(defaultValue);
+  const [userData, setUserData] = React.useState(defaultValue);
 
   const handleClose = () => props.close(false);
 
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
+
+  async function addProject() {
+    if (userData.title == "" && userData.body == "") return;
+    fetchData(domain + endPoints.createProject, {
+      title: userData.title,
+      desc: userData.body,
+    })
+      .then((e) => {
+        console.log(e);
+        if(e){
+           props.addProject(true);
+        }
+      })
+      .finally(() => {handleClose();
+      
+      });
   }
 
   return (
@@ -54,16 +73,16 @@ export default function AddProjectModal(props) {
             style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
           >
             <TextField
-                name="title"
-                onChange={(e) => handleChange(e)}
+              name="title"
+              onChange={(e) => handleChange(e)}
               size="small"
               id="outlined-basic"
               label="Title"
               variant="outlined"
             />
             <TextField
-            name="body"
-            onChange={(e) => handleChange(e)}
+              name="body"
+              onChange={(e) => handleChange(e)}
               size="small"
               multiline
               rows={2}
@@ -89,7 +108,12 @@ export default function AddProjectModal(props) {
                   }}
                 />
               </Button>
-              <Button onClick={() => props.addProject(userData)} size="small" variant="outlined" color="success">
+              <Button
+                onClick={() => addProject()}
+                size="small"
+                variant="outlined"
+                color="success"
+              >
                 add project
                 <AddIcon
                   style={{

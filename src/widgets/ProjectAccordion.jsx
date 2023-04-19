@@ -1,107 +1,114 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ActivityAccordion.css";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import {Typography, Button} from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
-import TaskCardAdmin from "../widgets/ProjectCardAdmin"
-
+import TaskCardAdmin from "../widgets/ProjectCardAdmin";
+import AddTaskModal from "../components/AddTaskModal";
+import EditTaskModal from "../components/EditTaskModal";
 
 function ProjectAccordion(props) {
+  let { project } = props;
+  const [tasks, setTasks] = useState(project.tasks);
+  const [addTaskModel, setAddTaskModel] = useState(false);
+  const [editTaskModel, setEditTaskModel] = useState(false);
+
+  console.log(project);
   return (
-    <div className="ActivityAccordion">
-      <Accordion style={{ width: "48.5rem" }}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <div className="AccordionTitle">
-            <Typography variant="body2">
-              Project title: {props.title}
-            </Typography>
-            <Typography variant="body2">
-              Project body: {props.body}
-            </Typography>
-            <Typography variant="body2">
-              Project Owner: admin123
-            </Typography>
-          </div>
-        </AccordionSummary>
-        <AccordionDetails>
-        <Button
-            style={{
-              fontSize: "0.8rem",
-              marginRight: "1rem",
-              color: "green",
-              borderColor: "green",
-            }}
-            variant="outlined"
-            size="small"
-            onClick={() => props.setAddTaskMoadl(true)}
+    <>
+      <AddTaskModal open={addTaskModel} close={()=> setAddTaskModel(false)} />
+      {/* <EditTaskModal open={editTaskModel} close={()=> setEditTaskModel(false)}/> */}
+      <div className="ActivityAccordion">
+        <Accordion style={{ width: "48.5rem" }}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
           >
-            Add Task
-            <AddIcon
+            <div className="AccordionTitle">
+              <Typography variant="body2">
+                Project title: {project.title}
+              </Typography>
+              <Typography variant="body2">
+                Project body: {project.desc}
+              </Typography>
+              <Typography variant="body2">Project Owner: admin123</Typography>
+            </div>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Button
               style={{
+                fontSize: "0.8rem",
+                marginRight: "1rem",
                 color: "green",
-                fontSize: "1.3rem",
-                marginBottom: "0.2rem",
-                marginLeft: "0.2rem",
+                borderColor: "green",
               }}
-            />
-          </Button>
-          <Button
-            style={{
-              fontSize: "0.8rem",
-              marginRight: "1rem",
-              color: "#001f54",
-              borderColor: "#001f54",
-            }}
-            variant="outlined"
-            size="small"
-            onClick={() => {
-              props.setEditableData(props.data);
-              props.setEditProjectModal(true);
-            }}
-          >
-            Edit Project
-            <EditIcon
+              variant="outlined"
+              size="small"
+              onClick={() =>setAddTaskModel(true)}
+            >
+              Add Task
+              <AddIcon
+                style={{
+                  color: "green",
+                  fontSize: "1.3rem",
+                  marginBottom: "0.2rem",
+                  marginLeft: "0.2rem",
+                }}
+              />
+            </Button>
+            <Button
               style={{
+                fontSize: "0.8rem",
+                marginRight: "1rem",
                 color: "#001f54",
-                fontSize: "1.1rem",
-                marginBottom: "0.2rem",
-                marginLeft: "0.5rem",
+                borderColor: "#001f54",
               }}
-            />
-          </Button>
-          <Button
-            style={{ fontSize: "0.8rem", color: "red", borderColor: "red" }}
-            variant="outlined"
-            size="small"
-            onClick={() => {
-              props.setDeleteProjectName(props.title)
-              props.setDeleteModalSwitch(true)
-            }}
-          >
-            Delete Project
-            <DeleteIcon
-              style={{
-                color: "red",
-                fontSize: "1.1rem",
-                marginBottom: "0.2rem",
-                marginLeft: "0.4rem",
+              variant="outlined"
+              size="small"
+              onClick={() => {
+                props.setEditableData(props.data);
+                props.setEditProjectModal(true);
               }}
-            />
-          </Button>
-            {
-              props.tasks.map((e) => (
-                <TaskCardAdmin 
-                title={e.title} 
-                body={e.body} 
+            >
+              Edit Project
+              <EditIcon
+                style={{
+                  color: "#001f54",
+                  fontSize: "1.1rem",
+                  marginBottom: "0.2rem",
+                  marginLeft: "0.5rem",
+                }}
+              />
+            </Button>
+            <Button
+              style={{ fontSize: "0.8rem", color: "red", borderColor: "red" }}
+              variant="outlined"
+              size="small"
+              onClick={() => {
+                props.setDeleteProjectName(props.title);
+                props.setDeleteModalSwitch(true);
+              }}
+            >
+              Delete Project
+              <DeleteIcon
+                style={{
+                  color: "red",
+                  fontSize: "1.1rem",
+                  marginBottom: "0.2rem",
+                  marginLeft: "0.4rem",
+                }}
+              />
+            </Button>
+            {project.tasks.map((e) => (
+              <TaskCardAdmin
+                title={e.title}
+                body={e.body}
                 assignedBy={e.assignedBy}
                 assignedTo={e.assignedTo}
                 cost={e.cost}
@@ -112,12 +119,12 @@ function ProjectAccordion(props) {
                 data={e}
                 setEditTaskModal={props.setEditTaskModal}
                 setEditTaskData={props.setEditTaskData}
-                />
-              ))
-            }
-        </AccordionDetails>
-      </Accordion>
-    </div>
+              />
+            ))}
+          </AccordionDetails>
+        </Accordion>
+      </div>
+    </>
   );
 }
 

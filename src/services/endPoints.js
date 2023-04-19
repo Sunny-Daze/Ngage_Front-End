@@ -65,4 +65,24 @@ export const endPoints = {
   updateTrainingTask: "/api/trainingTask/updateTrainingTask",
   deleteTrainingTask: "/api/trainingTask/deleteTrainingTask",
   completeTraningTask: "/api/trainingTask/completeTraningTask",
+
+
+  //Projects
+  fetchProject: "/api/project/fetchProject",
+  createProject: "/api/project/createProject",
+  deleteProject: "/api/project/deleteProject",
+  editProject: "/api/project/editProject",
+
+
+  //ProjectTask 
+
+  createProjectTask : "/api/projectTask/createProjectTask"
+  // createProjectTask : "/api/projectTask/createProjectTask"
+  // createProjectTask : "/api/projectTask/createProjectTask"
+  // createProjectTask : "/api/projectTask/createProjectTask"
+
+
+
+
+
 };
