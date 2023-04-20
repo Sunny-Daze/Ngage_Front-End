@@ -130,6 +130,7 @@ function getUserRoutes() {
 }
 
 const HomePage = ({ children }) => {
+  const [toggleNotification, setNotification] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [showProfileCard, setShowProfileCard] = useState(true);
   const open = Boolean(anchorEl);
@@ -163,7 +164,6 @@ const HomePage = ({ children }) => {
     },
   };
   const navigate = useNavigate();
-  const [Notification, setNotification] = useState(false);
 
   return (
     <>
@@ -263,7 +263,7 @@ const HomePage = ({ children }) => {
               );
             })}
           </section>
-
+          <Notification toggleNotification={toggleNotification} setNotification={setNotification} />
           {showProfileCard && (
             <div className="profileCard">
               <div className="avatar">
@@ -294,8 +294,7 @@ const HomePage = ({ children }) => {
                       }}
                       variant="body2"
                     >
-                      Super Admin
-                      {/* {getuserDetails("role")} */}
+                      {getuserDetails("role")}
                     </Typography>
                   </div>
                   {/* <Chip label="primary" color="primary" /> */}
@@ -364,7 +363,6 @@ const HomePage = ({ children }) => {
         </motion.div>
         <main>{children}</main>
       </div>
-      {/* <Notification Notification={Notification} setNotification={setNotification} /> */}
     </>
   );
 };

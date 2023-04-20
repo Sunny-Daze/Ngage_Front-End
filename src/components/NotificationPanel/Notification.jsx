@@ -16,7 +16,7 @@ const style = {
 };
 
 export default function Notification(props) {
-  const handleClose = () => props.SetNotification(props.Notification);
+  const handleClose = () => props.setNotification(props.Notification);
 
   return (
     <div>
