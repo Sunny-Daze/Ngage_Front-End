@@ -21,7 +21,7 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
-import Notification from "./NotificationPanel/Notification"
+import Notification from "./NotificationPanel/Notification";
 
 const routes = [
   {
@@ -121,7 +121,28 @@ function getUserRoutes() {
   }
 
   if (role === "Admin") {
-    return routes;
+    let hideUserControl = {
+        path: "/management",
+        name: "Management",
+        icon: <FiUsers />,
+        subRoutes: [
+          {
+            path: "/management/admin-control",
+            name: "Admin Control",
+            icon: <AiOutlineStar />,
+          },
+        ],
+      },
+      showShowed = [
+        routes[0],
+        routes[1],
+        routes[2],
+        routes[3],
+        hideUserControl,
+        routes[5],
+      ];
+
+    return showShowed;
   }
 
   if (role === "SuperAdmin") {
@@ -316,7 +337,10 @@ const HomePage = ({ children }) => {
                     },
                   }}
                 >
-                  <MailIcon onClick={()=>setNotification(true)} style={{ fontSize: "1.4rem", color: "white" }} />
+                  <MailIcon
+                    onClick={() => setNotification(true)}
+                    style={{ fontSize: "1.4rem", color: "white" }}
+                  />
                 </Badge>
               </div>
               <div className="settings">
@@ -337,9 +361,11 @@ const HomePage = ({ children }) => {
                     "aria-labelledby": "basic-button",
                   }}
                 >
-                  <MenuItem onClick={() => {
+                  <MenuItem
+                    onClick={() => {
                       navigate("/user-profile");
-                    }}>
+                    }}
+                  >
                     <ListItemIcon>
                       <Avatar sx={{ width: 32, height: 32, marginRight: 1 }} />
                     </ListItemIcon>
