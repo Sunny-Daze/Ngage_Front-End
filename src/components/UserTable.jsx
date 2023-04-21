@@ -37,6 +37,34 @@ const columns = [
       );
     },
   },
+];
+
+const SuperadminColumns = [
+  { field: "email", headerName: "Email", width: 200 },
+  { field: "username", headerName: "User Name", width: 200 },
+  { field: "role", headerName: "Role", width: 180 },
+  {
+    field: "editbutton",
+    headerName: "",
+    sortable: false,
+    headerClassName: "lastcolumnSeparator",
+    width: 100,
+    renderCell: (params) => {
+      return (
+        <Button
+          variant="outlined"
+          size="small"
+          style={{ marginLeft: 25, borderColor: "#001f54", color: "#001f54" }}
+          onClick={() => {
+            selectedUser = params.row;
+            params.row.dialogOpen();
+          }}
+        >
+          <EditIcon />
+        </Button>
+      );
+    },
+  },
   {
     field: "deletebutton",
     headerName: "",
@@ -54,12 +82,17 @@ const columns = [
   },
 ];
 
+function getRole(){
+  let userDetails = JSON.parse(localStorage.getItem("user") ?? "");
+  return userDetails.role;
+}
+
 const modelStyle = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 600,
+  width: 330,
   bgcolor: "background.paper",
   borderRadius: "5px",
   boxShadow: 24,
@@ -126,7 +159,7 @@ function UserTable() {
         rowHeight={40}
         style={{ fontSize: "0.8rem" }}
         rows={state}
-        columns={columns}
+        columns={getRole() ? columns : SuperadminColumns}
         pageSize={6}
         rowsPerPageOptions={[6]}
       />

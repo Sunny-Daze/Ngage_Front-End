@@ -44,16 +44,37 @@ function Community() {
   const [posts, setPosts] = React.useState([]);
   const [showLoading, setShowLoading] = React.useState(false);
 
+  function checkCategory1(post){
+    return post.category === 'Question'
+  }
+
+  function checkCategory2(post){
+    return post.category === 'Discussion'
+  }
+
   const handleFilter = (event) => {
-    console.log(event.target.value);
-
-    if (event.target.value === "none") {
+    setFilter(event.target.value);
+    const cat = event.target.value;
+    if (cat === "none"){
       setPosts([...posts]);
-      return;
+      // return;
     }
+    else if(cat === "question"){
+      const res = posts.filter(checkCategory1)
+      setPosts([...res]);
+      console.log(res);
+      // return;
+    }
+    else if(cat === "discussion"){
+      const res = posts.filter(checkCategory2)
+      setPosts([...res]);
+      console.log(res);
+      // return;
+    }
+    
 
-    let filteredPosts = posts.filter((e) => e.category == event.target.value);
-    setPosts([...filteredPosts]);
+    // let filteredPosts = posts.filter((e) => e.category == event.target.value);
+    // setPosts([...filteredPosts]);
   };
 
   const handleSort = (event) => {
@@ -63,7 +84,7 @@ function Community() {
   const handlePostClick = () => {
     setpostModal(true);
   };
-
+ 
   React.useEffect(() => {
     async function fetchData() {
       let token = localStorage.getItem("token");
@@ -127,9 +148,9 @@ function Community() {
             size="small"
             onChange={handleFilter}
           >
-            <MenuItem value={"none"}>none</MenuItem>
-            <MenuItem value={"Question"}>Question</MenuItem>
-            <MenuItem value={"Discussion"}>Discussion</MenuItem>
+            <MenuItem value={"none"}>None</MenuItem>
+            <MenuItem value={"question"}>Question</MenuItem>
+            <MenuItem value={"discussion"}>Discussion</MenuItem>
           </Select>
         </FormControl>
         <FormControl style={{ width: "9rem" }}>
@@ -167,14 +188,15 @@ function Community() {
       </div>
 
       <div className="postBody">
-        {/* {posts.length === 0 &&
+        {posts.length === 0 &&
       <Backdrop
       sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
       open={true}
     >
       <CircularProgress color="inherit" />
-    </Backdrop>} */}
+    </Backdrop>}
         {posts.map((item, key) => {
+          key = item.id;
           return <Post {...{ ...item, deletePostFromPosts }} />;
         })}
       </div>
