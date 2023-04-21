@@ -35,12 +35,12 @@ const routes = [
     icon: <MdOutlineAccountTree />,
     subRoutes: [
       {
-        path: "/settings/profile",
+        path: "/project/id",
         name: "Form Automation ",
         icon: <AiOutlineStar />,
       },
       {
-        path: "/settings/2fa",
+        path: "/project/id",
         name: "Ngage UI Library",
         icon: <AiOutlineStar />,
       },
@@ -121,28 +121,7 @@ function getUserRoutes() {
   }
 
   if (role === "Admin") {
-    let hideUserControl = {
-        path: "/management",
-        name: "Management",
-        icon: <FiUsers />,
-        subRoutes: [
-          {
-            path: "/management/admin-control",
-            name: "Admin Control",
-            icon: <AiOutlineStar />,
-          },
-        ],
-      },
-      showShowed = [
-        routes[0],
-        routes[1],
-        routes[2],
-        routes[3],
-        hideUserControl,
-        routes[5],
-      ];
-
-    return showShowed;
+    return routes;
   }
 
   if (role === "SuperAdmin") {
@@ -315,8 +294,7 @@ const HomePage = ({ children }) => {
                       }}
                       variant="body2"
                     >
-                      Super Admin
-                      {/* {getuserDetails("role")} */}
+                      {getuserDetails("role")}
                     </Typography>
                   </div>
                   {/* <Chip label="primary" color="primary" /> */}

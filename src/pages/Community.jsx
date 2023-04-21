@@ -52,24 +52,56 @@ function Community() {
     return post.category === 'Discussion'
   }
 
+  // async function fetchPost() {
+  //   let token = localStorage.getItem("token");
+
+  //   // console.warn(token);
+
+  //   let response = await axios.post(
+  //     domain + endPoints.fetchPosts,
+  //     {},
+  //     { headers: { Authorization: `Bearer ${token}` } }
+  //   );
+
+  //   if (response.data.success) {
+  //     response.data.result.forEach((e) => {
+  //       posts.push({
+  //         id: e._id,
+  //         category: e.category,
+  //         title: e.title,
+  //         user: e.user,
+  //         content: e.content,
+  //         likeCounts: e.likeCounts,
+  //         liked: e.liked,
+  //         comments: e.comments,
+  //         createdAt: e.createdAt,
+  //       });
+  //     });
+  //     setPosts([...posts]);
+  //   }
+  // }
+
   const handleFilter = (event) => {
     setFilter(event.target.value);
     const cat = event.target.value;
     if (cat === "none"){
+      // fetchPost();
       setPosts([...posts]);
       // return;
     }
     else if(cat === "question"){
-      const res = posts.filter(checkCategory1)
+      const temp = posts;
+      const res = temp.filter(checkCategory1)
       setPosts([...res]);
       console.log(res);
-      // return;
+      return;
     }
     else if(cat === "discussion"){
-      const res = posts.filter(checkCategory2)
+      const temp = posts;
+      console.log(temp)
+      const res = temp.filter(checkCategory2)
       setPosts([...res]);
-      console.log(res);
-      // return;
+      return;
     }
     
 
@@ -85,40 +117,40 @@ function Community() {
     setpostModal(true);
   };
  
-  React.useEffect(() => {
-    async function fetchData() {
-      let token = localStorage.getItem("token");
+  async function fetchData() {
+    let token = localStorage.getItem("token");
 
-      // console.warn(token);
+    // console.warn(token);
 
-      let response = await axios.post(
-        domain + endPoints.fetchPosts,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+    let response = await axios.post(
+      domain + endPoints.fetchPosts,
+      {},
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
 
-      if (response.data.success) {
-        response.data.result.forEach((e) => {
-          posts.push({
-            id: e._id,
-            category: e.category,
-            title: e.title,
-            user: e.user,
-            content: e.content,
-            likeCounts: e.likeCounts,
-            liked: e.liked,
-            comments: e.comments,
-            createdAt: e.createdAt,
-          });
+    if (response.data.success) {
+      response.data.result.forEach((e) => {
+        posts.push({
+          id: e._id,
+          category: e.category,
+          title: e.title,
+          user: e.user,
+          content: e.content,
+          likeCounts: e.likeCounts,
+          liked: e.liked,
+          comments: e.comments,
+          createdAt: e.createdAt,
         });
-        setPosts([...posts]);
-      }
+      });
+      setPosts([...posts]);
     }
+  }
+  React.useEffect(() => {
 
-    if (posts.length == 0) {
+    // if (posts.length === 0) {
       fetchData();
-    }
-  });
+    // }
+  }, []);
 
   return (
     <div className="Community">

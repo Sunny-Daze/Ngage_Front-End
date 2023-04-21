@@ -138,8 +138,6 @@ function UserTable() {
             role: e.role,
             dialogOpen: () => handleOpen(),
             dialogClose: () => handleClose(),
-
-
           });
         });
 
@@ -159,7 +157,7 @@ function UserTable() {
         rowHeight={40}
         style={{ fontSize: "0.8rem" }}
         rows={state}
-        columns={getRole() ? columns : SuperadminColumns}
+        columns={getRole() === 'Admin' ? columns : SuperadminColumns}
         pageSize={6}
         rowsPerPageOptions={[6]}
       />

@@ -18,7 +18,6 @@ function ProjectTasks() {
             <Button size="small" onClick={handleClick} endIcon={arrow ? <ArrowDownwardIcon /> : <ArrowUpwardIcon />} style={{color:'#001f54'}}>Priority</Button>
         </div>
         <ProjectTaskCard />
-        <ProjectTaskCard />
     </div>
   )
 }

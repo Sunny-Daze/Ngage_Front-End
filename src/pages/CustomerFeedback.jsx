@@ -2,6 +2,7 @@ import React from 'react'
 import './CustomerFeedback.css'
 import { Mention, MentionsInput } from 'react-mentions';
 import mentionsInputStyle from '../utils/mentionsInputStyle'
+import FeedbackCard from '../widgets/FeedbackCard'
 
 function CustomerFeedback() {
     	const [formState, setFormState] = React.useState({
@@ -41,6 +42,8 @@ function CustomerFeedback() {
                     data={users}
                      />
 				</MentionsInput>
+
+			<FeedbackCard />
     </div>
   )
 }
