@@ -44,16 +44,69 @@ function Community() {
   const [posts, setPosts] = React.useState([]);
   const [showLoading, setShowLoading] = React.useState(false);
 
-  const handleFilter = (event) => {
-    console.log(event.target.value);
+  function checkCategory1(post){
+    return post.category === 'Question'
+  }
 
-    if (event.target.value === "none") {
+  function checkCategory2(post){
+    return post.category === 'Discussion'
+  }
+
+  // async function fetchPost() {
+  //   let token = localStorage.getItem("token");
+
+  //   // console.warn(token);
+
+  //   let response = await axios.post(
+  //     domain + endPoints.fetchPosts,
+  //     {},
+  //     { headers: { Authorization: `Bearer ${token}` } }
+  //   );
+
+  //   if (response.data.success) {
+  //     response.data.result.forEach((e) => {
+  //       posts.push({
+  //         id: e._id,
+  //         category: e.category,
+  //         title: e.title,
+  //         user: e.user,
+  //         content: e.content,
+  //         likeCounts: e.likeCounts,
+  //         liked: e.liked,
+  //         comments: e.comments,
+  //         createdAt: e.createdAt,
+  //       });
+  //     });
+  //     setPosts([...posts]);
+  //   }
+  // }
+
+  const handleFilter = (event) => {
+    setFilter(event.target.value);
+    const cat = event.target.value;
+    if (cat === "none"){
+      // fetchPost();
       setPosts([...posts]);
+      // return;
+    }
+    else if(cat === "question"){
+      const temp = posts;
+      const res = temp.filter(checkCategory1)
+      setPosts([...res]);
+      console.log(res);
       return;
     }
+    else if(cat === "discussion"){
+      const temp = posts;
+      console.log(temp)
+      const res = temp.filter(checkCategory2)
+      setPosts([...res]);
+      return;
+    }
+    
 
-    let filteredPosts = posts.filter((e) => e.category == event.target.value);
-    setPosts([...filteredPosts]);
+    // let filteredPosts = posts.filter((e) => e.category == event.target.value);
+    // setPosts([...filteredPosts]);
   };
 
   const handleSort = (event) => {
@@ -63,41 +116,41 @@ function Community() {
   const handlePostClick = () => {
     setpostModal(true);
   };
+ 
+  async function fetchData() {
+    let token = localStorage.getItem("token");
 
-  React.useEffect(() => {
-    async function fetchData() {
-      let token = localStorage.getItem("token");
+    // console.warn(token);
 
-      // console.warn(token);
+    let response = await axios.post(
+      domain + endPoints.fetchPosts,
+      {},
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
 
-      let response = await axios.post(
-        domain + endPoints.fetchPosts,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      if (response.data.success) {
-        response.data.result.forEach((e) => {
-          posts.push({
-            id: e._id,
-            category: e.category,
-            title: e.title,
-            user: e.user,
-            content: e.content,
-            likeCounts: e.likeCounts,
-            liked: e.liked,
-            comments: e.comments,
-            createdAt: e.createdAt,
-          });
+    if (response.data.success) {
+      response.data.result.forEach((e) => {
+        posts.push({
+          id: e._id,
+          category: e.category,
+          title: e.title,
+          user: e.user,
+          content: e.content,
+          likeCounts: e.likeCounts,
+          liked: e.liked,
+          comments: e.comments,
+          createdAt: e.createdAt,
         });
-        setPosts([...posts]);
-      }
+      });
+      setPosts([...posts]);
     }
+  }
+  React.useEffect(() => {
 
-    if (posts.length == 0) {
+    // if (posts.length === 0) {
       fetchData();
-    }
-  });
+    // }
+  }, []);
 
   return (
     <div className="Community">
@@ -127,9 +180,9 @@ function Community() {
             size="small"
             onChange={handleFilter}
           >
-            <MenuItem value={"none"}>none</MenuItem>
-            <MenuItem value={"Question"}>Question</MenuItem>
-            <MenuItem value={"Discussion"}>Discussion</MenuItem>
+            <MenuItem value={"none"}>None</MenuItem>
+            <MenuItem value={"question"}>Question</MenuItem>
+            <MenuItem value={"discussion"}>Discussion</MenuItem>
           </Select>
         </FormControl>
         <FormControl style={{ width: "9rem" }}>
@@ -167,14 +220,15 @@ function Community() {
       </div>
 
       <div className="postBody">
-        {/* {posts.length === 0 &&
+        {posts.length === 0 &&
       <Backdrop
       sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
       open={true}
     >
       <CircularProgress color="inherit" />
-    </Backdrop>} */}
+    </Backdrop>}
         {posts.map((item, key) => {
+          key = item.id;
           return <Post {...{ ...item, deletePostFromPosts }} />;
         })}
       </div>

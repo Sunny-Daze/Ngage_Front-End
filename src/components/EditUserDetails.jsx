@@ -9,6 +9,7 @@ import {
   MenuItem,
   FormControl,
 } from "@mui/material";
+import { Edit } from "@mui/icons-material";
 import axios from "axios";
 import { domain, endPoints } from "../services/endPoints";
 
@@ -38,6 +39,7 @@ function EditUserDetails({ props }) {
   };
 
   const editUser = async () => {
+    getRole();
     let user = {
       userId: props.id,
       email: email,
@@ -63,6 +65,11 @@ function EditUserDetails({ props }) {
     // console.log(user);
   };
 
+  function getRole(){
+    let userDetails = JSON.parse(localStorage.getItem("user") ?? "");
+    return userDetails.role;
+  }
+
   return (
     <div className="EditUserDetails">
       <Typography variant="body2" style={headingStyle}>
@@ -87,7 +94,10 @@ function EditUserDetails({ props }) {
         defaultValue={username}
       />
 
-      <FormControl style={{width:'14rem'}}>
+      {
+        getRole() === 'Admin'
+        ?
+        <FormControl style={{width:'14rem'}}>
         <InputLabel id="demo-simple-select-label">Role</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -96,13 +106,30 @@ function EditUserDetails({ props }) {
           label="Role"
           onChange={handleChange}
         >
-          <MenuItem value={"Admin"}>Admin</MenuItem>
-          <MenuItem value={"Employee"}>Employee</MenuItem>
           <MenuItem value={"Customer"}>Customer</MenuItem>
+          <MenuItem value={"Employee"}>Employee</MenuItem>
+          <MenuItem value={"Admin"}>Admin</MenuItem>
         </Select>
       </FormControl>
+      :
+      <FormControl style={{width:'14rem'}}>
+      <InputLabel id="demo-simple-select-label">Role</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={role}
+        label="Role"
+        onChange={handleChange}
+      >
+        <MenuItem value={"Customer"}>Customer</MenuItem>
+        <MenuItem value={"Employee"}>Employee</MenuItem>
+        <MenuItem value={"Admin"}>Admin</MenuItem>
+        <MenuItem value={"SuperAdmin"}>Super Admin</MenuItem>
+      </Select>
+    </FormControl>
+    }
 
-      <Button variant="contained" onClick={editUser}>
+      <Button variant="contained" style={{background:'#001f54'}} endIcon={<Edit />} onClick={editUser}>
         UPDATE USER
       </Button>
     </div>
