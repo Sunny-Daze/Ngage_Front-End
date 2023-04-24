@@ -19,12 +19,10 @@ function ProductCard(props) {
       </div>
       <div className="product-descriptoin">
         <Typography
-        
           variant="body1"
           style={{
             color: "darkslategray",
             fontSize: "1.3rem",
-            // lineHeight:'1.5rem'
             marginBottom: "0.5rem",
           }}
         >

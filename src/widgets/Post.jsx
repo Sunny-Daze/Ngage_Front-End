@@ -114,7 +114,7 @@ function Post(props) {
           >
             {likeCounts}
           </Typography>
-          <IconButton style={{ paddingBottom: "0px" }}>
+          <IconButton style={{ paddingBottom: "0px" }} onClick={() => handleSeeMore()}>
             <AiOutlineComment
               style={{ fontSize: "1.9rem", color: "#001f54" }}
             />

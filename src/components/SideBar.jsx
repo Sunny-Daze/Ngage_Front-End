@@ -163,7 +163,7 @@ const HomePage = ({ children }) => {
     },
   };
   const navigate = useNavigate();
-  const [Notification, setNotification] = useState(false);
+  const [ToggleNotification, setToggleNotification] = useState(true);
 
   return (
     <>
@@ -316,7 +316,7 @@ const HomePage = ({ children }) => {
                   }}
                 >
                   <MailIcon
-                    onClick={() => setNotification(true)}
+                    onClick={() => setToggleNotification(true)}
                     style={{ fontSize: "1.4rem", color: "white" }}
                   />
                 </Badge>
@@ -338,27 +338,31 @@ const HomePage = ({ children }) => {
                   MenuListProps={{
                     "aria-labelledby": "basic-button",
                   }}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
                 >
-                  <MenuItem
+                  <MenuItem style={{fontSize:'0.95rem', width:'8.5rem', padding:'0.5rem'}}
                     onClick={() => {
                       navigate("/user-profile");
                     }}
                   >
-                    <ListItemIcon>
-                      <Avatar sx={{ width: 32, height: 32, marginRight: 1 }} />
-                    </ListItemIcon>
+                      <Avatar sx={{ width: 29, height: 29, marginRight: '0.5rem' }} />
                     My Account
                   </MenuItem>
                   <Divider />
-                  <MenuItem
+                  <MenuItem style={{fontSize:'0.95rem', width:'7.5rem', paddingLEft:'0.5rem', paddingRight:'0.5rem'}}
                     onClick={() => {
                       localStorage.clear();
                       navigate("/");
                     }}
                   >
-                    <ListItemIcon>
-                      <Logout fontSize="small" />
-                    </ListItemIcon>
+                      <Logout fontSize="small" style={{marginRight:'0.5rem'}}/>
                     Logout
                   </MenuItem>
                 </Menu>
@@ -368,7 +372,9 @@ const HomePage = ({ children }) => {
         </motion.div>
         <main>{children}</main>
       </div>
-      {/* <Notification Notification={Notification} setNotification={setNotification} /> */}
+      <Notification 
+      ToggleNotification={ToggleNotification} 
+      setToggleNotification={setToggleNotification} />
     </>
   );
 };
