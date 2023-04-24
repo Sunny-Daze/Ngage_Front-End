@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.92cedd05.css",
+    "main.js": "/static/js/main.dd1ec5d4.js",
+    "static/media/courseCardPhoto.JPG": "/static/media/courseCardPhoto.40bc2c36714abccb9a31.JPG",
+    "static/media/banner_login_register.JPG": "/static/media/banner_login_register.151d8313d100e5ec7d88.JPG",
+    "index.html": "/index.html",
+    "main.92cedd05.css.map": "/static/css/main.92cedd05.css.map",
+    "main.dd1ec5d4.js.map": "/static/js/main.dd1ec5d4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.92cedd05.css",
+    "static/js/main.dd1ec5d4.js"
+  ]
+}
