@@ -56,7 +56,7 @@ export default function Notification(props) {
         </div>
           <Divider style={{marginTop:'0.6rem'}} />
           <div style={{display:'flex', flexDirection:'column'}} className="notifBody">
-          <Alert onClose={() => {}} style={{width:'95%', fontSize:'0.8rem', marginTop:'0.5rem'}} severity="info"><Link>This is an info alert</Link>
+          <Alert onClose={() => {}} style={{fontSize:'0.8rem', marginTop:'0.5rem'}} severity="info"><Link>This is an info alert</Link>
           <br/>
           <span style={{fontSize:'0.7rem', marginTop:'0.5rem'}}>12/35/45 23:02</span>
           </Alert>

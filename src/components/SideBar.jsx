@@ -163,7 +163,7 @@ const HomePage = ({ children }) => {
     },
   };
   const navigate = useNavigate();
-  const [ToggleNotification, setToggleNotification] = useState(true);
+  const [ToggleNotification, setToggleNotification] = useState(false);
 
   return (
     <>
