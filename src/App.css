@@ -201,7 +201,7 @@
 input[type="date"]{
     background-color: white;
     /* padding: 5px; */
-    font-family: "Roboto Mono",monospace;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
     color: darkslategray;
     padding-top: 4px;
     font-size: 1rem;

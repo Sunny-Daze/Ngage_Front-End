@@ -4,9 +4,12 @@ import { Button, Typography } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import courseImage from "../assets/courseCardPhoto.JPG";
 import { domain, endPoints } from "../services/endPoints";
+import AssignCourseModal from "../components/AssignCourseModal"
 import axios from "axios";
 
 function CourseCard(props) {
+  const [toggleAssignCourse, setToggleAssignCourse] = React.useState(false);
+
   async function enrolToCourse() {
     let token = localStorage.getItem("token");
     let response = await axios.post(
@@ -46,20 +49,17 @@ function CourseCard(props) {
           {props.data.title}
         </Typography>
 
-        <Button
+        <Button size='small'
+          endIcon={!props.data.participated && <ChevronRightIcon />}
           onClick={() => (props.data.participated ? null : enrolToCourse())}
-          variant="outlined"
-          style={{
-            color: "#001f54",
-            marginTop: "1rem",
-            borderColor: "#001f54",
-            height: "1.6rem",
-            width: "7.5rem",
-          }}
+          variant="outlined" style={{ color: "#001f54", borderColor: "#001f54"}}
         >
-          {props.data.participated ? "Enrolled" : "Enrol"}
-          {!props.data.participated && <ChevronRightIcon />}
+          {props.data.participated ? "Enrolled" : "Enroll"}
+          {/* {!props.data.participated && <ChevronRightIcon />} */}
         </Button>
+
+        <Button onClick={() => setToggleAssignCourse(true)} size='small' variant='outlined' style={{ marginTop:'0.5rem'}} color='error' endIcon={<ChevronRightIcon />}>Assign</Button>
+        <AssignCourseModal  toggleAssignCourse={toggleAssignCourse} setToggleAssignCourse={setToggleAssignCourse} />
       </div>
     </div>
   );

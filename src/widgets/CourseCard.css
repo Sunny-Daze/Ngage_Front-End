@@ -1,9 +1,11 @@
 .CourseCard{
     height: 15rem;
+    /* padding-bottom:0.5rem; */
     width: 12rem;
     background: white;
     border-radius: 4px;
     margin: 10px;
+    padding-bottom: 0.5rem;
     color: darkslategray;
 }
 
@@ -21,4 +23,10 @@
 
 .CourseCardDescription {
     padding-left: 1rem;
+}
+
+.courseButtons{
+    display:flex;
+    margin-top:1rem;
+    gap: 0.5rem;
 }
