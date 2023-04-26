@@ -10,6 +10,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 import { fetchData } from "../services/request";
+import { Mention, MentionsInput } from "react-mentions";
+import mentionsInputStyle from "./mentionsInputStyle";
 
 const style = {
   position: "absolute",
@@ -49,8 +51,8 @@ export default function EditTaskModal(props) {
   };
 
   function validateField() {
-    let isEmpty = Object.keys(userData).filter((val) => val == "");
-    if (isEmpty.length == 0 && priority == "") return false;
+    let isEmpty = Object.keys(userData).filter((val) => val === "");
+    if (isEmpty.length === 0 && priority === "") return false;
     return true;
   }
 
@@ -70,6 +72,27 @@ export default function EditTaskModal(props) {
       });
     }
   }
+
+  // mentions
+  const [formState, setFormState] = React.useState({
+    username: "",
+    comment: "",
+  });
+
+  const users = [
+    {
+      id: "isaac",
+      display: "Isaac Newton",
+    },
+    {
+      id: "sam",
+      display: "Sam Victor",
+    },
+    {
+      id: "emma",
+      display: "emmanuel",
+    },
+  ];
 
   return (
     <div>
@@ -151,19 +174,22 @@ export default function EditTaskModal(props) {
               variant="outlined"
               defaultValue={userData.note}
             />
-            <TextField
-              name="assignedTo"
-              onChange={(e) => handleChange(e)}
-              multiline
-              rows={2}
-              size="small"
-              id="outlined-basic"
-              label="Asignees"
-              variant="outlined"
-              defaultValue={userData.assignedTo}
-            />
+            {/* mentions */}
+            <MentionsInput
+              placeholder="Add asignees. Use '@' for mention"
+              value={formState.comment}
+              onChange={(e) =>
+                setFormState({ ...formState, comment: e.target.value })
+              }
+              style={mentionsInputStyle}
+            >
+              <Mention style={{ background: "#cee4e5" }} data={users} />
+            </MentionsInput>
+            <Box style={{display:'flex', paddingLeft:'0.5rem', paddingRight:'0.5rem', justifyContent:'spacebetween'}}>
+            <input type="date" />
             <TextField
               name="cost"
+              style={{width:'12rem', marginLeft:'3rem'}}
               onChange={(e) => handleChange(e)}
               id="outlined-basic"
               label="Cost"
@@ -171,6 +197,7 @@ export default function EditTaskModal(props) {
               variant="outlined"
               defaultValue={userData.cost}
             />
+            </Box>
 
             <Box style={{ display: "flex", justifyContent: "center" }}>
               <Button
@@ -197,7 +224,7 @@ export default function EditTaskModal(props) {
                 size="small"
                 style={{ color: "green", borderColor: "green" }}
                 onClick={() => {
-                 editTask();
+                  editTask();
                 }}
               >
                 Edit Task
