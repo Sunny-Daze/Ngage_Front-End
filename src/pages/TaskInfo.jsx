@@ -4,11 +4,12 @@ import TaskInfoHeader from "../widgets/TaskInfoHeader";
 import TaskInfoBody from "../widgets/TaskInfoBody";
 
 
-function TaskInfo() {
+function TaskInfo(props) {
+  let {task} = props;
   return (
     <div className='TaskInfo'>
-        <TaskInfoHeader />
-        <TaskInfoBody />
+        <TaskInfoHeader task = {task} />
+        <TaskInfoBody task =  {task} />
     </div>
   )
 }

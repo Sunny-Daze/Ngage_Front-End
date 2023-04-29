@@ -3,7 +3,7 @@ import { FaBars } from "react-icons/fa";
 import Divider from "@mui/material/Divider";
 import Logout from "@mui/icons-material/Logout";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import SidebarMenu from "./SideBarMenu";
 import Avatar from "@mui/material/Avatar";
@@ -22,6 +22,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 import Notification from "./NotificationPanel/Notification";
+import { fetchData } from "../services/request";
+import { domain, endPoints } from "../services/endPoints";
 
 const routes = [
   {
@@ -33,18 +35,7 @@ const routes = [
     path: "/projects",
     name: "Projects",
     icon: <MdOutlineAccountTree />,
-    subRoutes: [
-      {
-        path: "/project/id",
-        name: "Form Automation ",
-        icon: <AiOutlineStar />,
-      },
-      {
-        path: "/project/id",
-        name: "Ngage UI Library",
-        icon: <AiOutlineStar />,
-      },
-    ],
+    subRoutes: [],
   },
   {
     path: "/training",
@@ -164,6 +155,29 @@ const HomePage = ({ children }) => {
   };
   const navigate = useNavigate();
   const [ToggleNotification, setToggleNotification] = useState(false);
+
+  useEffect(() => {
+    fetchData(domain + endPoints.fetchProjectNames, {}).then((e) => {
+      if (e.data.success) {
+        for (const route of getUserRoutes()) {
+          console.log(route);
+          if (route.name === "Projects") {
+            let arr = [];
+            e.data.result.forEach((e) => {
+              let obj = {
+                path: "/project/" + e._id,
+                name: e.title,
+                icon: <AiOutlineStar />,
+              };
+              arr.push(obj);
+            });
+
+            route.subRoutes = arr;
+          }
+        }
+      }
+    });
+  }, []);
 
   return (
     <>
@@ -339,30 +353,46 @@ const HomePage = ({ children }) => {
                     "aria-labelledby": "basic-button",
                   }}
                   anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
+                    vertical: "top",
+                    horizontal: "left",
                   }}
                   transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
+                    vertical: "top",
+                    horizontal: "left",
                   }}
                 >
-                  <MenuItem style={{fontSize:'0.95rem', width:'8.5rem', padding:'0.5rem'}}
+                  <MenuItem
+                    style={{
+                      fontSize: "0.95rem",
+                      width: "8.5rem",
+                      padding: "0.5rem",
+                    }}
                     onClick={() => {
                       navigate("/user-profile");
                     }}
                   >
-                      <Avatar sx={{ width: 29, height: 29, marginRight: '0.5rem' }} />
+                    <Avatar
+                      sx={{ width: 29, height: 29, marginRight: "0.5rem" }}
+                    />
                     My Account
                   </MenuItem>
                   <Divider />
-                  <MenuItem style={{fontSize:'0.95rem', width:'7.5rem', paddingLEft:'0.5rem', paddingRight:'0.5rem'}}
+                  <MenuItem
+                    style={{
+                      fontSize: "0.95rem",
+                      width: "7.5rem",
+                      paddingLEft: "0.5rem",
+                      paddingRight: "0.5rem",
+                    }}
                     onClick={() => {
                       localStorage.clear();
                       navigate("/");
                     }}
                   >
-                      <Logout fontSize="small" style={{marginRight:'0.5rem'}}/>
+                    <Logout
+                      fontSize="small"
+                      style={{ marginRight: "0.5rem" }}
+                    />
                     Logout
                   </MenuItem>
                 </Menu>
@@ -372,9 +402,10 @@ const HomePage = ({ children }) => {
         </motion.div>
         <main>{children}</main>
       </div>
-      <Notification 
-      ToggleNotification={ToggleNotification} 
-      setToggleNotification={setToggleNotification} />
+      <Notification
+        ToggleNotification={ToggleNotification}
+        setToggleNotification={setToggleNotification}
+      />
     </>
   );
 };

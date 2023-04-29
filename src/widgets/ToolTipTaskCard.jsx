@@ -17,14 +17,15 @@ const HtmlTooltip = styled(({ className, ...props }) => (
   }));
   
 
-function ToolTipTaskCard() {
+function ToolTipTaskCard(props) {
+  let {name } = props;
   return (
     <>
     <HtmlTooltip
                     title={
                       <React.Fragment>
                         <Typography style={{fontSize:'0.8rem'}} variant='body1' color="inherit">
-                          Alex Yadav
+                          {name}
                         </Typography>
                       </React.Fragment>
                     }
