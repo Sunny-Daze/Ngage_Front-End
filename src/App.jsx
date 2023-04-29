@@ -42,8 +42,8 @@ function App() {
           <Route path="/user-profile" element={<RenderUserProfile />} />
           <Route path="/training/learning-management/course" element={<RenderLearningCourse />} />
           <Route path="/recreation/activity/:id" element={<RenderRecreationActivity />} />
-          <Route path="/project/id" element={<RenderProject />} />
-          <Route path="/project/task/id" element={<RenderTaskInfo />} />
+          <Route path="/project/:id" element={<RenderProject />} />
+          <Route path="/project/task/:id" element={<RenderTaskInfo />} />
         </Routes>
       </Router>
     </div>

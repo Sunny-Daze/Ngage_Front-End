@@ -6,7 +6,6 @@ export async function fetchData(url,body) {
         body,
         { headers: { Authorization: `Bearer ${token}` } }
     );
-
     if (response.data.success) {
         return response;
     } else {

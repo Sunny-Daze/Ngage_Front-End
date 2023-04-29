@@ -10,48 +10,54 @@ const HtmlTooltip = styled(({ className, ...props }) => (
 ))(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
     backgroundColor: "#001F54",
-    color:'white',
+    color: "white",
     maxWidth: 220,
     fontSize: theme.typography.pxToRem(1),
-    opacity:0.5,
+    opacity: 0.5,
   },
 }));
 
-function ProjectHeaderCard() {
+function ProjectHeaderCard(props) {
+  console.log(props);
+  let { title, desc, cost, createdBy } = props;
   return (
     <>
       <div className="ProjectHeaderCardContatiner">
-        <Typography variant="h5">Form Automation</Typography>
+        <Typography variant="h5">{title}</Typography>
         <Typography variant="body2" style={{ marginTop: "0.4rem" }}>
-          Standardized components pertaining to the Engage UI language
+          {desc}
         </Typography>
       </div>
       <div className="projectCostContainer">
         <Typography variant="body2" style={{ marginBottom: "0.4rem" }}>
-          Total Cost Rs: 110000
+          Total Cost Rs: {cost}
         </Typography>
-        <Box style={{display:'flex'}}>
-        <Typography variant="body2">Project Owner(s): </Typography>
-        <HtmlTooltip
-                    title={
-                      <React.Fragment>
-                        <Typography style={{fontSize:'0.8rem'}} variant='body1' color="inherit">
-                          Alex Yadav
-                        </Typography>
-                      </React.Fragment>
-                    }
-                  >
-                    <Avatar
-                      style={{
-                        height: "1.5rem",
-                        width: "1.5rem",
-                        fontSize: "1rem",
-                        marginLeft: "0.35rem",
-                      }}
-                    >
-                      A
-                    </Avatar>
-        </HtmlTooltip>
+        <Box style={{ display: "flex" }}>
+          <Typography variant="body2">Project Owner(s): </Typography>
+          <HtmlTooltip
+            title={
+              <React.Fragment>
+                <Typography
+                  style={{ fontSize: "0.8rem" }}
+                  variant="body1"
+                  color="inherit"
+                >
+                  {createdBy}
+                </Typography>
+              </React.Fragment>
+            }
+          >
+            <Avatar
+              style={{
+                height: "1.5rem",
+                width: "1.5rem",
+                fontSize: "1rem",
+                marginLeft: "0.35rem",
+              }}
+            >
+              {createdBy[0]}
+            </Avatar>
+          </HtmlTooltip>
         </Box>
       </div>
     </>
