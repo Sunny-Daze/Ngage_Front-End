@@ -5,11 +5,20 @@ import TollIcon from "@mui/icons-material/Toll";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 // import couponImage from "../assets/couponImage.png";
 import CustomizedSnackbar from '../widgets/CustomizedSnackbar'
+import FailedSnackBar from '../widgets/FailedSnackBar'
+import { getUserPoints } from "../utils/localuserDetails";
 
 function ProductCard(props) {
   const [open, setOpen] = React.useState(false);
+  const [failOpen, setFailOpen] = React.useState(false);
+
   const handleClick = () => {
-    setOpen(true);
+    const userPnts = getUserPoints()
+    if(userPnts >= props.userPoints){
+      setOpen(true)
+    } else {
+      setFailOpen(true)
+    }
   }
 
   return (
@@ -51,8 +60,6 @@ function ProductCard(props) {
             color: "#001f54",
             marginTop: "1rem",
             borderColor: "#001f54",
-            // height: "1.6rem",
-            // width: "7.5rem",
           }}
         >
           PURCHASE
@@ -60,6 +67,7 @@ function ProductCard(props) {
         </Button>
       </div>
       <CustomizedSnackbar snackbarSwitch={open} handleSnackbar={setOpen} snackbarMessage="Order is placed successfully!"/>
+      <FailedSnackBar Snackbar snackbarSwitch={failOpen} handleSnackbar={setFailOpen} snackbarMessage="Not enough points!"/>
     </div>
   );
 }

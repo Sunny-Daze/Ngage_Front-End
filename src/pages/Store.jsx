@@ -4,6 +4,7 @@ import Card from "../widgets/CardWithPoints";
 import ProductCard from "../widgets/ProductCard";
 import { domain, endPoints } from "../services/endPoints";
 import axios from "axios";
+import { getUserPoints } from "../utils/localuserDetails";
 
 function UserControl() {
   const [state, setState] = React.useState([]);
@@ -45,7 +46,7 @@ function UserControl() {
       <Card
         heading="Items Store"
         subheading="Welcome to the store, where you can cash in you hard-earned points!"
-        coins="100"
+        coins={getUserPoints()}
       />
 
       <div className="Store-Products">

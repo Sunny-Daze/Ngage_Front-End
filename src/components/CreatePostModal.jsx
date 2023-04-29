@@ -14,6 +14,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { domain, endPoints } from "../services/endPoints";
 import axios from "axios";
 import CustomizedSnackbar from '../widgets/CustomizedSnackbar'
+import CircularProgress from '@mui/material/CircularProgress';
 
 let selectedtype = "";
 
@@ -80,6 +81,7 @@ export default function CreatePostModal(props) {
   const [badge2ButtonStyle, setBadge2ButtonStyle] =
     React.useState(inactiveButtonStyle);
   const [snackbar, setSnackbar] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   const handleProcedureContentChange = (content, delta, source, editor) => {
     setCode(content);
@@ -96,6 +98,7 @@ export default function CreatePostModal(props) {
   }
 
   async function createPost() {
+    setLoading(true);
     // if (selectedtype == "") return;
     let token = localStorage.getItem("token");
     // console.log({
@@ -118,6 +121,8 @@ export default function CreatePostModal(props) {
       props.addNewPost(response.data.result);
     }
 
+    setLoading(false)
+    setLoading(false)
     handleClose();
     setCode("");
     setSnackbar(true);
@@ -215,7 +220,8 @@ export default function CreatePostModal(props) {
             />
           </Box>
 
-          <Button
+          { !loading ?
+            <Button
             variant="contained"
             onClick={() => createPost()}
             style={{ marginTop: "1rem", width: "100%", background: "#001f54" }}
@@ -223,6 +229,16 @@ export default function CreatePostModal(props) {
             Create post{" "}
             <AddIcon style={{ marginLeft: "0.2rem", fontSize: "1.4rem" }} />
           </Button>
+          :
+            <Button
+            variant="contained"
+            disabled
+            style={{ marginTop: "1rem", width: "100%", background: "lightgray", color:'darkslategray' }}
+          >
+            Create Post <CircularProgress style={{color:'darkslategray', fontSize:'0.7rem', height:'1rem', width:'1rem', marginLeft:'0.7rem'}} />
+            {/* <AddIcon style={{ marginLeft: "0.2rem", fontSize: "1.4rem" }} /> */}
+          </Button>
+          }
         </Box>
       </Modal>
       <CustomizedSnackbar snackbarSwitch={snackbar} handleSnackbar={setSnackbar} snackbarMessage="Post created successfully!"/>

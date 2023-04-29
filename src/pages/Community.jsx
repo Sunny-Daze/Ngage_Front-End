@@ -85,8 +85,9 @@ function Community() {
     setFilter(event.target.value);
     const cat = event.target.value;
     if (cat === "none"){
-      // fetchPost();
-      setPosts([...posts]);
+      fetchData();
+      posts.sort(sortByNewest('createdAt'))
+      setPosts([...posts])
       // return;
     }
     else if(cat === "question"){
@@ -109,8 +110,38 @@ function Community() {
     // setPosts([...filteredPosts]);
   };
 
+  function sortByNewest(field) {
+    return function(a, b) {
+      return (a[field] < b[field]) - (a[field] > b[field])
+    };
+  }
+  function sortByLikes(field) {
+    return function(a, b) {
+      return (a[field] < b[field]) - (a[field] > b[field])
+    };
+  }
+  function sortByOldest(field) {
+    return function(a, b) {
+      return (a[field] > b[field]) - (a[field] < b[field])
+    };
+  }
+
   const handleSort = (event) => {
     setSort(event.target.value);
+    const sortVal = event.target.value;
+    if(sortVal === "newest"){
+      posts.sort(sortByNewest('createdAt'))
+      setPosts([...posts])
+      console.log(posts)
+    }
+    else if(sortVal === "oldest"){
+      posts.sort(sortByOldest('createdAt'));
+      setPosts([...posts])
+    }
+    else if(sortVal === "likes"){
+      posts.sort(sortByLikes('likeCounts'));
+      setPosts([...posts])
+    }
   };
 
   const handlePostClick = () => {
@@ -150,7 +181,7 @@ function Community() {
     // if (posts.length === 0) {
       fetchData();
     // }
-  }, []);
+  }, [filter]);
 
   return (
     <div className="Community">
@@ -227,10 +258,9 @@ function Community() {
     >
       <CircularProgress color="inherit" />
     </Backdrop>}
-        {posts.map((item, key) => {
-          key = item.id;
-          return <Post {...{ ...item, deletePostFromPosts }} />;
-        })}
+        {posts.map((item) => (
+          <Post {...{ ...item, deletePostFromPosts}} key={item._id} />
+        ))}
       </div>
       <CreatePostModal
         postModalswitch={postModal}

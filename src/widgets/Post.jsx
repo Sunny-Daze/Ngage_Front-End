@@ -13,9 +13,8 @@ import axios from "axios";
 import { FavoriteBorderRounded } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineComment } from "react-icons/ai";
-import { BsBookmark } from "react-icons/bs";
-import { FaBookmark } from "react-icons/fa";
 import ConfirmPostModal from '../components/ConfirmPostModal'
+import ConfirmPostDeleteModal from '../components/ConfirmPostDeleteModal'
 
 async function likeAndUnLikePost(liked, postId) {
   let url = liked
@@ -129,13 +128,13 @@ function Post(props) {
           >
             0
           </Typography>
-          <IconButton>
+          {/* <IconButton>
             <BsBookmark
               style={{ fontSize: "1.5rem", marginLeft: "3", color: "#001f54" }}
-            />
+            /> */}
             {/* IMP DO NOT REMOVE - display below icon when clicked */}
             {/* <FaBookmark style={{ fontSize: "1.55rem", marginLeft:'3' , color:'#001f54' }} /> */}
-          </IconButton>
+          {/* </IconButton> */}
         </div>
       </div>
 
@@ -201,7 +200,8 @@ function Post(props) {
           {renderPost(props.user._id) && (
             <Button
               onClick={() =>
-                deletePost(props.id,props.user._id,props.deletePostFromPosts)
+                setDeleteModalSwitch(true)
+                // deletePost(props.id,props.user._id,props.deletePostFromPosts)
               }
               variant="outlined"
               color="error"
@@ -224,6 +224,8 @@ function Post(props) {
             </Button>
           )}
         </div>
+        <ConfirmPostDeleteModal deleteModalSwitch={deleteModalSwitch} setDeleteModalSwitch={setDeleteModalSwitch} deletefunction={deletePost}
+        postId={props.id} postUser={props.user} customPar={props.deletePostFromPosts} />
       </div>
     </div>
   );
